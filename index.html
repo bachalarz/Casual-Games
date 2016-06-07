@@ -5,17 +5,15 @@
     <meta name="author" content="Magnus Bachalarz, Mattias Sachs Tastum">
     <title>Exam project</title>
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
-    <style>
-        #canvas {
-            background-color: #cccccc;
-        }
-    </style>
-</head>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,400italic' rel='stylesheet' type='text/css'>
 <body onload="init()">
-<a href="dokumentation/report.pdf" target="_blank">Rapport</a><br>
-    <div class="canvsWrapper">
-        <canvas id="canvasInfo" height="100" width="800"></canvas>
-        <canvas id="canvas" height="600" width="800"></canvas>
+    <div class="canvasWrapper">
+        <canvas id="canvasMain" height="750" width="1150"></canvas>
+        <canvas id="canvasInfo" height="750" width="250"></canvas>
+    </div>
+    <div class="buttonWrapper">
+    <a href="dokumentation/rapport.pdf"><button class="buttons">Rapport</button></a>
+    <a href="dokumentation/code.pdf"><button class="buttons">Source code</button></a>
     </div>
         <script src="js/createjsmin.js"></script>
         <script src="js/game.js"></script>
