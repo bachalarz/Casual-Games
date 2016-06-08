@@ -10,6 +10,8 @@ function init() {
     stageMain = new createjs.Stage("canvasMain");
     stageInfo = new createjs.Stage("canvasInfo");
 
+    document.getElementsByTagName("body")[0].style.cursor = "url('img/cursor.png'), auto";
+
     ufo = new createjs.Bitmap("img/ufo.png");
     ufo.width = 200;
     ufo.height = 200;
@@ -36,6 +38,9 @@ function preload(){
     queue.loadManifest([
         {id:"bgSound", src:"audio/music/bg.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
+        "img/buttonStartGame.png",
+        "img/buttonHowToPlay.png",
+
         "img/ufoSmall.png"
     ]);
     console.log("Preload is running");
@@ -62,11 +67,37 @@ function startPage(){
     titelText.x=stageMain.canvas.width/2;
     titelText.y=100;
 
-    //createjs.Sound.play('bgSound', {loop:-1});
+    var buttonStartGame = new createjs.Bitmap('img/buttonStartGame.png');
+    buttonStartGame.width = 250;
+    buttonStartGame.x = (stageMain.canvas.width/2)-(buttonStartGame.width)/2;
+    buttonStartGame.y = 280;
+    buttonStartGame.addEventListener('click',
+        function(e){
+            createjs.Sound.play('deadSound');
+            startGame();
+            moveSmallUfo = false;
+            removeBgUfo();
+            stageMain.removeChild(buttonStartGame, buttonHowToPlay, titelText);
+        }
+    );
 
-    stageMain.addChild(titelText);
-    moveSmallUfo = true;
+    var buttonHowToPlay = new createjs.Bitmap('img/buttonHowToPlay.png');
+    buttonHowToPlay.width = 250;
+    buttonHowToPlay.x = (stageMain.canvas.width/2)-(buttonHowToPlay.width)/2;
+    buttonHowToPlay.y = 400;
+    buttonHowToPlay.addEventListener('click',
+        function(e){
+            createjs.Sound.play('deadSound');
+            startGame();
+
+        }
+    );
+
+    //createjs.Sound.play('bgSound', {loop:-1});
     addBgUfo();
+    stageMain.addChild(buttonStartGame, buttonHowToPlay, titelText);
+    moveSmallUfo = true;
+
 }
 
 function selectHeroPage() {}
@@ -83,12 +114,28 @@ function addBgUfo() {
     moveUfo();
 }
 
+function removeBgUfo() {
+    setTimeout(function () {
+        createjs.Tween.get(ufoSmall).to(
+            {
+                x:1500, y:200
+            },
+            4000,
+            createjs.Ease.cubicInOut
+        ).call(
+            function(){
+                stageMain.removeChild(ufoSmall);
+            }
+        )
+    }, 6000);
+}
+
 function moveUfo(){
     createjs.Tween.get(ufoSmall).to(
         {
             x:Math.floor(Math.random() * 1000), y:Math.floor(Math.random() * 650)
         },
-        7000,
+        6000,
         createjs.Ease.cubicInOut
     ).call(
         function(){
@@ -96,19 +143,19 @@ function moveUfo(){
                 setTimeout(function () {
                     moveUfo();
                 }, 2000);
-                console.log("moveSmallUfo");
-            } else {console.log("moveSmallUfo FALSE");}
+            }
         }
-
-    );
+    )
 }
 
-
+function aboutGame() {
+    
+}
 
 function startGame() {
     gameIsRunning = true;
-    window.addEventListener('keydown', fingerDown);
-    window.addEventListener('keyup', fingerUp);
+    //window.addEventListener('keydown', fingerDown);
+    //window.addEventListener('keyup', fingerUp);
 }
 
 function nextLevel() {
