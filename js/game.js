@@ -1,14 +1,16 @@
-var scoreTotal = 0;
+var stageMain, stageInfo;
+var autoStart = true;
+//var scoreTotal = 0;
 
 function init() {
-    stageMain = new createjs.stage("canvasMain");
+    stageMain = new createjs.Stage("canvasMain");
     stageInfo = new createjs.Stage("canvasInfo");
 
     preloadText = new createjs.Text("", "50px Arial", "#000");
     preloadText.textBaseline="middle";
     preloadText.textAlign="center";
-    preloadText.x=stage.canvas.width/2;
-    preloadText.y=stage.canvas.height/2;
+    preloadText.x=stageMain.canvas.width/2;
+    preloadText.y=stageMain.canvas.height/2;
 
     preload()
 }
@@ -19,23 +21,21 @@ function preload(){
     queue.on("progress", queueProgress);
     queue.on("complete", queueComplete);
     queue.loadManifest([
-
-        //{id: "smug", src:"spritesheets/animations/smug.json"},
-        //"img/hero-boy-sheet.png"
-
+        {id:"bgSound", src:"sounds/music/bg.mp3"},
+        {id:"deadSound", src:"sounds/sounds/dead.mp3"}
     ])
     console.log("Preload")
 }
 
 function queueProgress(e){
     preloadText.text="Loading... "+ Math.round(e.progress*100)+"%";
-    stage.update(e);
+    stageMain.update(e);
 }
 
 function queueComplete(){
     createjs.Ticker.on("tick", tock);
     createjs.Ticker.setFPS(30);
-    stage.removeChild(preloadText);
+    stageMain.removeChild(preloadText);
 
     console.log('load complete')
 
@@ -61,6 +61,8 @@ function queueComplete(){
 }
 
 function tock(e) {
+    stageMain.update(e);
+    stageInfo.update(e);
     console.log("tock is running")
 }
 
