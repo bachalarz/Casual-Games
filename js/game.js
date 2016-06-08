@@ -56,16 +56,17 @@ function queueComplete(){
 }
 
 function startPage(){
-    titelText = new createjs.Text("Spillets titel", "50px Raleway", "#000");
+    titelText = new createjs.Text("Space Escape", "50px Raleway", "#000");
     titelText.textBaseline="middle";
     titelText.textAlign="center";
     titelText.x=stageMain.canvas.width/2;
     titelText.y=100;
 
+    //createjs.Sound.play('bgSound', {loop:-1});
+
     stageMain.addChild(titelText);
     moveSmallUfo = true;
     addBgUfo();
-    console.log("startPage()");
 }
 
 function selectHeroPage() {}
@@ -85,16 +86,20 @@ function addBgUfo() {
 function moveUfo(){
     createjs.Tween.get(ufoSmall).to(
         {
-            x:Math.floor(Math.random() * 1100), y:Math.floor(Math.random() * 700)
+            x:Math.floor(Math.random() * 1000), y:Math.floor(Math.random() * 650)
         },
         7000,
         createjs.Ease.cubicInOut
     ).call(
         function(){
-            if(moveSmallUfo=true)
-            setTimeout(function() { moveUfo(); }, 2000);
-            console.log("moveSmallUfo");
+            if(moveSmallUfo===true) {
+                setTimeout(function () {
+                    moveUfo();
+                }, 2000);
+                console.log("moveSmallUfo");
+            } else {console.log("moveSmallUfo FALSE");}
         }
+
     );
 }
 
