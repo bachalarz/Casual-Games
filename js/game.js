@@ -1,66 +1,163 @@
+var gameIsRunning = false;
+var stageMain, stageInfo; // Stages
+var preloadText, titelText; // Text
+var ufo, ufoSmall; //Bitmaps
+var moveSmallUfo = false;
+var autoStart = true;
 var scoreTotal = 0;
 
 function init() {
-    stageMain = new createjs.stage("canvasMain");
+    stageMain = new createjs.Stage("canvasMain");
     stageInfo = new createjs.Stage("canvasInfo");
 
-    preloadText = new createjs.Text("", "50px Arial", "#000");
+    ufo = new createjs.Bitmap("img/ufo.png");
+    ufo.width = 200;
+    ufo.height = 200;
+    ufo.x = 0;
+    ufo.y = 150;
+    stageMain.addChild(ufo);
+
+    preloadText = new createjs.Text("", "50px Raleway", "#000");
     preloadText.textBaseline="middle";
     preloadText.textAlign="center";
-    preloadText.x=stage.canvas.width/2;
-    preloadText.y=stage.canvas.height/2;
+    preloadText.x=stageMain.canvas.width/2;
+    preloadText.y=stageMain.canvas.height/1.7;
+
+    stageMain.addChild(preloadText);
 
     preload()
 }
 
 function preload(){
-    queue = new createjs.LoadQueue(autoStart);
+    var queue = new createjs.LoadQueue(autoStart);
     queue.installPlugin(createjs.Sound);
     queue.on("progress", queueProgress);
     queue.on("complete", queueComplete);
     queue.loadManifest([
-
-        //{id: "smug", src:"spritesheets/animations/smug.json"},
-        //"img/hero-boy-sheet.png"
-
-    ])
-    console.log("Preload")
+        {id:"bgSound", src:"audio/music/bg.mp3"},
+        {id:"deadSound", src:"audio/sounds/dead.mp3"},
+        "img/ufoSmall.png"
+    ]);
+    console.log("Preload is running");
 }
 
 function queueProgress(e){
-    preloadText.text="Loading... "+ Math.round(e.progress*100)+"%";
-    stage.update(e);
+    preloadText.text="Loading... " + Math.round(e.progress*100) + "%";
+    ufo.x =+(e.progress*950);
+    stageMain.update(e);
 }
 
 function queueComplete(){
     createjs.Ticker.on("tick", tock);
     createjs.Ticker.setFPS(30);
-    stage.removeChild(preloadText);
+    stageMain.removeChild(preloadText, ufo);
+    console.log('Loading complete');
+    startPage();
+}
 
-    console.log('load complete')
+function startPage(){
+    titelText = new createjs.Text("Space Escape", "50px Raleway", "#000");
+    titelText.textBaseline="middle";
+    titelText.textAlign="center";
+    titelText.x=stageMain.canvas.width/2;
+    titelText.y=100;
 
+    //createjs.Sound.play('bgSound', {loop:-1});
+
+    stageMain.addChild(titelText);
+    moveSmallUfo = true;
+    addBgUfo();
+}
+
+function selectHeroPage() {}
+
+function instructionPage() {}
+
+function addBgUfo() {
+    ufoSmall = new createjs.Bitmap("img/ufoSmall.png");
+    ufoSmall.width = 100;
+    ufoSmall.height = 100;
+    ufoSmall.x = -200;
+    ufoSmall.y = Math.floor(Math.random() * 600);
+    stageMain.addChild(ufoSmall);
+    moveUfo();
+}
+
+function moveUfo(){
+    createjs.Tween.get(ufoSmall).to(
+        {
+            x:Math.floor(Math.random() * 1000), y:Math.floor(Math.random() * 650)
+        },
+        7000,
+        createjs.Ease.cubicInOut
+    ).call(
+        function(){
+            if(moveSmallUfo===true) {
+                setTimeout(function () {
+                    moveUfo();
+                }, 2000);
+                console.log("moveSmallUfo");
+            } else {console.log("moveSmallUfo FALSE");}
+        }
+
+    );
+}
+
+
+
+function startGame() {
+    gameIsRunning = true;
     window.addEventListener('keydown', fingerDown);
     window.addEventListener('keyup', fingerUp);
+}
 
+function nextLevel() {
+    
+}
 
-    var splash = new createjs.Bitmap("img/start.png");
-    splash.x=300;
-    splash.y=100;
-    splash.addEventListener('click',
-        function(e){
-            createjs.Sound.play('bgSound', {loop:-1});
-
-            stage.removeChild(e.target);
-            stage.removeChild(introText);
-            stage2.removeChild(title);
-            selectHeroType();
-        }
-    );
-    stage.addChild(splash);
+function gameComplete() {
 
 }
+
+function gameOver() {
+    gameIsRunning = false;
+}
+
+function hitTest(rect1,rect2) {
+    if ( rect1.x >= rect2.x + rect2.width
+        || rect1.x + rect1.width <= rect2.x
+        || rect1.y >= rect2.y + rect2.height
+        || rect1.y + rect1.height <= rect2.y )
+    {
+        return false;
+    }
+    return true;
+}
+
+function checkCollisions(){
+
+}
+
+//finger up/down
+
+//add hero
+
+//move hero
+
+
+
 
 function tock(e) {
-    console.log("tock is running")
+
+    stageMain.update(e);
+    stageInfo.update(e);
+    //console.log("Tock() is running")
 }
 
+
+
+// Tilføjelser:
+// Lifestatus
+// Mute
+// Reset game
+// Add enemi
