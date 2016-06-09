@@ -44,7 +44,7 @@ function preload(){
     queue.on("complete", queueComplete);
     queue.loadManifest([
         {id:"bgSound", src:"audio/music/bgMusic.mp3"},
-        {id:"clickSpaceGun", src:"audio/music/spaceGun.mp3"},
+        {id:"clickSpaceGun", src:"audio/sounds/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
         //{id:"test1", src:"img/buttonStartGame.png"},
         "img/buttonStartGame.png",
