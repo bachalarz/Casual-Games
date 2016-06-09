@@ -1,7 +1,7 @@
 var gameIsRunning = false;
 var stageMain, stageInfo; // Stages
-var preloadText, titelText; // Text
-var ufo, ufoSmall; //Bitmaps
+var preloadText, titelText, getReady; // Text
+var ufo, ufoSmall, stickMan; //Bitmaps
 var moveSmallUfo = false;
 var autoStart = true;
 var scoreTotal = 0;
@@ -17,7 +17,17 @@ function init() {
     ufo.height = 200;
     ufo.x = 0;
     ufo.y = 150;
-    stageMain.addChild(ufo);
+
+    stickMan = new createjs.Bitmap('img/stickMan.png');
+    stickMan.width = 80;
+    stickMan.height = 100;
+    stickMan.x = 600;
+    stickMan.y = 190;
+
+    //stickMan = new createjs.SpriteSheet(queue.getResult('json/stickManRun.json'));
+    //stickMan = new createjs.Sprite(smugSheet, 'run');
+    //stickMan.x = 600;
+    //stickMan.y = 190;
 
     preloadText = new createjs.Text("", "50px Raleway", "#000");
     preloadText.textBaseline="middle";
@@ -25,7 +35,7 @@ function init() {
     preloadText.x=stageMain.canvas.width/2;
     preloadText.y=stageMain.canvas.height/1.7;
 
-    stageMain.addChild(preloadText);
+    stageMain.addChild(preloadText, ufo, stickMan);
 
     preload()
 }
@@ -36,10 +46,12 @@ function preload(){
     queue.on("progress", queueProgress);
     queue.on("complete", queueComplete);
     queue.loadManifest([
-        {id:"bgSound", src:"audio/music/bg.mp3"},
+        {id:"bgSound", src:"audio/music/bgMusic.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
+        //{id: "stickManRun", src:"json/stickManRun.json"},
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
+        //"img/stickManSprite.png",
 
         "img/ufoSmall.png"
     ]);
@@ -48,19 +60,22 @@ function preload(){
 
 function queueProgress(e){
     preloadText.text="Loading... " + Math.round(e.progress*100) + "%";
-    ufo.x =+(e.progress*950);
+    ufo.x =+(e.progress*850);
+    stickMan.x =700+(e.progress*350);
     stageMain.update(e);
 }
 
 function queueComplete(){
     createjs.Ticker.on("tick", tock);
     createjs.Ticker.setFPS(30);
-    stageMain.removeChild(preloadText, ufo);
+    stageMain.removeChild(stickMan, preloadText, ufo);
     console.log('Loading complete');
     startPage();
 }
 
 function startPage(){
+
+    stageMain.removeChild();
     titelText = new createjs.Text("Space Escape", "50px Raleway", "#000");
     titelText.textBaseline="middle";
     titelText.textAlign="center";
@@ -74,7 +89,7 @@ function startPage(){
     buttonStartGame.addEventListener('click',
         function(e){
             createjs.Sound.play('deadSound');
-            startGame();
+            getReady();
             moveSmallUfo = false;
             removeBgUfo();
             stageMain.removeChild(buttonStartGame, buttonHowToPlay, titelText);
@@ -88,16 +103,42 @@ function startPage(){
     buttonHowToPlay.addEventListener('click',
         function(e){
             createjs.Sound.play('deadSound');
-            startGame();
 
         }
     );
 
-    //createjs.Sound.play('bgSound', {loop:-1});
+    createjs.Sound.play('bgSound', {loop:-1});
     addBgUfo();
     stageMain.addChild(buttonStartGame, buttonHowToPlay, titelText);
     moveSmallUfo = true;
 
+}
+
+function getReady() {
+    console.log("get ready");
+    var counter = 4;
+    var cT = new createjs.Text(counter, "2000px Raleway", "#000");
+    cT.textBaseline="middle";
+    cT.textAlign="center";
+    cT.x=stageMain.canvas.width/2;
+    cT.y=stageMain.canvas.height/2;
+
+    stageMain.addChild(cT);
+
+    animate();
+    function animate() {
+        cT.scaleX = cT.scaleY = 0;
+        counter--;
+        cT.text = counter;
+        createjs.Tween.get(cT).to({scaleX: 2, scaleY: 2}, 1000).call(function () {
+            if (counter === 1) {
+                startGame();
+                stageMain.removeChild(cT);
+            } else {
+                animate();
+            }
+        })
+    }
 }
 
 function selectHeroPage() {}
@@ -118,7 +159,7 @@ function removeBgUfo() {
     setTimeout(function () {
         createjs.Tween.get(ufoSmall).to(
             {
-                x:1500, y:200
+                y:Math.floor(Math.random() * -600), x:-200
             },
             4000,
             createjs.Ease.cubicInOut
@@ -154,6 +195,7 @@ function aboutGame() {
 
 function startGame() {
     gameIsRunning = true;
+    console.log("start game")
     //window.addEventListener('keydown', fingerDown);
     //window.addEventListener('keyup', fingerUp);
 }
