@@ -4,12 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/js/game.js" line="254" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17306075-5c2b-4e73-a275-0c0c1aa8f30c" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/hero-boy-sheet.png" afterPath="$PROJECT_DIR$/img/heroSprite.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/json/heroSsboy.json" afterPath="$PROJECT_DIR$/json/heroSprite.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game.js" afterPath="$PROJECT_DIR$/js/game.js" />
-    </list>
+    <list default="true" id="17306075-5c2b-4e73-a275-0c0c1aa8f30c" name="Default" comment="" />
     <ignored path="Exam project.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -331,12 +326,12 @@
       <workItem from="1465314485056" duration="21000" />
       <workItem from="1465325968255" duration="6024000" />
       <workItem from="1465377155276" duration="13845000" />
-      <workItem from="1465402153390" duration="26354000" />
+      <workItem from="1465402153390" duration="26397000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50364000" />
+    <option name="totallyTimeSpent" value="50407000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
