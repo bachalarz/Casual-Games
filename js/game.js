@@ -2,6 +2,8 @@ var gameIsRunning = false;
 var stageMain, stageInfo; // Stages
 var preloadText, titelText, getReady; // Text
 var ufo, ufoSmall, stickMan; //Bitmaps
+var hero; //Hero player
+var queue; // Start
 var moveSmallUfo = false;
 var autoStart = true;
 var scoreTotal = 0;
@@ -26,11 +28,6 @@ function init() {
     stickMan.x = 600;
     stickMan.y = 190;
 
-    //stickMan = new createjs.SpriteSheet(queue.getResult('json/stickManRun.json'));
-    //stickMan = new createjs.Sprite(smugSheet, 'run');
-    //stickMan.x = 600;
-    //stickMan.y = 190;
-
     preloadText = new createjs.Text("", "50px Raleway", "#000");
     preloadText.textBaseline="middle";
     preloadText.textAlign="center";
@@ -49,13 +46,17 @@ function preload(){
     queue.on("complete", queueComplete);
     queue.loadManifest([
         {id:"bgSound", src:"audio/music/bgMusic.mp3"},
+        {id:"clickSpaceGun", src:"audio/music/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
-        //{id: "stickManRun", src:"json/stickManRun.json"},
+        //{id:"test1", src:"img/buttonStartGame.png"},
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
+<<<<<<< HEAD
         //"img/stickManSprite.png",
         {id:"levelJson",src:"json/levels.json"},
         {id:"tiles",src:"json/tiles.json"},
+=======
+>>>>>>> 893fd7621f65a4e561d648fbbd77aa7193dcbbea
 
         "img/ufoSmall.png"
     ]);
@@ -86,15 +87,15 @@ function startPage(){
     titelText.textBaseline="middle";
     titelText.textAlign="center";
     titelText.x=stageMain.canvas.width/2;
-    titelText.y=100;
+    titelText.y=140;
 
-    var buttonStartGame = new createjs.Bitmap('img/buttonStartGame.png');
+    var buttonStartGame = new createjs.Bitmap(queue.getResult('img/buttonStartGame.png'));
     buttonStartGame.width = 250;
     buttonStartGame.x = (stageMain.canvas.width/2)-(buttonStartGame.width)/2;
     buttonStartGame.y = 280;
     buttonStartGame.addEventListener('click',
         function(e){
-            createjs.Sound.play('deadSound');
+            createjs.Sound.play('clickSpaceGun');
             getReady();
             moveSmallUfo = false;
             removeBgUfo();
@@ -102,14 +103,13 @@ function startPage(){
         }
     );
 
-    var buttonHowToPlay = new createjs.Bitmap('img/buttonHowToPlay.png');
+    var buttonHowToPlay = new createjs.Bitmap(queue.getResult('img/buttonHowToPlay.png'));
     buttonHowToPlay.width = 250;
     buttonHowToPlay.x = (stageMain.canvas.width/2)-(buttonHowToPlay.width)/2;
     buttonHowToPlay.y = 400;
     buttonHowToPlay.addEventListener('click',
         function(e){
-            createjs.Sound.play('deadSound');
-
+            createjs.Sound.play('clickSpaceGun');
         }
     );
 
@@ -202,9 +202,14 @@ function aboutGame() {
 function startGame() {
     gameIsRunning = true;
     console.log("start game")
+<<<<<<< HEAD
     setupLevel();
     //window.addEventListener('keydown', fingerDown);
     //window.addEventListener('keyup', fingerUp);
+=======
+    window.addEventListener('keydown', fingerDown);
+    window.addEventListener('keyup', fingerUp);
+>>>>>>> 893fd7621f65a4e561d648fbbd77aa7193dcbbea
 }
 
 function setupLevel() {
@@ -247,6 +252,56 @@ function gameOver() {
     gameIsRunning = false;
 }
 
+function fingerUp(e){
+    if(e.keyCode===37){
+        keys.lkd=false;
+        hero.gotoAndStop('left');
+        hero.currentAnimation = "undefined";
+    }
+    if(e.keyCode===38){
+        keys.ukd=false;
+        hero.gotoAndStop('up');
+        hero.currentAnimation = "undefined";
+    }
+    if(e.keyCode===39){
+        keys.rkd=false;
+        hero.gotoAndStop('right');
+        hero.currentAnimation = "undefined";
+    }
+    if(e.keyCode===40){
+        keys.dkd=false;
+        hero.gotoAndStop('down');
+        hero.currentAnimation = "undefined";
+    }
+}
+
+function fingerDown(e){
+    if(e.keyCode===37){
+        keys.lkd=true;
+        if(hero.currentAnimation!='left') {
+            hero.gotoAndPlay('left');
+        }
+    }
+    if(e.keyCode===38){
+        keys.ukd=true;
+        if(hero.currentAnimation!='up') {
+            hero.gotoAndPlay('up');
+        }
+    }
+    if(e.keyCode===39){
+        keys.rkd=true;
+        if(hero.currentAnimation!='right') {
+            hero.gotoAndPlay('right');
+        }
+    }
+    if(e.keyCode===40){
+        keys.dkd=true;
+        if(hero.currentAnimation!='down') {
+            hero.gotoAndPlay('down');
+        }
+    }
+}
+
 function hitTest(rect1,rect2) {
     if ( rect1.x >= rect2.x + rect2.width
         || rect1.x + rect1.width <= rect2.x
@@ -272,7 +327,6 @@ function checkCollisions(){
 
 
 function tock(e) {
-
     stageMain.update(e);
     stageInfo.update(e);
     //console.log("Tock() is running")
