@@ -160,7 +160,7 @@ function startPage(){
 
 function getReady() {
     var counter = 4;
-    var cT = new createjs.Text(counter, "2000px Raleway", "#000");
+    var cT = new createjs.Text(counter, "1500px Raleway", "#000");
     cT.textBaseline="middle";
     cT.textAlign="center";
     cT.x=stageMain.canvas.width/2;
