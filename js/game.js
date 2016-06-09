@@ -52,7 +52,7 @@ function preload(){
     queue.on("progress", queueProgress);
     queue.on("complete", queueComplete);
     queue.loadManifest([
-        {id: "heroSsBoy", src:"json/heroSsBoy.json"},
+        {id: "heroSprite", src:"json/heroSprite.json"},
         {id:"bgSound", src:"audio/music/bgMusic.mp3"},
         {id:"clickSpaceGun", src:"audio/sounds/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
@@ -60,7 +60,7 @@ function preload(){
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
         "img/buttonRestart.png",
-        "img/hero-boy-sheet.png",
+        "img/heroSprite.png",
         {id:"levelJson",src:"json/levels.json"},
         {id:"tiles",src:"json/tiles.json"},
 
@@ -358,7 +358,7 @@ function checkCollisions(){
 
 function addHero(){
 
-    heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('json/heroSsBoy.json'));
+    heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
     hero = new createjs.Sprite(heroSpriteSheet, 'still');
     hero.width = 50;
     hero.height = 50;

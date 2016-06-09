@@ -1,6 +1,6 @@
 {
   "framerate": 8,
-  "images": ["img/hero-boy-sheet.png"],
+  "images": ["img/heroSprite.png"],
   "frames": {"width":50, "height":50, "regX":0, "regY":0},
   "animations": {
     "down": [0,3],
