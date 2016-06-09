@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/js/game.js" line="178" mnemonic="8" />
-    <bookmark url="file://$PROJECT_DIR$/js/game.js" line="136" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/js/game.js" line="94" mnemonic="8" />
+    <bookmark url="file://$PROJECT_DIR$/js/game.js" line="133" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17306075-5c2b-4e73-a275-0c0c1aa8f30c" name="Default" comment="" />
+    <list default="true" id="17306075-5c2b-4e73-a275-0c0c1aa8f30c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game.js" afterPath="$PROJECT_DIR$/js/game.js" />
+    </list>
     <ignored path="Exam project.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,24 +50,9 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="218" column="24" selection-start-line="218" selection-start-column="24" selection-end-line="218" selection-end-column="24" />
-              <folding>
-                <element signature="n#!!block;n#init#0" expanded="false" />
-                <element signature="n#!!block;n#preload#0" expanded="false" />
-                <element signature="n#!!block;n#queueComplete#0" expanded="false" />
-                <element signature="n#!!block;n#startPage#0" expanded="false" />
-                <element signature="n#!!block;n#getReady#0" expanded="false" />
-                <element signature="n#!!block;n#addBgUfo#0" expanded="false" />
-                <element signature="n#!!block;n#removeBgUfo#0" expanded="false" />
-                <element signature="n#!!block;n#moveUfo#0" expanded="false" />
-                <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-                <element signature="n#!!block;n#nextLevel#0" expanded="false" />
-                <element signature="n#!!block;n#gameComplete#0" expanded="false" />
-                <element signature="n#!!block;n#gameOver#0" expanded="false" />
-                <element signature="n#!!block;n#hitTest#0" expanded="false" />
-                <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="1305">
+              <caret line="87" column="37" selection-start-line="87" selection-start-column="37" selection-end-line="87" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -298,12 +285,12 @@
       <workItem from="1465314485056" duration="21000" />
       <workItem from="1465325968255" duration="6024000" />
       <workItem from="1465377155276" duration="13845000" />
-      <workItem from="1465402153390" duration="17857000" />
+      <workItem from="1465402153390" duration="18022000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41867000" />
+    <option name="totallyTimeSpent" value="42032000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -365,22 +352,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#preload#0" expanded="false" />
-            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
-            <element signature="n#!!block;n#startPage#0" expanded="false" />
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#addBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#moveUfo#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#nextLevel#0" expanded="false" />
-            <element signature="n#!!block;n#gameComplete#0" expanded="false" />
-            <element signature="n#!!block;n#gameOver#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -404,22 +376,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#preload#0" expanded="false" />
-            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
-            <element signature="n#!!block;n#startPage#0" expanded="false" />
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#addBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#moveUfo#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#nextLevel#0" expanded="false" />
-            <element signature="n#!!block;n#gameComplete#0" expanded="false" />
-            <element signature="n#!!block;n#gameOver#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -435,22 +392,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#preload#0" expanded="false" />
-            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
-            <element signature="n#!!block;n#startPage#0" expanded="false" />
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#addBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#moveUfo#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#nextLevel#0" expanded="false" />
-            <element signature="n#!!block;n#gameComplete#0" expanded="false" />
-            <element signature="n#!!block;n#gameOver#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -488,22 +430,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#preload#0" expanded="false" />
-            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
-            <element signature="n#!!block;n#startPage#0" expanded="false" />
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#addBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#moveUfo#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#nextLevel#0" expanded="false" />
-            <element signature="n#!!block;n#gameComplete#0" expanded="false" />
-            <element signature="n#!!block;n#gameOver#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -541,22 +468,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#preload#0" expanded="false" />
-            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
-            <element signature="n#!!block;n#startPage#0" expanded="false" />
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#addBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#moveUfo#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#nextLevel#0" expanded="false" />
-            <element signature="n#!!block;n#gameComplete#0" expanded="false" />
-            <element signature="n#!!block;n#gameOver#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -622,24 +534,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="218" column="24" selection-start-line="218" selection-start-column="24" selection-end-line="218" selection-end-column="24" />
-          <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#preload#0" expanded="false" />
-            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
-            <element signature="n#!!block;n#startPage#0" expanded="false" />
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#addBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeBgUfo#0" expanded="false" />
-            <element signature="n#!!block;n#moveUfo#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#nextLevel#0" expanded="false" />
-            <element signature="n#!!block;n#gameComplete#0" expanded="false" />
-            <element signature="n#!!block;n#gameOver#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="1305">
+          <caret line="87" column="37" selection-start-line="87" selection-start-column="37" selection-end-line="87" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
