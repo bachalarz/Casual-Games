@@ -1,14 +1,21 @@
 var gameIsRunning = false;
 var stageMain, stageInfo; // Stages
 var preloadText, titelText; // Text
-var ufo, ufoSmall, stickMan, soundButton; //Bitmaps
-var hero; //Hero player
+var ufo, ufoSmall, soundButton, stickMan; //Bitmaps
+var hero, heroSpriteSheet; //Hero player
 var queue; // Start
 var soundMute = false; // Sounds
 var moveSmallUfo = false;
 var autoStart = true;
 var scoreTotal = 0;
 var levelData, tiles, currentLevel=-1, t, blockSize = 50; //level
+var hitTest;
+var keys = {
+    rkd:false,
+    lkd:false,
+    ukd:false,
+    dkd:false,
+};
 
 function init() {
     stageMain = new createjs.Stage("canvasMain");
@@ -45,6 +52,7 @@ function preload(){
     queue.on("progress", queueProgress);
     queue.on("complete", queueComplete);
     queue.loadManifest([
+        {id: "heroSsBoy", src:"json/heroSsBoy.json"},
         {id:"bgSound", src:"audio/music/bgMusic.mp3"},
         {id:"clickSpaceGun", src:"audio/sounds/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
@@ -52,6 +60,7 @@ function preload(){
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
         "img/buttonRestart.png",
+        "img/hero-boy-sheet.png",
         {id:"levelJson",src:"json/levels.json"},
         {id:"tiles",src:"json/tiles.json"},
 
@@ -221,7 +230,8 @@ function aboutGame() {
 
 function startGame() {
     gameIsRunning = true;
-    setupLevel()
+    setupLevel();
+    addHero();
     console.log("start game")
     window.addEventListener('keydown', fingerDown);
     window.addEventListener('keyup', fingerUp);
@@ -346,14 +356,98 @@ function checkCollisions(){
 
 //finger up/down
 
-//add hero
+function addHero(){
 
-//move hero
+    heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('json/heroSsBoy.json'));
+    hero = new createjs.Sprite(heroSpriteSheet, 'still');
+    hero.width = 50;
+    hero.height = 50;
+    hero.speed = 10;
+    hero.nextX;
+    hero.nextY;
+
+    hero.x = (stageMain.canvas.width / 2) - (hero.width / 2);
+    hero.y = stageMain.canvas.height - hero.height;
+    stageMain.addChild(hero); //Her stod den oprindeligt!
+}
+
+function moveHero(){
+    if(keys.rkd && hero.x < 1150-hero.width){
+        var collisionDetected = false;
+        hero.nextY=hero.y;
+        hero.nextX=hero.x+hero.speed;
+        for(i=0; i<blocks.length; i++){
+            if(predictHit(hero, blocks[i])){
+                collisionDetected=true;
+                break;
+            }
+        }
+        if(!collisionDetected) {
+            hero.x += hero.speed;
+        }
+    }
+    if(keys.lkd && hero.x > 0){
+        var collisionDetected = false;
+        hero.nextY=hero.y;
+        hero.nextX=hero.x-hero.speed;
+        for(i=0; i<blocks.length; i++){
+            if(predictHit(hero, blocks[i])){
+                collisionDetected=true;
+                break;
+            }
+        }
+        if(!collisionDetected) {
+            hero.x -= hero.speed;
+        }
+    }
+    if(keys.ukd && hero.y >= 0){
+        var collisionDetected = false;
+        hero.nextY=hero.y-hero.speed;
+        hero.nextX=hero.x;
+        for(i=0; i<blocks.length; i++){
+            if(predictHit(hero, blocks[i])){
+                collisionDetected=true;
+                break;
+            }
+        }
+        if(!collisionDetected) {
+            hero.y -= hero.speed;
+        }
+    }
+    if(keys.dkd && hero.y < 750-hero.height){
+        var collisionDetected = false;
+        hero.nextY=hero.y+hero.speed;
+        hero.nextX=hero.x;
+        for(i=0; i<blocks.length; i++){
+            if(predictHit(hero, blocks[i])){
+                collisionDetected=true;
+                break;
+            }
+        }
+        if(!collisionDetected) {
+            hero.y += hero.speed;
+        }
+    }
+}
+//Character hitDetection with blocks
+function predictHit(character,rect2) {
+    if ( character.nextX >= rect2.x + rect2.width
+        || character.nextX + character.width <= rect2.x
+        || character.nextY >= rect2.y + rect2.height
+        || character.nextY + character.height <= rect2.y )
+    {
+        return false;
+    }
+    return true;
+}
 
 
 
 
 function tock(e) {
+    if (gameIsRunning === true) {
+        moveHero();
+    }
     stageMain.update(e);
     stageInfo.update(e);
     //console.log("Tock() is running")
