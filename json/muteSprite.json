@@ -1,0 +1,9 @@
+{
+  "framerate": 8,
+  "images": ["img/buttonMute.png"],
+  "frames": {"width":50, "height":50, "regX":0, "regY":0},
+  "animations": {
+    "muteOff": [0],
+    "muteOn": [1]
+  }
+}

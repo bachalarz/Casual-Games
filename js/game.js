@@ -1,9 +1,10 @@
 var gameIsRunning = false;
 var stageMain, stageInfo; // Stages
-var preloadText, titelText, getReady; // Text
-var ufo, ufoSmall, stickMan; //Bitmaps
+var preloadText, titelText; // Text
+var ufo, ufoSmall, stickMan, soundButton; //Bitmaps
 var hero; //Hero player
 var queue; // Start
+var soundMute = false; // Sounds
 var moveSmallUfo = false;
 var autoStart = true;
 var scoreTotal = 0;
@@ -47,9 +48,10 @@ function preload(){
         {id:"bgSound", src:"audio/music/bgMusic.mp3"},
         {id:"clickSpaceGun", src:"audio/sounds/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
-        //{id:"test1", src:"img/buttonStartGame.png"},
+        {id: "muteSprite", src:"json/muteSprite.json"},
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
+        "img/buttonRestart.png",
         {id:"levelJson",src:"json/levels.json"},
         {id:"tiles",src:"json/tiles.json"},
 
@@ -97,6 +99,29 @@ function startPage(){
             stageMain.removeChild(buttonStartGame, buttonHowToPlay, titelText);
         }
     );
+
+    soundButton = new createjs.SpriteSheet(queue.getResult('muteSprite'));
+    soundButton = new createjs.Sprite(soundButton, 'muteOff');
+    soundButton.x = 50;
+    soundButton.y = 30;
+    soundButton.addEventListener('click',
+        function(e){
+            soundOnOff();
+        }
+    );
+
+    var restartButton = new createjs.Bitmap(queue.getResult('img/buttonRestart.png'));
+    restartButton.width = 50;
+    restartButton.x = 150;
+    restartButton.y = 30;
+    restartButton.addEventListener('click',
+        function(e){
+            createjs.Sound.play('deadSound');
+            //restartGame();
+        }
+    );
+
+    stageInfo.addChild(soundButton, restartButton);
 
     var buttonHowToPlay = new createjs.Bitmap(queue.getResult('img/buttonHowToPlay.png'));
     buttonHowToPlay.width = 250;
@@ -242,6 +267,18 @@ function gameOver() {
     gameIsRunning = false;
 }
 
+function soundOnOff() {
+    if (soundMute===false) {
+        soundMute = true;
+        createjs.Sound.stop();
+        soundButton.gotoAndStop('muteOn');
+    } else {
+        soundMute = false;
+        createjs.Sound.play('bgSound', {loop:-1});
+        soundButton.gotoAndStop('muteOff');
+    }
+}
+
 function fingerUp(e){
     if(e.keyCode===37){
         keys.lkd=false;
@@ -326,6 +363,5 @@ function tock(e) {
 
 // Tilføjelser:
 // Lifestatus
-// Mute
 // Reset game
 // Add enemi
