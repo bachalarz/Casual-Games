@@ -52,6 +52,7 @@ function preload(){
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
         {id:"levelJson",src:"json/levels.json"},
+        {id:"tiles",src:"json/tiles.json"},
 
         "img/ufoSmall.png"
     ]);
@@ -70,6 +71,8 @@ function queueComplete(){
     createjs.Ticker.setFPS(30);
     stageMain.removeChild(stickMan, preloadText, ufo);
     console.log('Loading complete');
+    levelData = queue.getResult("levelJson")
+    tiles = new createjs.SpriteSheet(queue.getResult("tiles"));
     startPage();
 }
 
@@ -194,13 +197,42 @@ function aboutGame() {
 
 function startGame() {
     gameIsRunning = true;
+    setupLevel()
     console.log("start game")
     window.addEventListener('keydown', fingerDown);
     window.addEventListener('keyup', fingerUp);
 }
 
-function nextLevel() {
-    
+function setupLevel(){
+    stageMain.removeAllChildren();
+    var row, col;
+    currentLevel++;
+    var level = levelData.levels[currentLevel].tiles;
+    blocks=[];
+    for(row=0; row<level.length; row++){
+        for(col=0; col<level[row].length; col++){
+            var img;
+            switch(level[row][col]){
+                case 0:
+                    img = "floor";
+                    break;
+
+                case 1:
+                    img = "block";
+                    break;
+            }
+            t = new createjs.Sprite(tiles, img);
+            t.x=col*blockSize;
+            t.y=row*blockSize;
+            t.width=blockSize;
+            t.height=blockSize;
+            t.type = level[row][col];
+            if(t.type===1){
+                blocks.push(t);
+            }
+            stageMain.addChild(t);
+        }
+    }
 }
 
 function gameComplete() {
