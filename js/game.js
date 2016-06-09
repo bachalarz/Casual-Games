@@ -7,6 +7,8 @@ var queue; // Start
 var moveSmallUfo = false;
 var autoStart = true;
 var scoreTotal = 0;
+var levelData, tiles, currentLevel=-1, t, blockSize = 50; //level
+var queue;
 
 function init() {
     stageMain = new createjs.Stage("canvasMain");
@@ -49,6 +51,7 @@ function preload(){
         //{id:"test1", src:"img/buttonStartGame.png"},
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
+        {id:"levelJson",src:"json/levels.json"},
 
         "img/ufoSmall.png"
     ]);
