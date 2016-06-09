@@ -8,7 +8,6 @@ var moveSmallUfo = false;
 var autoStart = true;
 var scoreTotal = 0;
 var levelData, tiles, currentLevel=-1, t, blockSize = 50; //level
-var queue;
 
 function init() {
     stageMain = new createjs.Stage("canvasMain");
