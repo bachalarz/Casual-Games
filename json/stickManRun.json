@@ -1,6 +1,6 @@
 {
   "framerate": 8,
-  "images": ["./img/stickManSprite.png"],
+  "images": ["img/stickManSprite.png"],
   "frames": {"width":100, "height":100, "regX":0, "regY":0},
   "animations": {
     "run": [0,4]
