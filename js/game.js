@@ -2,11 +2,11 @@ var gameIsRunning = false;
 var stageMain, stageInfo; // Stages
 var preloadText, titelText, getReady; // Text
 var ufo, ufoSmall, stickMan; //Bitmaps
-var hero; //Hero player
-var queue; // Start
 var moveSmallUfo = false;
 var autoStart = true;
 var scoreTotal = 0;
+var levelData, tiles, currentLevel=-1, t, blockSize = 50; //level
+var queue;
 
 function init() {
     stageMain = new createjs.Stage("canvasMain");
@@ -26,6 +26,11 @@ function init() {
     stickMan.x = 600;
     stickMan.y = 190;
 
+    //stickMan = new createjs.SpriteSheet(queue.getResult('json/stickManRun.json'));
+    //stickMan = new createjs.Sprite(smugSheet, 'run');
+    //stickMan.x = 600;
+    //stickMan.y = 190;
+
     preloadText = new createjs.Text("", "50px Raleway", "#000");
     preloadText.textBaseline="middle";
     preloadText.textAlign="center";
@@ -44,11 +49,13 @@ function preload(){
     queue.on("complete", queueComplete);
     queue.loadManifest([
         {id:"bgSound", src:"audio/music/bgMusic.mp3"},
-        {id:"clickSpaceGun", src:"audio/music/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
-        //{id:"test1", src:"img/buttonStartGame.png"},
+        //{id: "stickManRun", src:"json/stickManRun.json"},
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
+        //"img/stickManSprite.png",
+        {id:"levelJson",src:"json/levels.json"},
+        {id:"tiles",src:"json/tiles.json"},
 
         "img/ufoSmall.png"
     ]);
@@ -67,6 +74,8 @@ function queueComplete(){
     createjs.Ticker.setFPS(30);
     stageMain.removeChild(stickMan, preloadText, ufo);
     console.log('Loading complete');
+    levelData = queue.getResult("levelJson")
+    tiles = new createjs.SpriteSheet(queue.getResult("tiles"));
     startPage();
 }
 
@@ -77,15 +86,15 @@ function startPage(){
     titelText.textBaseline="middle";
     titelText.textAlign="center";
     titelText.x=stageMain.canvas.width/2;
-    titelText.y=140;
+    titelText.y=100;
 
-    var buttonStartGame = new createjs.Bitmap(queue.getResult('img/buttonStartGame.png'));
+    var buttonStartGame = new createjs.Bitmap('img/buttonStartGame.png');
     buttonStartGame.width = 250;
     buttonStartGame.x = (stageMain.canvas.width/2)-(buttonStartGame.width)/2;
     buttonStartGame.y = 280;
     buttonStartGame.addEventListener('click',
         function(e){
-            createjs.Sound.play('clickSpaceGun');
+            createjs.Sound.play('deadSound');
             getReady();
             moveSmallUfo = false;
             removeBgUfo();
@@ -93,13 +102,14 @@ function startPage(){
         }
     );
 
-    var buttonHowToPlay = new createjs.Bitmap(queue.getResult('img/buttonHowToPlay.png'));
+    var buttonHowToPlay = new createjs.Bitmap('img/buttonHowToPlay.png');
     buttonHowToPlay.width = 250;
     buttonHowToPlay.x = (stageMain.canvas.width/2)-(buttonHowToPlay.width)/2;
     buttonHowToPlay.y = 400;
     buttonHowToPlay.addEventListener('click',
         function(e){
-            createjs.Sound.play('clickSpaceGun');
+            createjs.Sound.play('deadSound');
+
         }
     );
 
@@ -186,18 +196,47 @@ function moveUfo(){
 }
 
 function aboutGame() {
-    
+
 }
 
 function startGame() {
     gameIsRunning = true;
     console.log("start game")
-    window.addEventListener('keydown', fingerDown);
-    window.addEventListener('keyup', fingerUp);
+    setupLevel();
+    //window.addEventListener('keydown', fingerDown);
+    //window.addEventListener('keyup', fingerUp);
 }
 
-function nextLevel() {
-    
+function setupLevel() {
+    stageMain.removeAllChildren();
+    var row, col;
+    currentLevel++;
+    var level = levelData.levels[currentLevel].tiles;
+    blocks=[];
+    for(row=0; row<level.length; row++){
+        for(col=0; col<level[row].length; col++){
+            var img;
+            switch(level[row][col]){
+                case 0:
+                    img = "floor";
+                    break;
+
+                case 1:
+                    img = "block";
+                    break;
+            }
+            t = new createjs.Sprite(tiles, img);
+            t.x=col*blockSize;
+            t.y=row*blockSize;
+            t.width=blockSize;
+            t.height=blockSize;
+            t.type = level[row][col];
+            if(t.type===1){
+                blocks.push(t);
+            }
+            stageMain.addChild(t);
+        }
+    }
 }
 
 function gameComplete() {
@@ -206,56 +245,6 @@ function gameComplete() {
 
 function gameOver() {
     gameIsRunning = false;
-}
-
-function fingerUp(e){
-    if(e.keyCode===37){
-        keys.lkd=false;
-        hero.gotoAndStop('left');
-        hero.currentAnimation = "undefined";
-    }
-    if(e.keyCode===38){
-        keys.ukd=false;
-        hero.gotoAndStop('up');
-        hero.currentAnimation = "undefined";
-    }
-    if(e.keyCode===39){
-        keys.rkd=false;
-        hero.gotoAndStop('right');
-        hero.currentAnimation = "undefined";
-    }
-    if(e.keyCode===40){
-        keys.dkd=false;
-        hero.gotoAndStop('down');
-        hero.currentAnimation = "undefined";
-    }
-}
-
-function fingerDown(e){
-    if(e.keyCode===37){
-        keys.lkd=true;
-        if(hero.currentAnimation!='left') {
-            hero.gotoAndPlay('left');
-        }
-    }
-    if(e.keyCode===38){
-        keys.ukd=true;
-        if(hero.currentAnimation!='up') {
-            hero.gotoAndPlay('up');
-        }
-    }
-    if(e.keyCode===39){
-        keys.rkd=true;
-        if(hero.currentAnimation!='right') {
-            hero.gotoAndPlay('right');
-        }
-    }
-    if(e.keyCode===40){
-        keys.dkd=true;
-        if(hero.currentAnimation!='down') {
-            hero.gotoAndPlay('down');
-        }
-    }
 }
 
 function hitTest(rect1,rect2) {
@@ -283,6 +272,7 @@ function checkCollisions(){
 
 
 function tock(e) {
+
     stageMain.update(e);
     stageInfo.update(e);
     //console.log("Tock() is running")
