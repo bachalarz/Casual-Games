@@ -1,7 +1,7 @@
 var gameIsRunning = false;
 var stageMain, stageInfo; // Stages
 var preloadText, titelText; // Text
-var ufo, ufoSmall, soundButton, stickMan; //Bitmaps
+var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, buttonBack, stickMan, stickManRun; //Bitmaps
 var hero, heroSpriteSheet; //Hero player
 var queue; // Start
 var soundMute = false; // Sounds
@@ -57,16 +57,20 @@ function preload(){
         {id:"clickSpaceGun", src:"audio/sounds/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
         {id: "muteSprite", src:"json/muteSprite.json"},
+        {id: "runSprite", src:"json/stickManRun.json"},
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
+        "img/buttonBack.png",
         "img/buttonRestart.png",
         "img/heroSprite.png",
+        "img/rules.png",
+        "img/rules.png",
         {id:"levelJson",src:"json/levels.json"},
         {id:"tiles",src:"json/tiles.json"},
 
         "img/ufoSmall.png"
     ]);
-    console.log("Preload is running");
+    //console.log("Preload is running");
 }
 
 function queueProgress(e){
@@ -80,7 +84,7 @@ function queueComplete(){
     createjs.Ticker.on("tick", tock);
     createjs.Ticker.setFPS(30);
     stageMain.removeChild(stickMan, preloadText, ufo);
-    console.log('Loading complete');
+    //console.log('Loading complete');
     levelData = queue.getResult("levelJson")
     tiles = new createjs.SpriteSheet(queue.getResult("tiles"));
     startPage();
@@ -95,7 +99,12 @@ function startPage(){
     titelText.x=stageMain.canvas.width/2;
     titelText.y=140;
 
-    var buttonStartGame = new createjs.Bitmap(queue.getResult('img/buttonStartGame.png'));
+    stickManRun = new createjs.SpriteSheet(queue.getResult('runSprite'));
+    stickManRun = new createjs.Sprite(stickManRun, 'run');
+    stickManRun.x = -100;
+    stickManRun.y = 550;
+
+    buttonStartGame = new createjs.Bitmap(queue.getResult('img/buttonStartGame.png'));
     buttonStartGame.width = 250;
     buttonStartGame.x = (stageMain.canvas.width/2)-(buttonStartGame.width)/2;
     buttonStartGame.y = 280;
@@ -108,6 +117,22 @@ function startPage(){
             stageMain.removeChild(buttonStartGame, buttonHowToPlay, titelText);
         }
     );
+
+    buttonHowToPlay = new createjs.Bitmap(queue.getResult('img/buttonHowToPlay.png'));
+    buttonHowToPlay.width = 250;
+    buttonHowToPlay.x = (stageMain.canvas.width/2)-(buttonHowToPlay.width)/2;
+    buttonHowToPlay.y = 400;
+    buttonHowToPlay.addEventListener('click',
+        function(e){
+            createjs.Sound.play('clickSpaceGun');
+            aboutGame();
+        }
+    );
+
+    createjs.Sound.play('bgSound', {loop:-1});
+    addBgUfo();
+    stageMain.addChild(buttonStartGame, buttonHowToPlay, titelText, stickManRun);
+    moveSmallUfo = true;
 
     soundButton = new createjs.SpriteSheet(queue.getResult('muteSprite'));
     soundButton = new createjs.Sprite(soundButton, 'muteOff');
@@ -131,26 +156,9 @@ function startPage(){
     );
 
     stageInfo.addChild(soundButton, restartButton);
-
-    var buttonHowToPlay = new createjs.Bitmap(queue.getResult('img/buttonHowToPlay.png'));
-    buttonHowToPlay.width = 250;
-    buttonHowToPlay.x = (stageMain.canvas.width/2)-(buttonHowToPlay.width)/2;
-    buttonHowToPlay.y = 400;
-    buttonHowToPlay.addEventListener('click',
-        function(e){
-            createjs.Sound.play('clickSpaceGun');
-        }
-    );
-
-    createjs.Sound.play('bgSound', {loop:-1});
-    addBgUfo();
-    stageMain.addChild(buttonStartGame, buttonHowToPlay, titelText);
-    moveSmallUfo = true;
-
 }
 
 function getReady() {
-    console.log("get ready");
     var counter = 4;
     var cT = new createjs.Text(counter, "2000px Raleway", "#000");
     cT.textBaseline="middle";
@@ -175,10 +183,6 @@ function getReady() {
         })
     }
 }
-
-function selectHeroPage() {}
-
-function instructionPage() {}
 
 function addBgUfo() {
     ufoSmall = new createjs.Bitmap("img/ufoSmall.png");
@@ -225,7 +229,26 @@ function moveUfo(){
 }
 
 function aboutGame() {
-    
+    stageMain.removeChild(buttonStartGame, buttonHowToPlay, titelText);
+
+    buttonBack = new createjs.Bitmap(queue.getResult('img/buttonBack.png'));
+    buttonBack.width = 250;
+    buttonBack.x = (stageMain.canvas.width/2)-(buttonStartGame.width)/2;
+    buttonBack.y = 600;
+    buttonBack.addEventListener('click',
+        function(e){
+            createjs.Sound.play('clickSpaceGun');
+            stageMain.removeChild(buttonBack, rulesGraphics);
+            stageMain.addChild(buttonStartGame, buttonHowToPlay, titelText);
+
+        }
+    );
+
+    var rulesGraphics = new createjs.Bitmap(queue.getResult("img/rules.png"));
+    rulesGraphics.x = 50;
+    rulesGraphics.y = 50;
+
+    stageMain.addChild(buttonBack, rulesGraphics);
 }
 
 function startGame() {
@@ -264,7 +287,7 @@ function setupLevel(){
             if(t.type===1){
                 blocks.push(t);
             }
-            stageMain.addChild(t);
+            stageMain.addChild(t, ufoSmall);
         }
     }
 }
@@ -448,14 +471,19 @@ function tock(e) {
     if (gameIsRunning === true) {
         moveHero();
     }
+    if (stickManRun.x < 1200) {
+        stickManRun.x += 5;
+    }
+
     stageMain.update(e);
     stageInfo.update(e);
     //console.log("Tock() is running")
 }
 
-
-
 // Tilføjelser:
 // Lifestatus
 // Reset game
 // Add enemi
+// SetChildIndex
+// setInterval (kører function hvert x tid)
+
