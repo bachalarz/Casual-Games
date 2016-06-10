@@ -1,7 +1,8 @@
 var gameIsRunning = false;
+var levelText, lifeText, scoreText, timeText; // Show in stageInfo
 var stageMain, stageInfo; // Stages
 var preloadText, titelText; // Text
-var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, buttonBack, stickMan, stickManRun; //Bitmaps
+var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, restartButton, buttonBack, stickMan, stickManRun; //Bitmaps
 var hero, heroSpriteSheet; //Hero player
 var queue; // Start
 var soundMute = false; // Sounds
@@ -144,18 +145,29 @@ function startPage(){
         }
     );
 
-    var restartButton = new createjs.Bitmap(queue.getResult('img/buttonRestart.png'));
+    restartButton = new createjs.Bitmap(queue.getResult('img/buttonRestart.png'));
     restartButton.width = 50;
     restartButton.x = 150;
     restartButton.y = 30;
     restartButton.addEventListener('click',
         function(e){
             createjs.Sound.play('deadSound');
-            //restartGame();
         }
     );
 
-    stageInfo.addChild(soundButton, restartButton);
+    levelText = new createjs.Text("", "40px Raleway", "#000");
+    levelText.text = "Level " + currentLevel;
+    levelText.x = 50;
+    levelText.y = 110;
+
+    timeText = new createjs.Text("Time left", "36px Raleway", "#000");
+    timeText.x = 50;
+    timeText.y = 400;
+
+
+    stageInfo.addChild(soundButton);
+    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText ); // Fjern mig!!!
+
 }
 
 function getReady() {
@@ -258,6 +270,8 @@ function startGame() {
     console.log("start game")
     window.addEventListener('keydown', fingerDown);
     window.addEventListener('keyup', fingerUp);
+
+c
 }
 
 function setupLevel(){
