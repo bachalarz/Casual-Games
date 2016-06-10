@@ -61,7 +61,7 @@ function preload(){
         {id: "muteSprite", src:"json/muteSprite.json"},
         {id: "runSprite", src:"json/stickManRun.json"},
         "img/heart.png",
-        "star.png",
+        "img/star.png",
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
         "img/buttonBack.png",
@@ -158,6 +158,14 @@ function startPage(){
         }
     );
 
+    var lifeIcon = new createjs.Bitmap(queue.getResult("img/heart.png"));
+    lifeIcon.x = 50;
+    lifeIcon.y = 200;
+
+    var scoreIcon = new createjs.Bitmap(queue.getResult("img/star.png"));
+    scoreIcon.x = 50;
+    scoreIcon.y = 300;
+
     levelText = new createjs.Text("", "40px Raleway", "#000");
     levelText.text = "Level " + currentLevel;
     levelText.textAlign="right";
@@ -180,7 +188,7 @@ function startPage(){
     timeText.y = 400;
 
     stageInfo.addChild(soundButton);
-    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText ); // Fjern mig!!!
+    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, lifeIcon, scoreIcon); // Fjern mig!!!
 
 
 }
