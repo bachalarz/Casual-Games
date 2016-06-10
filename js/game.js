@@ -1,4 +1,5 @@
 var gameIsRunning = false;
+var heroLife = 3, heroScore = 0; // Hero status
 var levelText, lifeText, scoreText, timeText; // Show in stageInfo
 var stageMain, stageInfo; // Stages
 var preloadText, titelText, deadText; // Text
@@ -59,6 +60,8 @@ function preload(){
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
         {id: "muteSprite", src:"json/muteSprite.json"},
         {id: "runSprite", src:"json/stickManRun.json"},
+        "img/heart.png",
+        "star.png",
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
         "img/buttonBack.png",
@@ -157,16 +160,28 @@ function startPage(){
 
     levelText = new createjs.Text("", "40px Raleway", "#000");
     levelText.text = "Level " + currentLevel;
-    levelText.x = 50;
+    levelText.textAlign="right";
+    levelText.x = 200;
     levelText.y = 110;
 
-    timeText = new createjs.Text("Time left", "36px Raleway", "#000");
-    timeText.x = 50;
-    timeText.y = 400;
+    lifeText = new createjs.Text("", "40px Raleway", "#000");
+    lifeText.textAlign="right";
+    lifeText.x = 200;
+    lifeText.y = 200;
 
+    scoreText = new createjs.Text("4000", "40px Raleway", "#000");
+    scoreText.textAlign="right";
+    scoreText.x = 200;
+    scoreText.y = 300;
+
+    timeText = new createjs.Text("Time left", "36px Raleway", "#000");
+    timeText.textAlign="right";
+    timeText.x = 200;
+    timeText.y = 400;
 
     stageInfo.addChild(soundButton);
     stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText ); // Fjern mig!!!
+
 
 }
 
@@ -194,6 +209,16 @@ function getReady() {
             }
         })
     }
+}
+
+function updateStatusBar() {
+    var currentLevelStatusBar = currentLevel +1;
+    levelText.text = "Level  " + currentLevelStatusBar;
+    lifeText.text = heroLife;
+    scoreText.text = heroScore;
+
+
+
 }
 
 function addBgUfo() {
@@ -267,7 +292,6 @@ function startGame() {
     gameIsRunning = true;
     setupLevel();
     addHero();
-    console.log("start game")
     window.addEventListener('keydown', fingerDown);
     window.addEventListener('keyup', fingerUp);
 }
@@ -499,10 +523,13 @@ function predictHit(character,rect2) {
 function tock(e) {
     if (gameIsRunning === true) {
         moveHero();
+        //updateStatusBar();
     }
     if (stickManRun.x < 1200) {
         stickManRun.x += 5;
     }
+
+    updateStatusBar(); // Skal flyttes til (game is running)
 
     stageMain.update(e);
     stageInfo.update(e);
