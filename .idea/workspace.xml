@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/js/game.js" line="254" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/js/game.js" line="59" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17306075-5c2b-4e73-a275-0c0c1aa8f30c" name="Default" comment="" />
+    <list default="true" id="17306075-5c2b-4e73-a275-0c0c1aa8f30c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/img/rules.png" afterPath="$PROJECT_DIR$/img/rules.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game.js" afterPath="$PROJECT_DIR$/js/game.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/styles/styles.css" afterPath="$PROJECT_DIR$/styles/styles.css" />
+    </list>
     <ignored path="Exam project.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,29 +31,39 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="30" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="30" />
+            <state relative-caret-position="135">
+              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="styles.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/styles/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state relative-caret-position="255">
+              <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="58">
+              <caret line="162" column="42" selection-start-line="162" selection-start-column="42" selection-end-line="162" selection-end-column="42" />
+              <folding>
+                <element signature="n#!!block;n#startGame#0" expanded="false" />
+                <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+                <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+                <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+                <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+                <element signature="n#!!block;n#hitTest#0" expanded="false" />
+                <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+                <element signature="n#!!block;n#moveHero#0" expanded="false" />
+                <element signature="n#!!block;n#predictHit#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,7 +109,7 @@
         <entry file="file://$PROJECT_DIR$/json/stickManRun.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+              <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -109,13 +123,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/styles/styles.css" />
         <option value="$PROJECT_DIR$/json/stickManRun.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/json/muteSprite.json" />
         <option value="$PROJECT_DIR$/json/heroSprite.json" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/game.js" />
+        <option value="$PROJECT_DIR$/styles/styles.css" />
       </list>
     </option>
   </component>
@@ -127,8 +141,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="873" />
+    <option name="width" value="2560" />
+    <option name="height" value="1413" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -155,7 +169,26 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Default">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Tests" />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -326,21 +359,21 @@
       <workItem from="1465314485056" duration="21000" />
       <workItem from="1465325968255" duration="6024000" />
       <workItem from="1465377155276" duration="13845000" />
-      <workItem from="1465402153390" duration="26397000" />
+      <workItem from="1465402153390" duration="34217000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50407000" />
+    <option name="totallyTimeSpent" value="58227000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="873" extended-state="6" />
+    <frame x="0" y="23" width="2560" height="1413" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2114165" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11815675" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18065004" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20945083" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -393,7 +426,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#!!block;n#startGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -417,7 +460,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#!!block;n#startGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -433,7 +486,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#!!block;n#startGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -471,7 +534,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#!!block;n#startGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -509,7 +582,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#!!block;n#startGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -542,26 +625,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/json/stickManRun.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/styles/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -579,14 +646,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="30" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/img/heroSprite.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -600,10 +659,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/img/stickMan.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/stickManSprite.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/json/stickManRun.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+        <state relative-caret-position="58">
+          <caret line="162" column="42" selection-start-line="162" selection-start-column="42" selection-end-line="162" selection-end-column="42" />
+          <folding>
+            <element signature="n#!!block;n#startGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
           <folding />
         </state>
       </provider>
