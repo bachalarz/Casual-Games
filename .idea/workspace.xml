@@ -39,8 +39,8 @@
       <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/styles/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+            <state relative-caret-position="300">
+              <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -49,11 +49,9 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-990">
-              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+            <state relative-caret-position="315">
+              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
               <folding>
-                <element signature="n#!!block;n#getReady#0" expanded="false" />
-                <element signature="n#!!block;n#setupLevel#0" expanded="false" />
                 <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
                 <element signature="n#!!block;n#fingerUp#0" expanded="false" />
                 <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -63,6 +61,13 @@
                 <element signature="n#!!block;n#predictHit#0" expanded="false" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="timer2.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/img/timer2.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
@@ -359,12 +364,12 @@
       <workItem from="1465377155276" duration="13845000" />
       <workItem from="1465402153390" duration="34542000" />
       <workItem from="1465501979552" duration="110000" />
-      <workItem from="1465549985837" duration="5262000" />
+      <workItem from="1465549985837" duration="8683000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63924000" />
+    <option name="totallyTimeSpent" value="67345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -427,8 +432,6 @@
         <state relative-caret-position="3900">
           <caret line="260" column="36" selection-start-line="260" selection-start-column="36" selection-end-line="260" selection-end-column="36" />
           <folding>
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -498,8 +501,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -569,8 +570,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -603,8 +602,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -629,8 +626,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -677,8 +672,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -725,8 +718,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -819,14 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/styles/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -835,13 +818,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/img/timer1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/timer2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-990">
-          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+        <state relative-caret-position="315">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
           <folding>
-            <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />

@@ -3,7 +3,7 @@ var heroLife = 3, heroScore = 0; // Hero status
 var levelText, lifeText, scoreText, timeText; // Show in stageInfo
 var stageMain, stageInfo; // Stages
 var preloadText, titelText, deadText; // Text
-var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, restartButton, buttonBack, stickMan, stickManRun; //Bitmaps
+var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, restartButton, buttonBack, stickMan, stickManRun, timerBar1, timerBar2; //Bitmaps
 var hero, heroSpriteSheet; //Hero player
 var queue; // Start
 var soundMute = false; // Sounds
@@ -18,6 +18,8 @@ var keys = {
     ukd:false,
     dkd:false,
 };
+
+var temp = 60;
 
 function init() {
     stageMain = new createjs.Stage("canvasMain");
@@ -61,7 +63,9 @@ function preload(){
         {id: "muteSprite", src:"json/muteSprite.json"},
         {id: "runSprite", src:"json/stickManRun.json"},
         "img/heart.png",
-        "star.png",
+        "img/star.png",
+        "img/timer1.png",
+        "img/timer2.png",
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
         "img/buttonBack.png",
@@ -158,6 +162,7 @@ function startPage(){
         }
     );
 
+
     levelText = new createjs.Text("", "40px Raleway", "#000");
     levelText.text = "Level " + currentLevel;
     levelText.textAlign="right";
@@ -179,9 +184,29 @@ function startPage(){
     timeText.x = 200;
     timeText.y = 400;
 
-    stageInfo.addChild(soundButton);
-    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText ); // Fjern mig!!!
+    var timerImg1 = new createjs.Bitmap(queue.getResult('img/timer1.png'));
+    timerImg1.x = 50;
+    timerImg1.y = 480;
 
+    var timerImg2 = new createjs.Bitmap(queue.getResult('img/timer2.png'));
+    timerImg2.alpha = 1;
+    timerImg2.x = 50;
+    timerImg2.y = 480;
+
+    timerBar1 = new createjs.Shape();
+    timerBar1.graphics.beginFill("#c5910e");
+    timerBar1.graphics.drawRect(0, 0, 150, temp);
+    timerBar1.x = 50;
+    timerBar1.y = 500;
+
+    timerBar2 = new createjs.Shape();
+    timerBar2.graphics.beginFill("#c5910e");
+    timerBar2.graphics.drawRect(0, 0, 150, temp);
+    timerBar2.x = 50;
+    timerBar2.y = 605;
+
+    stageInfo.addChild(soundButton);
+    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, timerImg1, timerBar1, timerBar2, timerImg2); // Fjern mig!!!
 
 }
 
