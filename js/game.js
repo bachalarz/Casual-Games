@@ -162,6 +162,13 @@ function startPage(){
         }
     );
 
+    var lifeIcon = new createjs.Bitmap(queue.getResult("img/heart.png"));
+    lifeIcon.x = 50;
+    lifeIcon.y = 200;
+
+    var scoreIcon = new createjs.Bitmap(queue.getResult("img/star.png"));
+    scoreIcon.x = 50;
+    scoreIcon.y = 300;
 
     levelText = new createjs.Text("", "40px Raleway", "#000");
     levelText.text = "Level " + currentLevel;
@@ -206,7 +213,7 @@ function startPage(){
     timerBar2.y = 605;
 
     stageInfo.addChild(soundButton);
-    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, timerImg1, timerBar1, timerBar2, timerImg2); // Fjern mig!!!
+    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, lifeIcon, scoreIcon, timerImg1, timerBar1, timerBar2, timerImg2); // Fjern mig!!!
 
 }
 
