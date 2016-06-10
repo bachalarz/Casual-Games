@@ -1,7 +1,7 @@
 var gameIsRunning = false;
 var levelText, lifeText, scoreText, timeText; // Show in stageInfo
 var stageMain, stageInfo; // Stages
-var preloadText, titelText; // Text
+var preloadText, titelText, deadText; // Text
 var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, restartButton, buttonBack, stickMan, stickManRun; //Bitmaps
 var hero, heroSpriteSheet; //Hero player
 var queue; // Start
@@ -270,8 +270,6 @@ function startGame() {
     console.log("start game")
     window.addEventListener('keydown', fingerDown);
     window.addEventListener('keyup', fingerUp);
-
-c
 }
 
 function setupLevel(){
@@ -309,8 +307,25 @@ function setupLevel(){
 function gameComplete() {
 
 }
-
+//tilføjes til enemy hit detection
+function lifestatus() {
+    if (heroLife <= 0){
+        gameOver();
+    }
+}
 function gameOver() {
+    deadText = new createjs.Text("", "50px Raleway", "#000");
+    deadText.text = "You have died!";
+    deadText.textBaseline="middle";
+    deadText.textAlign="center";
+    deadText.x=stageMain.canvas.width/2;
+    deadText.y=300;
+
+    var splash = new createjs.Bitmap("img/skull.png");
+    splash.x=stageMain.canvas.width/2;
+    splash.y=300;
+
+    stageMain.addChild(deadText);
     gameIsRunning = false;
 }
 
