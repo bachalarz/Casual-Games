@@ -73,6 +73,7 @@ function preload(){
         "img/heroSprite.png",
         "img/rules.png",
         "img/rules.png",
+        "img/skull.png",
         {id:"levelJson",src:"json/levels.json"},
         {id:"tiles",src:"json/tiles.json"},
 
@@ -377,11 +378,11 @@ function gameOver() {
     deadText.x=stageMain.canvas.width/2;
     deadText.y=300;
 
-    var splash = new createjs.Bitmap("img/skull.png");
+    var splash = new createjs.Bitmap(queue.getResult('img/skull.png'));
     splash.x=stageMain.canvas.width/2;
     splash.y=300;
 
-    stageMain.addChild(deadText);
+    stageMain.addChild(deadText, splash);
     gameIsRunning = false;
 }
 
