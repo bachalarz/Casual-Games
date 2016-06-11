@@ -3,7 +3,7 @@ var heroLife = 3, heroScore = 0; // Hero status
 var levelText, lifeText, scoreText, timeText; // Show in stageInfo
 var stageMain, stageInfo; // Stages
 var preloadText, titelText, deadText; // Text
-var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, restartButton, buttonBack, stickMan, stickManRun, timerBar1, timerBar2; //Bitmaps
+var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, restartButton, buttonBack, stickMan, stickManRun, lifeIcon, scoreIcon, timerBar1, timerBar2; //Bitmaps
 var hero, heroSpriteSheet; //Hero player
 var queue; // Start
 var soundMute = false; // Sounds
@@ -19,7 +19,8 @@ var keys = {
     dkd:false,
 };
 
-var temp = 60;
+var timeLeft = 60;
+var timerImg1, timerImg2, timerBar1y, timerBar2y;
 
 function init() {
     stageMain = new createjs.Stage("canvasMain");
@@ -163,11 +164,11 @@ function startPage(){
         }
     );
 
-    var lifeIcon = new createjs.Bitmap(queue.getResult("img/heart.png"));
+    lifeIcon = new createjs.Bitmap(queue.getResult("img/heart.png"));
     lifeIcon.x = 50;
     lifeIcon.y = 200;
 
-    var scoreIcon = new createjs.Bitmap(queue.getResult("img/star.png"));
+    scoreIcon = new createjs.Bitmap(queue.getResult("img/star.png"));
     scoreIcon.x = 50;
     scoreIcon.y = 300;
 
@@ -192,30 +193,17 @@ function startPage(){
     timeText.x = 200;
     timeText.y = 400;
 
-    var timerImg1 = new createjs.Bitmap(queue.getResult('img/timer1.png'));
+    timerImg1 = new createjs.Bitmap(queue.getResult('img/timer1.png'));
     timerImg1.x = 50;
     timerImg1.y = 480;
 
-    var timerImg2 = new createjs.Bitmap(queue.getResult('img/timer2.png'));
+    timerImg2 = new createjs.Bitmap(queue.getResult('img/timer2.png'));
     timerImg2.alpha = 1;
     timerImg2.x = 50;
     timerImg2.y = 480;
 
-    timerBar1 = new createjs.Shape();
-    timerBar1.graphics.beginFill("#c5910e");
-    timerBar1.graphics.drawRect(0, 0, 150, temp);
-    timerBar1.x = 50;
-    timerBar1.y = 500;
-
-    timerBar2 = new createjs.Shape();
-    timerBar2.graphics.beginFill("#c5910e");
-    timerBar2.graphics.drawRect(0, 0, 150, temp);
-    timerBar2.x = 50;
-    timerBar2.y = 605;
 
     stageInfo.addChild(soundButton);
-    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, lifeIcon, scoreIcon, timerImg1, timerBar1, timerBar2, timerImg2); // Fjern mig!!!
-
 }
 
 function getReady() {
@@ -245,13 +233,30 @@ function getReady() {
 }
 
 function updateStatusBar() {
+
+    var factor = 80/60; // 60 er start level time
+
+    timerBar1y = 80-(timeLeft*factor)  ; //Skal ved timeLeft = 60 være 0
+    timerBar2y = timeLeft*factor; //Skal ved timeLeft = 60 være 80
+
+    timerBar1 = new createjs.Shape();
+    timerBar1.graphics.beginFill("#c5910e");
+    timerBar1.graphics.drawRect(0, 0, 150, timerBar1y);
+    timerBar1.x = 50;
+    timerBar1.y = 500;
+
+    timerBar2 = new createjs.Shape();
+    timerBar2.graphics.beginFill("#c5910e");
+    timerBar2.graphics.drawRect(0, 0, 150, timerBar2y);
+    timerBar2.x = 50;
+    timerBar2.y = 605;
+
     var currentLevelStatusBar = currentLevel +1;
     levelText.text = "Level  " + currentLevelStatusBar;
     lifeText.text = heroLife;
     scoreText.text = heroScore;
 
-
-
+    stageInfo.addChild(timerImg1, timerBar1, timerBar2, timerImg2);
 }
 
 function addBgUfo() {
@@ -327,6 +332,9 @@ function startGame() {
     addHero();
     window.addEventListener('keydown', fingerDown);
     window.addEventListener('keyup', fingerUp);
+
+    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, lifeIcon, scoreIcon, timerImg1, timerImg2); // Fjern mig!!!
+
 }
 
 function setupLevel(){
@@ -357,6 +365,7 @@ function setupLevel(){
                 blocks.push(t);
             }
             stageMain.addChild(t, ufoSmall);
+
         }
     }
 }
@@ -555,14 +564,20 @@ function predictHit(character,rect2) {
 
 function tock(e) {
     if (gameIsRunning === true) {
+        timeLeft-=.02;
         moveHero();
-        //updateStatusBar();
+        updateStatusBar();
     }
     if (stickManRun.x < 1200) {
         stickManRun.x += 5;
     }
 
-    updateStatusBar(); // Skal flyttes til (game is running)
+    if (timeLeft <0) {
+        gameOver();
+    }
+
+
+
 
     stageMain.update(e);
     stageInfo.update(e);
