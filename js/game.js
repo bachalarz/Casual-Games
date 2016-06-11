@@ -19,7 +19,7 @@ var keys = {
     dkd:false,
 };
 
-var timeLeft = 60;
+var conuntDownTime = false, timeLeft = 60;
 var timerImg1, timerImg2, timerBar1y, timerBar2y;
 
 function init() {
@@ -234,7 +234,7 @@ function getReady() {
 
 function updateStatusBar() {
 
-    var factor = 80/60; // 60 er start level time
+    var factor = 1.33; // 60 er start level time
 
     timerBar1y = 80-(timeLeft*factor)  ; //Skal ved timeLeft = 60 være 0
     timerBar2y = timeLeft*factor; //Skal ved timeLeft = 60 være 80
@@ -289,6 +289,7 @@ function moveUfo(){
     createjs.Tween.get(ufoSmall).to(
         {
             x:Math.floor(Math.random() * 1000), y:Math.floor(Math.random() * 650)
+
         },
         6000,
         createjs.Ease.cubicInOut
@@ -333,8 +334,24 @@ function startGame() {
     window.addEventListener('keydown', fingerDown);
     window.addEventListener('keyup', fingerUp);
 
-    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, lifeIcon, scoreIcon, timerImg1, timerImg2); // Fjern mig!!!
+    conuntDownTime = true;
+    runTimerCountDown();
 
+    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, lifeIcon, scoreIcon, timerImg1, timerImg2); // Fjern mig!!!
+}
+
+function runTimerCountDown () {
+    if (conuntDownTime === true && timeLeft > -1) {
+        startTimerCountDown();
+    }
+}
+
+function startTimerCountDown(){
+    timeLeft--;
+    console.log(timeLeft);
+    setTimeout(function () {
+        runTimerCountDown();
+    }, 1000);
 }
 
 function setupLevel(){
@@ -564,7 +581,7 @@ function predictHit(character,rect2) {
 
 function tock(e) {
     if (gameIsRunning === true) {
-        timeLeft-=.02;
+        //timeLeft-=.02;
         moveHero();
         updateStatusBar();
     }
@@ -575,7 +592,6 @@ function tock(e) {
     if (timeLeft <0) {
         gameOver();
     }
-
 
 
 
