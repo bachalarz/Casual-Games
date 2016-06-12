@@ -1,9 +1,9 @@
-var gameIsRunning = false;
+var gameIsRunning = false, timeIsRunning = false;
 var heroLife = 3, heroScore = 0; // Hero status
 var levelText, lifeText, scoreText, timeText; // Show in stageInfo
 var stageMain, stageInfo; // Stages
 var preloadText, titelText, deadText; // Text
-var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, restartButton, buttonBack, stickMan, stickManRun, lifeIcon, scoreIcon, timerBar1, timerBar2; //Bitmaps
+var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, restartButton, buttonBack, stickMan, stickManRun, sandDropRun, lifeIcon, scoreIcon, timerBar1, timerBar2; //Bitmaps
 var hero, heroSpriteSheet; //Hero player
 var queue; // Start
 var soundMute = false; // Sounds
@@ -63,6 +63,8 @@ function preload(){
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
         {id: "muteSprite", src:"json/muteSprite.json"},
         {id: "runSprite", src:"json/stickManRun.json"},
+        {id: "sandDropSprite", src:"json/sandDropSprite.json"},
+        "img/sandDropSprite.png",
         "img/heart.png",
         "img/star.png",
         "img/timer1.png",
@@ -202,6 +204,11 @@ function startPage(){
     timerImg2.x = 50;
     timerImg2.y = 480;
 
+    sandDropRun = new createjs.SpriteSheet(queue.getResult('sandDropSprite'));
+    sandDropRun = new createjs.Sprite(sandDropRun, 'run');
+    sandDropRun.x = 110;
+    sandDropRun.y = 600;
+
 
     stageInfo.addChild(soundButton);
 }
@@ -232,6 +239,7 @@ function getReady() {
     }
 }
 
+//Denne funktion bliver kaldt 30 gange i sekundet fra tock()
 function updateStatusBar() {
 
     var factor = 1.33; // 60 er start level time
@@ -256,7 +264,7 @@ function updateStatusBar() {
     lifeText.text = heroLife;
     scoreText.text = heroScore;
 
-    stageInfo.addChild(timerImg1, timerBar1, timerBar2, timerImg2);
+    stageInfo.addChild(timerImg1, timerBar1, timerBar2, timerImg2, sandDropRun);
 }
 
 function addBgUfo() {
@@ -329,6 +337,7 @@ function aboutGame() {
 
 function startGame() {
     gameIsRunning = true;
+    timeIsRunning = true;
     setupLevel();
     addHero();
     window.addEventListener('keydown', fingerDown);
@@ -342,16 +351,17 @@ function startGame() {
 
 function runTimerCountDown () {
     if (conuntDownTime === true && timeLeft > -1) {
-        startTimerCountDown();
+        TimerCountDown();
     }
 }
 
-function startTimerCountDown(){
-    timeLeft--;
-    console.log(timeLeft);
-    setTimeout(function () {
-        runTimerCountDown();
-    }, 1000);
+function TimerCountDown(){
+    if (timeIsRunning === true) {
+        timeLeft -= .5;
+        setTimeout(function () {
+            runTimerCountDown();
+        }, 500);
+    }
 }
 
 function setupLevel(){
@@ -397,6 +407,8 @@ function lifestatus() {
     }
 }
 function gameOver() {
+    gameIsRunning = false;
+
     deadText = new createjs.Text("", "50px Raleway", "#000");
     deadText.text = "You have died!";
     deadText.textBaseline="middle";
@@ -409,7 +421,8 @@ function gameOver() {
     splash.y=300;
 
     stageMain.addChild(deadText, splash);
-    gameIsRunning = false;
+    stageInfo.removeChild(sandDropRun);
+
 }
 
 function soundOnOff() {
@@ -565,23 +578,42 @@ function moveHero(){
     }
 }
 //Character hitDetection with blocks
-function predictHit(character,rect2) {
-    if ( character.nextX >= rect2.x + rect2.width
-        || character.nextX + character.width <= rect2.x
-        || character.nextY >= rect2.y + rect2.height
-        || character.nextY + character.height <= rect2.y )
+function predictHit(character,rect1) {
+    if ( character.nextX >= rect1.x + rect1.width
+        || character.nextX + character.width <= rect1.x
+        || character.nextY >= rect1.y + rect1.height
+        || character.nextY + character.height <= rect1.y )
     {
         return false;
     }
     return true;
 }
 
+// POWERUPS START
 
+function freezeTime() {
+    timeIsRunning = false;
+    sandDropRun.gotoAndStop('stop');
+    setTimeout(function () {
+        timeIsRunning = true;
+        sandDropRun.gotoAndPlay('run');
+        TimerCountDown()
+    }, 20000);
+
+}
+
+function turnBackTime() {
+    if (timeLeft < 50) {
+        timeLeft+=10;
+    }
+}
+
+
+// POWERUPS END
 
 
 function tock(e) {
     if (gameIsRunning === true) {
-        //timeLeft-=.02;
         moveHero();
         updateStatusBar();
     }
@@ -589,7 +621,7 @@ function tock(e) {
         stickManRun.x += 5;
     }
 
-    if (timeLeft <0) {
+    if (timeLeft <0 && gameIsRunning === true) {
         gameOver();
     }
 

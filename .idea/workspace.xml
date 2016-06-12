@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17306075-5c2b-4e73-a275-0c0c1aa8f30c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/json/sandDropSprite.json" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/timer.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game.js" afterPath="$PROJECT_DIR$/js/game.js" />
     </list>
     <ignored path="Exam project.iws" />
@@ -29,8 +32,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+            <state relative-caret-position="150">
+              <caret line="10" column="125" selection-start-line="10" selection-start-column="125" selection-end-line="10" selection-end-column="125" />
               <folding />
             </state>
           </provider>
@@ -49,19 +52,22 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="348" column="31" selection-start-line="348" selection-start-column="31" selection-end-line="348" selection-end-column="31" />
+            <state relative-caret-position="458">
+              <caret line="600" column="9" selection-start-line="600" selection-start-column="9" selection-end-line="600" selection-end-column="9" />
               <folding>
                 <element signature="n#!!block;n#init#0" expanded="false" />
-                <marker date="1465673994000" expanded="false" signature="2879:3172" ph="{...}" />
-                <marker date="1465673994000" expanded="false" signature="6469:7106" ph="{...}" />
-                <marker date="1465673994000" expanded="false" signature="11847:12120" ph="{...}" />
-                <marker date="1465673994000" expanded="false" signature="12142:12676" ph="{...}" />
-                <marker date="1465673994000" expanded="false" signature="12700:13281" ph="{...}" />
-                <marker date="1465673994000" expanded="false" signature="13313:13545" ph="{...}" />
-                <marker date="1465673994000" expanded="false" signature="13573:13577" ph="{...}" />
-                <marker date="1465673994000" expanded="false" signature="14046:15642" ph="{...}" />
-                <marker date="1465673994000" expanded="false" signature="15717:15989" ph="{...}" />
+                <element signature="n#!!block;n#queueComplete#0" expanded="false" />
+                <element signature="n#!!block;n#getReady#0" expanded="false" />
+                <element signature="n#!!block;n#aboutGame#0" expanded="false" />
+                <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+                <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+                <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+                <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+                <element signature="n#!!block;n#hitTest#0" expanded="false" />
+                <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+                <element signature="n#!!block;n#addHero#0" expanded="false" />
+                <element signature="n#!!block;n#moveHero#0" expanded="false" />
+                <element signature="n#!!block;n#predictHit#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -70,10 +76,27 @@
       <file leaf-file-name="heroSprite.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/json/heroSprite.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+            <state relative-caret-position="120">
+              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
               <folding />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sandDropSprite.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/json/sandDropSprite.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sandDropSprite.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/img/sandDropSprite.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
@@ -115,6 +138,7 @@
         <option value="$PROJECT_DIR$/json/heroSprite.json" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/styles/styles.css" />
+        <option value="$PROJECT_DIR$/json/sandDropSprite.json" />
         <option value="$PROJECT_DIR$/js/game.js" />
       </list>
     </option>
@@ -127,8 +151,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="873" />
+    <option name="width" value="2560" />
+    <option name="height" value="1413" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -156,26 +180,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope">
-        <subPane subId="Problems" />
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Default">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Tests" />
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -288,6 +292,26 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Default">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Tests" />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -375,24 +399,27 @@
       <workItem from="1465377155276" duration="13845000" />
       <workItem from="1465402153390" duration="34542000" />
       <workItem from="1465501979552" duration="110000" />
-      <workItem from="1465549985837" duration="21924000" />
+      <workItem from="1465549985837" duration="22138000" />
+      <workItem from="1465674448595" duration="64000" />
+      <workItem from="1465741610834" duration="363000" />
+      <workItem from="1465764524360" duration="4492000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80586000" />
+    <option name="totallyTimeSpent" value="85719000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="873" extended-state="6" />
+    <frame x="0" y="23" width="2560" height="1413" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21000704" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20992517" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20945083" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.123960696" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18263091" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24970461" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18263091" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -422,32 +449,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/json/heroSprite.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/json/muteSprite.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/buttonMute.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -455,7 +460,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -481,15 +485,18 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!block;n#init#0" expanded="false" />
-            <marker date="1465673994000" expanded="false" signature="2879:3172" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="6469:7106" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="11847:12120" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12142:12676" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12700:13281" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13313:13545" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13573:13577" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="14046:15642" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="15717:15989" ph="{...}" />
+            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
+            <element signature="n#!!block;n#getReady#0" expanded="false" />
+            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#addHero#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -506,7 +513,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -519,7 +525,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -527,7 +532,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -553,15 +557,18 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!block;n#init#0" expanded="false" />
-            <marker date="1465673994000" expanded="false" signature="2879:3172" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="6469:7106" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="11847:12120" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12142:12676" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12700:13281" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13313:13545" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13573:13577" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="14046:15642" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="15717:15989" ph="{...}" />
+            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
+            <element signature="n#!!block;n#getReady#0" expanded="false" />
+            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#addHero#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -588,15 +595,18 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!block;n#init#0" expanded="false" />
-            <marker date="1465673994000" expanded="false" signature="2879:3172" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="6469:7106" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="11847:12120" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12142:12676" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12700:13281" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13313:13545" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13573:13577" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="14046:15642" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="15717:15989" ph="{...}" />
+            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
+            <element signature="n#!!block;n#getReady#0" expanded="false" />
+            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#addHero#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -615,15 +625,18 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!block;n#init#0" expanded="false" />
-            <marker date="1465673994000" expanded="false" signature="2879:3172" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="6469:7106" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="11847:12120" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12142:12676" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12700:13281" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13313:13545" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13573:13577" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="14046:15642" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="15717:15989" ph="{...}" />
+            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
+            <element signature="n#!!block;n#getReady#0" expanded="false" />
+            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#addHero#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -664,15 +677,18 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!block;n#init#0" expanded="false" />
-            <marker date="1465673994000" expanded="false" signature="2879:3172" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="6469:7106" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="11847:12120" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12142:12676" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12700:13281" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13313:13545" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13573:13577" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="14046:15642" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="15717:15989" ph="{...}" />
+            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
+            <element signature="n#!!block;n#getReady#0" expanded="false" />
+            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#addHero#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -713,15 +729,18 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!block;n#init#0" expanded="false" />
-            <marker date="1465673994000" expanded="false" signature="2879:3172" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="6469:7106" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="11847:12120" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12142:12676" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12700:13281" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13313:13545" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13573:13577" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="14046:15642" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="15717:15989" ph="{...}" />
+            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
+            <element signature="n#!!block;n#getReady#0" expanded="false" />
+            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#addHero#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -752,7 +771,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -760,7 +778,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -783,18 +800,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/timer1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/timer2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/img/skull.png">
@@ -802,17 +808,20 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/img/heroSprite.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/js/createjsmin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4140">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/json/heroSprite.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/img/timer.png" />
+    <entry file="file://$PROJECT_DIR$/img/timer2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/json/levels.json">
@@ -828,13 +837,42 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/createjsmin.js">
+    <entry file="file://$PROJECT_DIR$/img/heroSprite.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/timer1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/sandDropSprite.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4140">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="150">
+          <caret line="10" column="125" selection-start-line="10" selection-start-column="125" selection-end-line="10" selection-end-column="125" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/json/heroSprite.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/json/sandDropSprite.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -846,29 +884,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="348" column="31" selection-start-line="348" selection-start-column="31" selection-end-line="348" selection-end-column="31" />
+        <state relative-caret-position="458">
+          <caret line="600" column="9" selection-start-line="600" selection-start-column="9" selection-end-line="600" selection-end-column="9" />
           <folding>
             <element signature="n#!!block;n#init#0" expanded="false" />
-            <marker date="1465673994000" expanded="false" signature="2879:3172" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="6469:7106" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="11847:12120" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12142:12676" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="12700:13281" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13313:13545" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="13573:13577" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="14046:15642" ph="{...}" />
-            <marker date="1465673994000" expanded="false" signature="15717:15989" ph="{...}" />
+            <element signature="n#!!block;n#queueComplete#0" expanded="false" />
+            <element signature="n#!!block;n#getReady#0" expanded="false" />
+            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
+            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
+            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
+            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
+            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
+            <element signature="n#!!block;n#hitTest#0" expanded="false" />
+            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
+            <element signature="n#!!block;n#addHero#0" expanded="false" />
+            <element signature="n#!!block;n#moveHero#0" expanded="false" />
+            <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
       </provider>

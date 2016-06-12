@@ -1,0 +1,9 @@
+{
+  "framerate": 10,
+  "images": ["img/sandDropSprite.png"],
+  "frames": {"width":20, "height":80, "regX":0, "regY":0},
+  "animations": {
+    "run": [1,11],
+    "stop": [0]
+  }
+}
