@@ -21,8 +21,8 @@ var keys = {
 
 var stuffAdded=false;
 
-var conuntDownTime = false, timeLeft = 60;
-var timerImg1, timerImg2, timerBar1y, timerBar2y;
+var conuntDownTime = false, startTime = 200, timeLeft = startTime;
+var timerImg1, timerImg2;
 
 function init() {
     stageMain = new createjs.Stage("canvasMain");
@@ -257,7 +257,7 @@ function getReady() {
 //Denne funktion bliver kaldt 30 gange i sekundet fra tock()
 function updateStatusBar() {
 
-    var scale=timeLeft/60;
+    var scale=timeLeft/startTime;
     timerBar2.scaleY=scale;
     timerBar1.scaleY=1-scale;
     var currentLevelStatusBar = currentLevel +1;
@@ -415,11 +415,11 @@ function gameOver() {
     deadText.textBaseline="middle";
     deadText.textAlign="center";
     deadText.x=stageMain.canvas.width/2;
-    deadText.y=400;
+    deadText.y=500;
 
     var splash = new createjs.Bitmap(queue.getResult('img/alienSkull.png'));
     splash.x=stageMain.canvas.width/2;
-    splash.y=80;
+    splash.y=180;
     splash.x=450;
 
     stageMain.addChild(splash, deadText);
@@ -605,8 +605,10 @@ function freezeTime() {
 }
 
 function turnBackTime() {
-    if (timeLeft < 50) {
+    if (timeLeft < startTime-10) {
         timeLeft+=10;
+    } else {
+        timeLeft = startTime;
     }
 }
 
