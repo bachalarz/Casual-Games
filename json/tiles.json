@@ -4,6 +4,9 @@
   "frames": {"width":50, "height":50, "regX": 0, "regY":0},
   "animations": {
     "floor": [0],
-    "block": [1]
+    "block": [1],
+    "tp": [2],
+    "wp": [3],
+    "eg": [4]
   }
 }
