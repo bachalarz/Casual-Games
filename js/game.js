@@ -16,8 +16,10 @@ var keys = {
     rkd:false,
     lkd:false,
     ukd:false,
-    dkd:false,
+    dkd:false
 };
+
+var stuffAdded=false;
 
 var conuntDownTime = false, timeLeft = 60;
 var timerImg1, timerImg2, timerBar1y, timerBar2y;
@@ -210,6 +212,19 @@ function startPage(){
     sandDropRun.y = 600;
 
 
+    timerBar1 = new createjs.Shape();
+    timerBar1.graphics.beginFill("#c5910e");
+    timerBar1.graphics.drawRect(0, 0, 150, 80);
+    timerBar1.x = 50;
+    timerBar1.y = 500;
+    timerBar1.scaleY=0;
+
+    timerBar2 = new createjs.Shape();
+    timerBar2.graphics.beginFill("#c5910e");
+    timerBar2.graphics.drawRect(0, 0, 150, 80);
+    timerBar2.x = 50;
+    timerBar2.y = 605;
+
     stageInfo.addChild(soundButton);
 }
 
@@ -242,29 +257,14 @@ function getReady() {
 //Denne funktion bliver kaldt 30 gange i sekundet fra tock()
 function updateStatusBar() {
 
-    var factor = 1.33; // 60 er start level time
-
-    timerBar1y = 80-(timeLeft*factor)  ; //Skal ved timeLeft = 60 være 0
-    timerBar2y = timeLeft*factor; //Skal ved timeLeft = 60 være 80
-
-    timerBar1 = new createjs.Shape();
-    timerBar1.graphics.beginFill("#c5910e");
-    timerBar1.graphics.drawRect(0, 0, 150, timerBar1y);
-    timerBar1.x = 50;
-    timerBar1.y = 500;
-
-    timerBar2 = new createjs.Shape();
-    timerBar2.graphics.beginFill("#c5910e");
-    timerBar2.graphics.drawRect(0, 0, 150, timerBar2y);
-    timerBar2.x = 50;
-    timerBar2.y = 605;
-
+    var scale=timeLeft/60;
+    timerBar2.scaleY=scale;
+    timerBar1.scaleY=1-scale;
     var currentLevelStatusBar = currentLevel +1;
     levelText.text = "Level  " + currentLevelStatusBar;
     lifeText.text = heroLife;
     scoreText.text = heroScore;
 
-    stageInfo.addChild(timerImg1, timerBar1, timerBar2, timerImg2, sandDropRun);
 }
 
 function addBgUfo() {
@@ -346,7 +346,8 @@ function startGame() {
     conuntDownTime = true;
     runTimerCountDown();
 
-    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, lifeIcon, scoreIcon, timerImg1, timerImg2); // Fjern mig!!!
+    stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, lifeIcon, scoreIcon, timerImg1, timerBar1, timerBar2, timerImg2, sandDropRun);
+
 }
 
 function runTimerCountDown () {

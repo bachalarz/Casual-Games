@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/js/game.js" line="60" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/js/game.js" line="62" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17306075-5c2b-4e73-a275-0c0c1aa8f30c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/json/sandDropSprite.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/timer.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game.js" afterPath="$PROJECT_DIR$/js/game.js" />
     </list>
@@ -52,14 +50,12 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="600" column="9" selection-start-line="600" selection-start-column="9" selection-end-line="600" selection-end-column="9" />
+            <state relative-caret-position="4335">
+              <caret line="348" column="156" selection-start-line="348" selection-start-column="156" selection-end-line="348" selection-end-column="156" />
               <folding>
                 <element signature="n#!!block;n#init#0" expanded="false" />
                 <element signature="n#!!block;n#queueComplete#0" expanded="false" />
                 <element signature="n#!!block;n#getReady#0" expanded="false" />
-                <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-                <element signature="n#!!block;n#setupLevel#0" expanded="false" />
                 <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
                 <element signature="n#!!block;n#fingerUp#0" expanded="false" />
                 <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -70,6 +66,20 @@
                 <element signature="n#!!block;n#predictHit#0" expanded="false" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="timer1.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/img/timer1.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="timer2.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/img/timer2.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
@@ -97,16 +107,6 @@
         <entry file="file://$PROJECT_DIR$/img/sandDropSprite.png">
           <provider selected="true" editor-type-id="images">
             <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="levels.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/json/levels.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
           </provider>
         </entry>
       </file>
@@ -151,8 +151,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="2560" />
-    <option name="height" value="1413" />
+    <option name="width" value="1440" />
+    <option name="height" value="873" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -179,7 +179,26 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Default">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Tests" />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -208,110 +227,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="styles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExamProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExamProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="json" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExamProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExamProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExamProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExamProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="img" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExamProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExamProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="audio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sounds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExamProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExamProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="audio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="music" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Problems" />
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Default">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Tests" />
-      </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -382,6 +304,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",HIDE_INHERITED_FROM_OBJECT" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -402,23 +327,25 @@
       <workItem from="1465549985837" duration="22138000" />
       <workItem from="1465674448595" duration="64000" />
       <workItem from="1465741610834" duration="363000" />
-      <workItem from="1465764524360" duration="4492000" />
+      <workItem from="1465764524360" duration="4617000" />
+      <workItem from="1465769658451" duration="61000" />
+      <workItem from="1465801785220" duration="2188000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85719000" />
+    <option name="totallyTimeSpent" value="88093000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2560" height="1413" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="873" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20992517" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20930232" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.123960696" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1238825" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24970461" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18263091" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -487,8 +414,6 @@
             <element signature="n#!!block;n#init#0" expanded="false" />
             <element signature="n#!!block;n#queueComplete#0" expanded="false" />
             <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -559,8 +484,6 @@
             <element signature="n#!!block;n#init#0" expanded="false" />
             <element signature="n#!!block;n#queueComplete#0" expanded="false" />
             <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -597,8 +520,6 @@
             <element signature="n#!!block;n#init#0" expanded="false" />
             <element signature="n#!!block;n#queueComplete#0" expanded="false" />
             <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -627,8 +548,6 @@
             <element signature="n#!!block;n#init#0" expanded="false" />
             <element signature="n#!!block;n#queueComplete#0" expanded="false" />
             <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -679,8 +598,6 @@
             <element signature="n#!!block;n#init#0" expanded="false" />
             <element signature="n#!!block;n#queueComplete#0" expanded="false" />
             <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -731,8 +648,6 @@
             <element signature="n#!!block;n#init#0" expanded="false" />
             <element signature="n#!!block;n#queueComplete#0" expanded="false" />
             <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
@@ -819,11 +734,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/img/timer.png" />
-    <entry file="file://$PROJECT_DIR$/img/timer2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/json/levels.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -842,22 +752,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/img/timer1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/img/sandDropSprite.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="125" selection-start-line="10" selection-start-column="125" selection-end-line="10" selection-end-column="125" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/json/heroSprite.json">
@@ -884,16 +781,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="125" selection-start-line="10" selection-start-column="125" selection-end-line="10" selection-end-column="125" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/timer1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/timer2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="600" column="9" selection-start-line="600" selection-start-column="9" selection-end-line="600" selection-end-column="9" />
+        <state relative-caret-position="4335">
+          <caret line="348" column="156" selection-start-line="348" selection-start-column="156" selection-end-line="348" selection-end-column="156" />
           <folding>
             <element signature="n#!!block;n#init#0" expanded="false" />
             <element signature="n#!!block;n#queueComplete#0" expanded="false" />
             <element signature="n#!!block;n#getReady#0" expanded="false" />
-            <element signature="n#!!block;n#aboutGame#0" expanded="false" />
-            <element signature="n#!!block;n#setupLevel#0" expanded="false" />
             <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
             <element signature="n#!!block;n#fingerUp#0" expanded="false" />
             <element signature="n#!!block;n#fingerDown#0" expanded="false" />
