@@ -9,6 +9,8 @@ var queue; // Start
 var soundMute = false; // Sounds
 var moveSmallUfo = false;
 var autoStart = true;
+var teleporters=[];
+var powerUps=[];
 var scoreTotal = 0;
 var levelData, tiles, currentLevel=-1, t, blockSize = 50; //level
 var hitTest;
@@ -338,8 +340,8 @@ function aboutGame() {
 function startGame() {
     gameIsRunning = true;
     timeIsRunning = true;
-    setupLevel();
     addHero();
+    setupLevel();
     window.addEventListener('keydown', fingerDown);
     window.addEventListener('keyup', fingerUp);
 
@@ -365,79 +367,131 @@ function TimerCountDown(){
     }
 }
 
-function setupLevel(){
+function setupLevel() {
     stageMain.removeAllChildren();
     var row, col;
     currentLevel++;
     var level = levelData.levels[currentLevel].tiles;
-    blocks=[];
-    for(row=0; row<level.length; row++){
-        for(col=0; col<level[row].length; col++){
+    blocks = [];
+    teleporters = [];
+    var hCol, hRow;
+    for (row = 0; row < level.length; row++) {
+        for (col = 0; col < level[row].length; col++) {
             var img;
-            switch(level[row][col]){
+            switch (level[row][col]) {
                 case 0:
                     img = "floor";
                     break;
-
                 case 1:
                     img = "block";
                     break;
+                case 2:
+                    img = "tp";
+                    break;
+                case 3:
+                    img = "wp";
+                    break;
+                case 4:
+                    img = "eg";
+                    break;
+                case "H":
+                    img = "floor";
+                    hCol = col;
+                    hRow = row;
+                    break;
             }
             t = new createjs.Sprite(tiles, img);
-            t.x=col*blockSize;
-            t.y=row*blockSize;
-            t.width=blockSize;
-            t.height=blockSize;
+            t.x = col * blockSize;
+            t.y = row * blockSize;
+            t.width = blockSize;
+            t.height = blockSize;
             t.type = level[row][col];
-            if(t.type===1){
+            if (t.type === 1) {
                 blocks.push(t);
+            } else{
+                
             }
-            stageMain.addChild(t, ufoSmall);
+            stageMain.addChild(t);
+
 
         }
+        var tps = levelData.levels[currentLevel].teleporters;
+        for (var i = 0; i < tps.length; i++) {
+            t = new createjs.Sprite(tiles, 'tp');
+            t.x = tps[i].x;
+            t.y = tps[i].y;
+            t.width = blockSize;
+            t.height = blockSize;
+            t.waypointX = tps[i].waypointX;
+            t.waypointY = tps[i].waypointY;
+
+            teleporters.push(t)
+            stageMain.addChild(t);
+        }
+        var pus = levelData.levels[currentLevel].powerUps;
+        for (var i = 0; i < pus.length; i++) {
+            t = new createjs.Sprite(tiles, 'pu1');
+            t.x = pus[i].x;
+            t.y = pus[i].y;
+            t.width = blockSize;
+            t.height = blockSize;
+            if (t.type === 5, 6, 7) {
+                //pick up powerup
+            } else{
+
+            }
+
+            powerUps.push(t)
+            stageMain.addChild(t);
+        }
+        hero.x = hCol * blockSize;
+        hero.y = hRow * blockSize;
+        stageMain.addChild(hero, ufoSmall); //Her stod den oprindeligt!
     }
 }
 
-function gameComplete() {
+    function gameComplete() {
 
-}
+    }
+
 //tilføjes til enemy hit detection
-function lifestatus() {
-    if (heroLife <= 0){
-        gameOver();
+    function lifestatus() {
+        if (heroLife <= 0) {
+            gameOver();
+        }
     }
-}
-function gameOver() {
-    gameIsRunning = false;
 
-    deadText = new createjs.Text("", "50px Raleway", "#c5910e");
-    deadText.text = "You have died!";
-    deadText.textBaseline="middle";
-    deadText.textAlign="center";
-    deadText.x=stageMain.canvas.width/2;
-    deadText.y=500;
+    function gameOver() {
+        gameIsRunning = false;
 
-    var splash = new createjs.Bitmap(queue.getResult('img/alienSkull.png'));
-    splash.x=stageMain.canvas.width/2;
-    splash.y=180;
-    splash.x=450;
+        deadText = new createjs.Text("", "50px Raleway", "#c5910e");
+        deadText.text = "You have died!";
+        deadText.textBaseline = "middle";
+        deadText.textAlign = "center";
+        deadText.x = stageMain.canvas.width / 2;
+        deadText.y = 500;
 
-    stageMain.addChild(splash, deadText);
-    stageInfo.removeChild(sandDropRun);
+        var splash = new createjs.Bitmap(queue.getResult('img/alienSkull.png'));
+        splash.x = stageMain.canvas.width / 2;
+        splash.y = 180;
+        splash.x = 450;
 
-}
+        stageMain.addChild(splash, deadText);
+        stageInfo.removeChild(sandDropRun);
 
-function soundOnOff() {
-    if (soundMute===false) {
-        soundMute = true;
-        createjs.Sound.stop();
-        soundButton.gotoAndStop('muteOn');
-    } else {
-        soundMute = false;
-        createjs.Sound.play('bgSound', {loop:-1});
-        soundButton.gotoAndStop('muteOff');
     }
-}
+
+    function soundOnOff() {
+        if (soundMute === false) {
+            soundMute = true;
+            createjs.Sound.stop();
+            soundButton.gotoAndStop('muteOn');
+        } else {
+            soundMute = false;
+            createjs.Sound.play('bgSound', {loop: -1});
+            soundButton.gotoAndStop('muteOff');
+        }
+    }
 
 function fingerUp(e){
     if(e.keyCode===37){
@@ -462,179 +516,184 @@ function fingerUp(e){
     }
 }
 
-function fingerDown(e){
-    if(e.keyCode===37){
-        keys.lkd=true;
-        if(hero.currentAnimation!='left') {
-            hero.gotoAndPlay('left');
+    function fingerDown(e) {
+        if (e.keyCode === 37) {
+            keys.lkd = true;
+            if (hero.currentAnimation != 'left') {
+                hero.gotoAndPlay('left');
+            }
+        }
+        if (e.keyCode === 38) {
+            keys.ukd = true;
+            if (hero.currentAnimation != 'up') {
+                hero.gotoAndPlay('up');
+            }
+        }
+        if (e.keyCode === 39) {
+            keys.rkd = true;
+            if (hero.currentAnimation != 'right') {
+                hero.gotoAndPlay('right');
+            }
+        }
+        if (e.keyCode === 40) {
+            keys.dkd = true;
+            if (hero.currentAnimation != 'down') {
+                hero.gotoAndPlay('down');
+            }
         }
     }
-    if(e.keyCode===38){
-        keys.ukd=true;
-        if(hero.currentAnimation!='up') {
-            hero.gotoAndPlay('up');
-        }
-    }
-    if(e.keyCode===39){
-        keys.rkd=true;
-        if(hero.currentAnimation!='right') {
-            hero.gotoAndPlay('right');
-        }
-    }
-    if(e.keyCode===40){
-        keys.dkd=true;
-        if(hero.currentAnimation!='down') {
-            hero.gotoAndPlay('down');
-        }
-    }
-}
 
-function hitTest(rect1,rect2) {
-    if ( rect1.x >= rect2.x + rect2.width
-        || rect1.x + rect1.width <= rect2.x
-        || rect1.y >= rect2.y + rect2.height
-        || rect1.y + rect1.height <= rect2.y )
-    {
-        return false;
+    function hitTest(rect1, rect2) {
+        if (rect1.x >= rect2.x + rect2.width
+            || rect1.x + rect1.width <= rect2.x
+            || rect1.y >= rect2.y + rect2.height
+            || rect1.y + rect1.height <= rect2.y) {
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 
-function checkCollisions(){
+    function checkCollisions() {
 
-}
+    }
 
 //finger up/down
 
-function addHero(){
+    function addHero() {
 
-    heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
-    hero = new createjs.Sprite(heroSpriteSheet, 'still');
-    hero.width = 50;
-    hero.height = 50;
-    hero.speed = 10;
-    hero.nextX;
-    hero.nextY;
+        heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
+        hero = new createjs.Sprite(heroSpriteSheet, 'still');
+        hero.width = 50;
+        hero.height = 50;
+        hero.speed = 10;
+        hero.nextX;
+        hero.nextY;
 
-    hero.x = (stageMain.canvas.width / 2) - (hero.width / 2);
-    hero.y = stageMain.canvas.height - hero.height;
-    stageMain.addChild(hero); //Her stod den oprindeligt!
-}
 
-function moveHero(){
-    if(keys.rkd && hero.x < 1150-hero.width){
-        var collisionDetected = false;
-        hero.nextY=hero.y;
-        hero.nextX=hero.x+hero.speed;
-        for(i=0; i<blocks.length; i++){
-            if(predictHit(hero, blocks[i])){
-                collisionDetected=true;
+    }
+
+    function moveHero() {
+        var i = 0, tpLength = teleporters.length;
+        for (; i < tpLength; i++) {
+            if (hitTest(hero, teleporters[i])) {
+                console.log('hit tp', teleporters[i].waypointX)
+                hero.x = teleporters[i].waypointX;
+                hero.y = teleporters[i].waypointY;
                 break;
             }
         }
-        if(!collisionDetected) {
-            hero.x += hero.speed;
-        }
-    }
-    if(keys.lkd && hero.x > 0){
-        var collisionDetected = false;
-        hero.nextY=hero.y;
-        hero.nextX=hero.x-hero.speed;
-        for(i=0; i<blocks.length; i++){
-            if(predictHit(hero, blocks[i])){
-                collisionDetected=true;
-                break;
+        if (keys.rkd && hero.x < 1150 - hero.width) {
+            var collisionDetected = false;
+            hero.nextY = hero.y;
+            hero.nextX = hero.x + hero.speed;
+            for (i = 0; i < blocks.length; i++) {
+                if (predictHit(hero, blocks[i])) {
+                    collisionDetected = true;
+                    break;
+                }
+            }
+            if (!collisionDetected) {
+                hero.x += hero.speed;
             }
         }
-        if(!collisionDetected) {
-            hero.x -= hero.speed;
-        }
-    }
-    if(keys.ukd && hero.y >= 0){
-        var collisionDetected = false;
-        hero.nextY=hero.y-hero.speed;
-        hero.nextX=hero.x;
-        for(i=0; i<blocks.length; i++){
-            if(predictHit(hero, blocks[i])){
-                collisionDetected=true;
-                break;
+        if (keys.lkd && hero.x > 0) {
+            var collisionDetected = false;
+            hero.nextY = hero.y;
+            hero.nextX = hero.x - hero.speed;
+            for (i = 0; i < blocks.length; i++) {
+                if (predictHit(hero, blocks[i])) {
+                    collisionDetected = true;
+                    break;
+                }
+            }
+            if (!collisionDetected) {
+                hero.x -= hero.speed;
             }
         }
-        if(!collisionDetected) {
-            hero.y -= hero.speed;
-        }
-    }
-    if(keys.dkd && hero.y < 750-hero.height){
-        var collisionDetected = false;
-        hero.nextY=hero.y+hero.speed;
-        hero.nextX=hero.x;
-        for(i=0; i<blocks.length; i++){
-            if(predictHit(hero, blocks[i])){
-                collisionDetected=true;
-                break;
+        if (keys.ukd && hero.y >= 0) {
+            var collisionDetected = false;
+            hero.nextY = hero.y - hero.speed;
+            hero.nextX = hero.x;
+            for (i = 0; i < blocks.length; i++) {
+                if (predictHit(hero, blocks[i])) {
+                    collisionDetected = true;
+                    break;
+                }
+            }
+            if (!collisionDetected) {
+                hero.y -= hero.speed;
             }
         }
-        if(!collisionDetected) {
-            hero.y += hero.speed;
+        if (keys.dkd && hero.y < 750 - hero.height) {
+            var collisionDetected = false;
+            hero.nextY = hero.y + hero.speed;
+            hero.nextX = hero.x;
+            for (i = 0; i < blocks.length; i++) {
+                if (predictHit(hero, blocks[i])) {
+                    collisionDetected = true;
+                    break;
+                }
+            }
+            if (!collisionDetected) {
+                hero.y += hero.speed;
+            }
         }
     }
-}
+
 //Character hitDetection with blocks
-function predictHit(character,rect1) {
-    if ( character.nextX >= rect1.x + rect1.width
-        || character.nextX + character.width <= rect1.x
-        || character.nextY >= rect1.y + rect1.height
-        || character.nextY + character.height <= rect1.y )
-    {
-        return false;
+    function predictHit(character, rect1) {
+        if (character.nextX >= rect1.x + rect1.width
+            || character.nextX + character.width <= rect1.x
+            || character.nextY >= rect1.y + rect1.height
+            || character.nextY + character.height <= rect1.y) {
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 
 // POWERUPS START
 
-function freezeTime() {
-    timeIsRunning = false;
-    sandDropRun.gotoAndStop('stop');
-    setTimeout(function () {
-        timeIsRunning = true;
-        sandDropRun.gotoAndPlay('run');
-        TimerCountDown()
-    }, 20000);
+    function freezeTime() {
+        timeIsRunning = false;
+        sandDropRun.gotoAndStop('stop');
+        setTimeout(function () {
+            timeIsRunning = true;
+            sandDropRun.gotoAndPlay('run');
+            TimerCountDown()
+        }, 20000);
 
-}
-
-function turnBackTime() {
-    if (timeLeft < startTime-10) {
-        timeLeft+=10;
-    } else {
-        timeLeft = startTime;
     }
-}
+
+    function turnBackTime() {
+        if (timeLeft < startTime - 10) {
+            timeLeft += 10;
+        } else {
+            timeLeft = startTime;
+        }
+    }
 
 
 // POWERUPS END
 
 
-function tock(e) {
-    if (gameIsRunning === true) {
-        moveHero();
-        updateStatusBar();
+    function tock(e) {
+        if (gameIsRunning === true) {
+            moveHero();
+            updateStatusBar();
+        }
+        if (stickManRun.x < 1200) {
+            stickManRun.x += 5;
+        }
+
+        if (timeLeft < 0 && gameIsRunning === true) {
+            gameOver();
+        }
+
+
+        stageMain.update(e);
+        stageInfo.update(e);
+        //console.log("Tock() is running")
     }
-    if (stickManRun.x < 1200) {
-        stickManRun.x += 5;
-    }
-
-    if (timeLeft <0 && gameIsRunning === true) {
-        gameOver();
-    }
-
-
-
-    stageMain.update(e);
-    stageInfo.update(e);
-    //console.log("Tock() is running")
-}
 
 // Tilføjelser:
 // Lifestatus
