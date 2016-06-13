@@ -1,5 +1,5 @@
 var gameIsRunning = false, timeIsRunning = false;
-var heroStartLife = 3, heroLife = heroStartLife, heroScore = 0; // Hero status
+var heroStartLife = 3, heroLife = heroStartLife, heroStartScore = 1000, heroScore = heroStartScore; // Hero status
 var levelText, lifeText, scoreText, timeText; // Show in stageInfo
 var stageMain, stageInfo; // Stages
 var preloadText, titelText, deadText; // Text
@@ -20,8 +20,6 @@ var keys = {
     ukd:false,
     dkd:false
 };
-
-var stuffAdded=false;
 
 var conuntDownTime = false, startTime = 200, timeLeft = startTime;
 var timerImg1, timerImg2;
@@ -70,6 +68,7 @@ function preload(){
         {id: "sandDropSprite", src:"json/sandDropSprite.json"},
         "img/resetWarning.png",
         "img/sandDropSprite.png",
+        "img/gameOverBg.png",
         "img/heart.png",
         "img/star.png",
         "img/timer1.png",
@@ -77,6 +76,7 @@ function preload(){
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
         "img/buttonBack.png",
+        "img/buttonPlayAgain.png",
         "img/buttonRestart.png",
         "img/buttonYes.png",
         "img/buttonNo.png",
@@ -346,8 +346,8 @@ function startGame() {
     timeIsRunning = true;
     addHero();
     setupLevel();
-    window.addEventListener('keydown', fingerDown);
-    window.addEventListener('keyup', fingerUp);
+        window.addEventListener('keydown', fingerDown);
+        window.addEventListener('keyup', fingerUp);
 
     conuntDownTime = true;
     runTimerCountDown();
@@ -566,19 +566,38 @@ function resetGame(){
     function gameOver() {
         gameIsRunning = false;
 
-        deadText = new createjs.Text("", "50px Raleway", "#c5910e");
+        var gameOverBg = new createjs.Bitmap(queue.getResult("img/gameOverBg.png"));
+        gameOverBg.width = 850;
+        gameOverBg.height = 550;
+        gameOverBg.x = (stageMain.canvas.width / 2) - (gameOverBg.width / 2);
+        gameOverBg.y = (stageMain.canvas.height / 2) - (gameOverBg.height / 2);
+
+
+        var splash = new createjs.Bitmap(queue.getResult('img/alienSkull.png'));
+        splash.x = stageMain.canvas.width / 2;
+        splash.y = 140;
+        splash.x = 450;
+
+        deadText = new createjs.Text("", "50px Raleway", "#000");
         deadText.text = "You have died!";
         deadText.textBaseline = "middle";
         deadText.textAlign = "center";
         deadText.x = stageMain.canvas.width / 2;
-        deadText.y = 500;
+        deadText.y = 450;
 
-        var splash = new createjs.Bitmap(queue.getResult('img/alienSkull.png'));
-        splash.x = stageMain.canvas.width / 2;
-        splash.y = 180;
-        splash.x = 450;
+        var buttonPlayAgain = new createjs.Bitmap(queue.getResult("img/buttonPlayAgain.png"));
+        buttonPlayAgain.width = 250;
+        buttonPlayAgain.x = (stageMain.canvas.width / 2) - (buttonPlayAgain.width / 2);
+        buttonPlayAgain.y = 530;
+        buttonPlayAgain.addEventListener('click',
+            function(e){
+                resetGame();
+            }
+        );
 
-        stageMain.addChild(splash, deadText);
+
+
+        stageMain.addChild(gameOverBg, splash, deadText, buttonPlayAgain);
         stageInfo.removeChild(sandDropRun);
 
     }
@@ -619,28 +638,30 @@ function fingerUp(e){
 }
 
     function fingerDown(e) {
-        if (e.keyCode === 37) {
-            keys.lkd = true;
-            if (hero.currentAnimation != 'left') {
-                hero.gotoAndPlay('left');
+        if (gameIsRunning === true && timeIsRunning === true) {
+            if (e.keyCode === 37) {
+                keys.lkd = true;
+                if (hero.currentAnimation != 'left') {
+                    hero.gotoAndPlay('left');
+                }
             }
-        }
-        if (e.keyCode === 38) {
-            keys.ukd = true;
-            if (hero.currentAnimation != 'up') {
-                hero.gotoAndPlay('up');
+            if (e.keyCode === 38) {
+                keys.ukd = true;
+                if (hero.currentAnimation != 'up') {
+                    hero.gotoAndPlay('up');
+                }
             }
-        }
-        if (e.keyCode === 39) {
-            keys.rkd = true;
-            if (hero.currentAnimation != 'right') {
-                hero.gotoAndPlay('right');
+            if (e.keyCode === 39) {
+                keys.rkd = true;
+                if (hero.currentAnimation != 'right') {
+                    hero.gotoAndPlay('right');
+                }
             }
-        }
-        if (e.keyCode === 40) {
-            keys.dkd = true;
-            if (hero.currentAnimation != 'down') {
-                hero.gotoAndPlay('down');
+            if (e.keyCode === 40) {
+                keys.dkd = true;
+                if (hero.currentAnimation != 'down') {
+                    hero.gotoAndPlay('down');
+                }
             }
         }
     }
@@ -673,7 +694,6 @@ function fingerUp(e){
     }
 
     function moveHero() {
-        if (gameIsRunning === true && timeIsRunning === true) {
             var i = 0, tpLength = teleporters.length;
             for (; i < tpLength; i++) {
                 if (hitTest(hero, teleporters[i])) {
@@ -740,7 +760,6 @@ function fingerUp(e){
                 }
             }
         }
-    }
 
 //Character hitDetection with blocks
     function predictHit(character, rect1) {
