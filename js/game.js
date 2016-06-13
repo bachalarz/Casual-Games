@@ -563,9 +563,9 @@ function fingerUp(e){
 
         heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
         hero = new createjs.Sprite(heroSpriteSheet, 'still');
-        hero.width = 50;
-        hero.height = 50;
-        hero.speed = 8;
+        hero.width = 45;
+        hero.height = 45;
+        hero.speed = 10;
         hero.nextX;
         hero.nextY;
 
