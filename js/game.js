@@ -566,6 +566,8 @@ function resetGame(){
     function gameOver() {
         gameIsRunning = false;
 
+        createjs.Sound.play('deadSound');
+
         var gameOverBg = new createjs.Bitmap(queue.getResult("img/gameOverBg.png"));
         gameOverBg.width = 850;
         gameOverBg.height = 550;
@@ -617,23 +619,25 @@ function resetGame(){
 function fingerUp(e){
     if(e.keyCode===37){
         keys.lkd=false;
-        hero.gotoAndStop('up');
+        hero.gotoAndStop('still');
         hero.currentAnimation = "undefined";
     }
     if(e.keyCode===38){
         keys.ukd=false;
-        hero.gotoAndStop('up');
+        hero.gotoAndStop('still');
         hero.currentAnimation = "undefined";
     }
     if(e.keyCode===39){
         keys.rkd=false;
-        hero.gotoAndStop('up');
+        hero.gotoAndStop('still');
         hero.currentAnimation = "undefined";
     }
     if(e.keyCode===40){
         keys.dkd=false;
-        hero.gotoAndStop('up');
+        hero.gotoAndStop('still');
         hero.currentAnimation = "undefined";
+    }
+    if(e.keyCode===32){
     }
 }
 
@@ -662,6 +666,12 @@ function fingerUp(e){
                 if (hero.currentAnimation != 'down') {
                     hero.gotoAndPlay('down');
                 }
+            }
+            if(e.keyCode===32){
+                hero.gotoAndPlay('jump');
+                setTimeout(function () {
+                    hero.gotoAndPlay('still');
+                }, 2000);
             }
         }
     }
