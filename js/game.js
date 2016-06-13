@@ -78,7 +78,7 @@ function preload(){
         "img/heroSprite.png",
         "img/rules.png",
         "img/rules.png",
-        "img/skull.png",
+        "img/alienSkull.png",
         {id:"levelJson",src:"json/levels.json"},
         {id:"tiles",src:"json/tiles.json"},
 
@@ -410,18 +410,19 @@ function lifestatus() {
 function gameOver() {
     gameIsRunning = false;
 
-    deadText = new createjs.Text("", "50px Raleway", "#000");
+    deadText = new createjs.Text("", "50px Raleway", "#c5910e");
     deadText.text = "You have died!";
     deadText.textBaseline="middle";
     deadText.textAlign="center";
     deadText.x=stageMain.canvas.width/2;
-    deadText.y=300;
+    deadText.y=400;
 
-    var splash = new createjs.Bitmap(queue.getResult('img/skull.png'));
+    var splash = new createjs.Bitmap(queue.getResult('img/alienSkull.png'));
     splash.x=stageMain.canvas.width/2;
-    splash.y=300;
+    splash.y=80;
+    splash.x=450;
 
-    stageMain.addChild(deadText, splash);
+    stageMain.addChild(splash, deadText);
     stageInfo.removeChild(sandDropRun);
 
 }
