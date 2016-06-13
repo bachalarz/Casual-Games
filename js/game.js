@@ -565,7 +565,7 @@ function fingerUp(e){
         hero = new createjs.Sprite(heroSpriteSheet, 'still');
         hero.width = 50;
         hero.height = 50;
-        hero.speed = 10;
+        hero.speed = 8;
         hero.nextX;
         hero.nextY;
 
@@ -670,6 +670,10 @@ function fingerUp(e){
         } else {
             timeLeft = startTime;
         }
+    }
+
+    function addLife() {
+        heroLife++;
     }
 
 
