@@ -360,7 +360,6 @@ function TimerCountDown(){
     if (timeIsRunning === true) {
         timeLeft -= .5;
         setTimeout(function () {
-            console.log(timeLeft);
             runTimerCountDown();
         }, 500);
     }
@@ -416,11 +415,11 @@ function gameOver() {
     deadText.textBaseline="middle";
     deadText.textAlign="center";
     deadText.x=stageMain.canvas.width/2;
-    deadText.y=400;
+    deadText.y=500;
 
     var splash = new createjs.Bitmap(queue.getResult('img/alienSkull.png'));
     splash.x=stageMain.canvas.width/2;
-    splash.y=80;
+    splash.y=180;
     splash.x=450;
 
     stageMain.addChild(splash, deadText);
