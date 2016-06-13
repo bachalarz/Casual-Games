@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/js/game.js" line="62" mnemonic="9" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="17306075-5c2b-4e73-a275-0c0c1aa8f30c" name="Default" comment="" />
+    <list default="true" id="17306075-5c2b-4e73-a275-0c0c1aa8f30c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/img/heroSprite.png" afterPath="$PROJECT_DIR$/img/heroSprite.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/img/tiles.png" afterPath="$PROJECT_DIR$/img/tiles.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game.js" afterPath="$PROJECT_DIR$/js/game.js" />
+    </list>
     <ignored path="Exam project.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +29,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="125" selection-start-line="10" selection-start-column="125" selection-end-line="10" selection-end-column="125" />
+            <state relative-caret-position="105">
+              <caret line="7" column="39" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -47,17 +49,9 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="413" column="32" selection-start-line="413" selection-start-column="32" selection-end-line="413" selection-end-column="32" />
+            <state relative-caret-position="401">
+              <caret line="454" column="28" selection-start-line="454" selection-start-column="28" selection-end-line="454" selection-end-column="28" />
               <folding>
-                <element signature="n#!!block;n#init#0" expanded="false" />
-                <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
-                <element signature="n#!!block;n#fingerUp#0" expanded="false" />
-                <element signature="n#!!block;n#fingerDown#0" expanded="false" />
-                <element signature="n#!!block;n#hitTest#0" expanded="false" />
-                <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-                <element signature="n#!!block;n#addHero#0" expanded="false" />
-                <element signature="n#!!block;n#moveHero#0" expanded="false" />
                 <element signature="n#!!block;n#predictHit#0" expanded="false" />
               </folding>
             </state>
@@ -324,12 +318,12 @@
       <workItem from="1465741610834" duration="363000" />
       <workItem from="1465764524360" duration="4617000" />
       <workItem from="1465769658451" duration="61000" />
-      <workItem from="1465801785220" duration="3586000" />
+      <workItem from="1465801785220" duration="6399000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89491000" />
+    <option name="totallyTimeSpent" value="92304000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -338,10 +332,10 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20930232" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1238825" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1238825" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18263091" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18263091" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -406,14 +400,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
-            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
-            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-            <element signature="n#!!block;n#addHero#0" expanded="false" />
-            <element signature="n#!!block;n#moveHero#0" expanded="false" />
             <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
@@ -474,14 +460,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
-            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
-            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-            <element signature="n#!!block;n#addHero#0" expanded="false" />
-            <element signature="n#!!block;n#moveHero#0" expanded="false" />
             <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
@@ -508,14 +486,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
-            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
-            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-            <element signature="n#!!block;n#addHero#0" expanded="false" />
-            <element signature="n#!!block;n#moveHero#0" expanded="false" />
             <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
@@ -534,14 +504,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
-            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
-            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-            <element signature="n#!!block;n#addHero#0" expanded="false" />
-            <element signature="n#!!block;n#moveHero#0" expanded="false" />
             <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
@@ -582,14 +544,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
-            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
-            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-            <element signature="n#!!block;n#addHero#0" expanded="false" />
-            <element signature="n#!!block;n#moveHero#0" expanded="false" />
             <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
@@ -630,14 +584,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
-            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
-            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-            <element signature="n#!!block;n#addHero#0" expanded="false" />
-            <element signature="n#!!block;n#moveHero#0" expanded="false" />
             <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>
@@ -711,7 +657,7 @@
         <state relative-caret-position="-4140">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -730,32 +676,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/img/heroSprite.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/sandDropSprite.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/json/heroSprite.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/json/sandDropSprite.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/styles/styles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -764,10 +684,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/img/sandDropSprite.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/json/sandDropSprite.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="125" selection-start-line="10" selection-start-column="125" selection-end-line="10" selection-end-column="125" />
+        <state relative-caret-position="90">
+          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -782,19 +707,32 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/json/heroSprite.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/heroSprite.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="39" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="413" column="32" selection-start-line="413" selection-start-column="32" selection-end-line="413" selection-end-column="32" />
+        <state relative-caret-position="401">
+          <caret line="454" column="28" selection-start-line="454" selection-start-column="28" selection-end-line="454" selection-end-column="28" />
           <folding>
-            <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#soundOnOff#0" expanded="false" />
-            <element signature="n#!!block;n#fingerUp#0" expanded="false" />
-            <element signature="n#!!block;n#fingerDown#0" expanded="false" />
-            <element signature="n#!!block;n#hitTest#0" expanded="false" />
-            <element signature="n#!!block;n#checkCollisions#0" expanded="false" />
-            <element signature="n#!!block;n#addHero#0" expanded="false" />
-            <element signature="n#!!block;n#moveHero#0" expanded="false" />
             <element signature="n#!!block;n#predictHit#0" expanded="false" />
           </folding>
         </state>

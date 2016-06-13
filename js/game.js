@@ -9,7 +9,6 @@ var queue; // Start
 var soundMute = false; // Sounds
 var moveSmallUfo = false;
 var autoStart = true;
-var teleporters=[];
 var scoreTotal = 0;
 var levelData, tiles, currentLevel=-1, t, blockSize = 50; //level
 var hitTest;
@@ -339,8 +338,8 @@ function aboutGame() {
 function startGame() {
     gameIsRunning = true;
     timeIsRunning = true;
-    addHero();
     setupLevel();
+    addHero();
     window.addEventListener('keydown', fingerDown);
     window.addEventListener('keyup', fingerUp);
 
@@ -372,8 +371,6 @@ function setupLevel(){
     currentLevel++;
     var level = levelData.levels[currentLevel].tiles;
     blocks=[];
-    teleporters=[];
-    var hCol, hRow;
     for(row=0; row<level.length; row++){
         for(col=0; col<level[row].length; col++){
             var img;
@@ -381,22 +378,9 @@ function setupLevel(){
                 case 0:
                     img = "floor";
                     break;
+
                 case 1:
                     img = "block";
-                    break;
-                case 2:
-                    img = "tp";
-                    break;
-                case 3:
-                    img = "wp";
-                    break;
-                case 4:
-                    img = "eg";
-                    break;
-                case "H":
-                    img="floor";
-                    hCol=col;
-                    hRow=row;
                     break;
             }
             t = new createjs.Sprite(tiles, img);
@@ -408,26 +392,10 @@ function setupLevel(){
             if(t.type===1){
                 blocks.push(t);
             }
-            stageMain.addChild(t);
+            stageMain.addChild(t, ufoSmall);
 
-
+        }
     }
-    var tps = levelData.levels[currentLevel].teleporters;
-    for(var i=0; i<tps.length;i++){
-        t = new createjs.Sprite(tiles, 'tp');
-        t.x=tps[i].x;
-        t.y=tps[i].y;
-        t.width=blockSize;
-        t.height=blockSize;
-        t.waypointX=tps[i].waypointX;
-        t.waypointY=tps[i].waypointY;
-        
-        teleporters.push(t)
-        stageMain.addChild(t);
-    }
-    hero.x = hCol*blockSize;
-    hero.y = hRow*blockSize;
-    stageMain.addChild(hero, ufoSmall); //Her stod den oprindeligt!
 }
 
 function gameComplete() {
@@ -474,7 +442,7 @@ function soundOnOff() {
 function fingerUp(e){
     if(e.keyCode===37){
         keys.lkd=false;
-        hero.gotoAndStop('left');
+        hero.gotoAndStop('up');
         hero.currentAnimation = "undefined";
     }
     if(e.keyCode===38){
@@ -484,12 +452,12 @@ function fingerUp(e){
     }
     if(e.keyCode===39){
         keys.rkd=false;
-        hero.gotoAndStop('right');
+        hero.gotoAndStop('up');
         hero.currentAnimation = "undefined";
     }
     if(e.keyCode===40){
         keys.dkd=false;
-        hero.gotoAndStop('down');
+        hero.gotoAndStop('up');
         hero.currentAnimation = "undefined";
     }
 }
@@ -548,19 +516,12 @@ function addHero(){
     hero.nextX;
     hero.nextY;
 
-
+    hero.x = (stageMain.canvas.width / 2) - (hero.width / 2);
+    hero.y = stageMain.canvas.height - hero.height;
+    stageMain.addChild(hero); //Her stod den oprindeligt!
 }
 
 function moveHero(){
-    var i=0, tpLength=teleporters.length;
-    for(;i<tpLength;i++){
-        if(hitTest(hero, teleporters[i])){
-            console.log('hit tp', teleporters[i].waypointX)
-            hero.x=teleporters[i].waypointX;
-            hero.y=teleporters[i].waypointY;
-            break;
-        }
-    }
     if(keys.rkd && hero.x < 1150-hero.width){
         var collisionDetected = false;
         hero.nextY=hero.y;
