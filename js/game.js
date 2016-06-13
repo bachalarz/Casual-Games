@@ -60,6 +60,7 @@ function preload(){
     queue.on("complete", queueComplete);
     queue.loadManifest([
         {id: "heroSprite", src:"json/heroSprite.json"},
+        {id: "alienSprite", src:"json/alienSprite.json"},
         {id:"bgSound", src:"audio/music/bgMusic.mp3"},
         {id:"clickSpaceGun", src:"audio/sounds/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
@@ -81,6 +82,7 @@ function preload(){
         "img/buttonYes.png",
         "img/buttonNo.png",
         "img/heroSprite.png",
+        "img/alienSprite.png",
         "img/rules.png",
         "img/rules.png",
         "img/alienSkull.png",
@@ -217,7 +219,6 @@ function startPage(){
     sandDropRun.x = 110;
     sandDropRun.y = 600;
 
-
     timerBar1 = new createjs.Shape();
     timerBar1.graphics.beginFill("#c5910e");
     timerBar1.graphics.drawRect(0, 0, 150, 80);
@@ -231,7 +232,14 @@ function startPage(){
     timerBar2.x = 50;
     timerBar2.y = 605;
 
-    stageInfo.addChild(soundButton);
+    // Midlertidige alien sprite - kan bruger som fjernder i banerne!
+
+    var alienSprite = new createjs.SpriteSheet(queue.getResult('alienSprite'));
+    alienSprite = new createjs.Sprite(alienSprite, 'all');
+    alienSprite.x = 200;
+    alienSprite.y = 700;
+
+    stageInfo.addChild(soundButton, alienSprite);
 }
 
 function getReady() {
@@ -696,8 +704,8 @@ function fingerUp(e){
 
         heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
         hero = new createjs.Sprite(heroSpriteSheet, 'still');
-        hero.width = 45;
-        hero.height = 45;
+        hero.width = 50;
+        hero.height = 50;
         hero.speed = 10;
         hero.nextX;
         hero.nextY;
