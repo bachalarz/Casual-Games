@@ -1,6 +1,6 @@
 {
   "framerate": 8,
-  "images": ["img/heroSprite.png"],
+  "images": ["img/alienSprite.png"],
   "frames": {"width":50, "height":50, "regX":0, "regY":0},
   "animations": {
     "down": [0,3],
@@ -8,6 +8,7 @@
     "right":[8,11],
     "up":[12,15],
     "jump": [16,19],
-    "still":[16]
+    "still":[16],
+    "all":[0,19]
   }
 }

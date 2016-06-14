@@ -1,5 +1,5 @@
 var gameIsRunning = false, timeIsRunning = false;
-var heroStartLife = 3, heroLife = heroStartLife, heroScore = 0; // Hero status
+var heroStartLife = 3, heroLife = heroStartLife, heroStartScore = 1000, heroScore = heroStartScore; // Hero status
 var levelText, lifeText, scoreText, timeText; // Show in stageInfo
 var stageMain, stageInfo; // Stages
 var preloadText, titelText, deadText; // Text
@@ -21,9 +21,7 @@ var keys = {
     dkd:false
 };
 
-var stuffAdded=false;
-
-var conuntDownTime = false, startTime = 200, timeLeft = startTime;
+var conuntDownTime = false, startTime = 60, timeLeft = startTime;
 var timerImg1, timerImg2;
 
 function init() {
@@ -62,6 +60,7 @@ function preload(){
     queue.on("complete", queueComplete);
     queue.loadManifest([
         {id: "heroSprite", src:"json/heroSprite.json"},
+        {id: "alienSprite", src:"json/alienSprite.json"},
         {id:"bgSound", src:"audio/music/bgMusic.mp3"},
         {id:"clickSpaceGun", src:"audio/sounds/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
@@ -70,6 +69,7 @@ function preload(){
         {id: "sandDropSprite", src:"json/sandDropSprite.json"},
         "img/resetWarning.png",
         "img/sandDropSprite.png",
+        "img/gameOverBg.png",
         "img/heart.png",
         "img/star.png",
         "img/timer1.png",
@@ -77,13 +77,15 @@ function preload(){
         "img/buttonStartGame.png",
         "img/buttonHowToPlay.png",
         "img/buttonBack.png",
+        "img/buttonPlayAgain.png",
         "img/buttonRestart.png",
         "img/buttonYes.png",
         "img/buttonNo.png",
         "img/heroSprite.png",
+        "img/alienSprite.png",
         "img/rules.png",
         "img/rules.png",
-        "img/lost.png",
+        "img/alienSkull.png",
         {id:"levelJson",src:"json/levels.json"},
         {id:"tiles",src:"json/tiles.json"},
 
@@ -217,7 +219,6 @@ function startPage(){
     sandDropRun.x = 110;
     sandDropRun.y = 600;
 
-
     timerBar1 = new createjs.Shape();
     timerBar1.graphics.beginFill("#c5910e");
     timerBar1.graphics.drawRect(0, 0, 150, 80);
@@ -231,7 +232,14 @@ function startPage(){
     timerBar2.x = 50;
     timerBar2.y = 605;
 
-    stageInfo.addChild(soundButton);
+    // Midlertidige alien sprite - kan bruger som fjernder i banerne!
+
+    var alienSprite = new createjs.SpriteSheet(queue.getResult('alienSprite'));
+    alienSprite = new createjs.Sprite(alienSprite, 'all');
+    alienSprite.x = 200;
+    alienSprite.y = 700;
+
+    stageInfo.addChild(soundButton, alienSprite);
 }
 
 function getReady() {
@@ -251,6 +259,7 @@ function getReady() {
         cT.text = counter;
         createjs.Tween.get(cT).to({scaleX: 2, scaleY: 2}, 1000).call(function () {
             if (counter === 1) {
+
                 startGame();
                 stageMain.removeChild(cT);
             } else {
@@ -346,8 +355,8 @@ function startGame() {
     timeIsRunning = true;
     addHero();
     setupLevel();
-    window.addEventListener('keydown', fingerDown);
-    window.addEventListener('keyup', fingerUp);
+        window.addEventListener('keydown', fingerDown);
+        window.addEventListener('keyup', fingerUp);
 
     conuntDownTime = true;
     runTimerCountDown();
@@ -406,6 +415,7 @@ function setupLevel() {
                     img = "floor";
                     hCol = col;
                     hRow = row;
+                    console.log("hero found at ",hCol, hRow)
                     break;
             }
             t = new createjs.Sprite(tiles, img);
@@ -416,13 +426,14 @@ function setupLevel() {
             t.type = level[row][col];
             if (t.type === 1) {
                 blocks.push(t);
-            } else{
-                
+            } else {
+
             }
             stageMain.addChild(t);
 
 
         }
+    }
         var tps = levelData.levels[currentLevel].teleporters;
         for (var i = 0; i < tps.length; i++) {
             t = new createjs.Sprite(tiles, 'tp');
@@ -438,78 +449,19 @@ function setupLevel() {
         }
         var pus = levelData.levels[currentLevel].powerUps;
         for (var i = 0; i < pus.length; i++) {
-            t = new createjs.Sprite(tiles, 'pu1');
+            t = new createjs.Sprite(tiles, pus[i].sprite);
             t.x = pus[i].x;
             t.y = pus[i].y;
             t.width = blockSize;
             t.height = blockSize;
-            if (t.type === 6, 7, 8) {
-                // Pick up powerup
-            } else{
-                // Doing nothing is hard, you never know when you're done.
-            }
-
+            t.type=pus[i].type;
             powerUps.push(t)
             stageMain.addChild(t);
         }
         hero.x = hCol * blockSize;
         hero.y = hRow * blockSize;
         stageMain.addChild(hero, ufoSmall);
-    }
-}
-
-function nextLevel () {
-    addHero();
-    stageMain.removeAllChildren();
-    var row, col;
-    currentLevel++;
-    var level = levelData.levels[currentLevel].tiles;
-    blocks = [];
-    teleporters = [];
-    var hCol, hRow;
-    for (row = 0; row < level.length; row++) {
-        for (col = 0; col < level[row].length; col++) {
-            var img;
-            switch (level[row][col]) {
-                case 0:
-                    img = "floor";
-                    break;
-                case 1:
-                    img = "block";
-                    break;
-                case 2:
-                    img = "tp";
-                    break;
-                case 3:
-                    img = "wp";
-                    break;
-                case 4:
-                    img = "sg";
-                    break;
-                case 5:
-                    img = "eg";
-                    break;
-                case "H":
-                    img = "floor";
-                    hCol = col;
-                    hRow = row;
-                    break;
-            }
-            t = new createjs.Sprite(tiles, img);
-            t.x = col * blockSize;
-            t.y = row * blockSize;
-            t.width = blockSize;
-            t.height = blockSize;
-            t.type = level[row][col];
-            if (t.type === 1) {
-                blocks.push(t);
-            } else {
-
-            }
-            stageMain.addChild(t);
-        }
-    }
-    stageMain.addChild(hero);
+    
 }
 
     function gameComplete() {
@@ -573,12 +525,40 @@ function resetGame(){
     function gameOver() {
         gameIsRunning = false;
 
-        var splash = new createjs.Bitmap(queue.getResult('img/lost.png'));
-        splash.x = stageMain.canvas.width / 2;
-        splash.y = 125;
-        splash.x = 50;
+        createjs.Sound.play('deadSound');
 
-        stageMain.addChild(splash, deadText);
+        var gameOverBg = new createjs.Bitmap(queue.getResult("img/gameOverBg.png"));
+        gameOverBg.width = 850;
+        gameOverBg.height = 550;
+        gameOverBg.x = (stageMain.canvas.width / 2) - (gameOverBg.width / 2);
+        gameOverBg.y = (stageMain.canvas.height / 2) - (gameOverBg.height / 2);
+
+
+        var splash = new createjs.Bitmap(queue.getResult('img/alienSkull.png'));
+        splash.x = stageMain.canvas.width / 2;
+        splash.y = 140;
+        splash.x = 450;
+
+        deadText = new createjs.Text("", "50px Raleway", "#000");
+        deadText.text = "You have died!";
+        deadText.textBaseline = "middle";
+        deadText.textAlign = "center";
+        deadText.x = stageMain.canvas.width / 2;
+        deadText.y = 450;
+
+        var buttonPlayAgain = new createjs.Bitmap(queue.getResult("img/buttonPlayAgain.png"));
+        buttonPlayAgain.width = 250;
+        buttonPlayAgain.x = (stageMain.canvas.width / 2) - (buttonPlayAgain.width / 2);
+        buttonPlayAgain.y = 530;
+        buttonPlayAgain.addEventListener('click',
+            function(e){
+                resetGame();
+            }
+        );
+
+
+
+        stageMain.addChild(gameOverBg, splash, deadText, buttonPlayAgain);
         stageInfo.removeChild(sandDropRun);
 
     }
@@ -598,49 +578,59 @@ function resetGame(){
 function fingerUp(e){
     if(e.keyCode===37){
         keys.lkd=false;
-        hero.gotoAndStop('up');
+        hero.gotoAndStop('still');
         hero.currentAnimation = "undefined";
     }
     if(e.keyCode===38){
         keys.ukd=false;
-        hero.gotoAndStop('up');
+        hero.gotoAndStop('still');
         hero.currentAnimation = "undefined";
     }
     if(e.keyCode===39){
         keys.rkd=false;
-        hero.gotoAndStop('up');
+        hero.gotoAndStop('still');
         hero.currentAnimation = "undefined";
     }
     if(e.keyCode===40){
         keys.dkd=false;
-        hero.gotoAndStop('up');
+        hero.gotoAndStop('still');
         hero.currentAnimation = "undefined";
+    }
+    if(e.keyCode===32){
     }
 }
 
     function fingerDown(e) {
-        if (e.keyCode === 37) {
-            keys.lkd = true;
-            if (hero.currentAnimation != 'left') {
-                hero.gotoAndPlay('left');
+        if (gameIsRunning === true) {
+            if (e.keyCode === 37) {
+                keys.lkd = true;
+                if (hero.currentAnimation != 'left') {
+                    hero.gotoAndPlay('left');
+                }
             }
-        }
-        if (e.keyCode === 38) {
-            keys.ukd = true;
-            if (hero.currentAnimation != 'up') {
-                hero.gotoAndPlay('up');
+            if (e.keyCode === 38) {
+                keys.ukd = true;
+                if (hero.currentAnimation != 'up') {
+                    hero.gotoAndPlay('up');
+                }
             }
-        }
-        if (e.keyCode === 39) {
-            keys.rkd = true;
-            if (hero.currentAnimation != 'right') {
-                hero.gotoAndPlay('right');
+            if (e.keyCode === 39) {
+                keys.rkd = true;
+                if (hero.currentAnimation != 'right') {
+                    hero.gotoAndPlay('right');
+                }
             }
-        }
-        if (e.keyCode === 40) {
-            keys.dkd = true;
-            if (hero.currentAnimation != 'down') {
-                hero.gotoAndPlay('down');
+            if (e.keyCode === 40) {
+                keys.dkd = true;
+                if (hero.currentAnimation != 'down') {
+                    hero.gotoAndPlay('down');
+                }
+            }
+            if(e.keyCode===32){
+                hero.gotoAndPlay('jump');
+                setTimeout(function () {
+                    hero.gotoAndPlay('still');
+                }, 2000);
             }
         }
     }
@@ -665,93 +655,103 @@ function fingerUp(e){
 
         heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
         hero = new createjs.Sprite(heroSpriteSheet, 'still');
-        hero.width = 45;
-        hero.height = 45;
+        hero.width = 50;
+        hero.height = 50;
         hero.speed = 10;
         hero.nextX;
         hero.nextY;
     }
 
     function moveHero() {
-        if (gameIsRunning === true && timeIsRunning === true) {
+        if (gameIsRunning === true) {
 
             var i = 0, powerUpLength = powerUps.length;
             for (; i < powerUpLength; i++) {
                 if (hitTest(hero, powerUps[i])) {
                     stageMain.removeChild(powerUps[i]);
+                    switch(powerUps[i].type){
+                        case "life":
+                            addLife();
+                            break;
+                        case "freezeTime":
+                            freezeTime();
+                            break;
+                        case "turnBackTime":
+                            turnBackTime();
+                            break;
+                    }
                     powerUps.splice(i, 1);
-                    addLife();
-                    console.log('hit powerUp', powerUps[i].waypointX)
-                }
-            }
+                    break;
 
-                var i = 0, tpLength = teleporters.length;
-                for (; i < tpLength; i++) {
-                    if (hitTest(hero, teleporters[i])) {
-                        console.log('hit tp', teleporters[i].waypointX)
-                        hero.x = teleporters[i].waypointX;
-                        hero.y = teleporters[i].waypointY;
-                        break;
-                    }
                 }
-                if (keys.rkd && hero.x < 1150 - hero.width) {
-                    var collisionDetected = false;
-                    hero.nextY = hero.y;
-                    hero.nextX = hero.x + hero.speed;
-                    for (i = 0; i < blocks.length; i++) {
-                        if (predictHit(hero, blocks[i])) {
-                            collisionDetected = true;
+            }
+                    var i = 0, tpLength = teleporters.length;
+                    for (; i < tpLength; i++) {
+                        if (hitTest(hero, teleporters[i])) {
+                            hero.x = teleporters[i].waypointX;
+                            hero.y = teleporters[i].waypointY;
                             break;
                         }
                     }
-                    if (!collisionDetected) {
-                        hero.x += hero.speed;
-                    }
-                }
-                if (keys.lkd && hero.x > 0) {
-                    var collisionDetected = false;
-                    hero.nextY = hero.y;
-                    hero.nextX = hero.x - hero.speed;
-                    for (i = 0; i < blocks.length; i++) {
-                        if (predictHit(hero, blocks[i])) {
-                            collisionDetected = true;
-                            break;
+
+                    if (keys.rkd && hero.x < 1150 - hero.width) {
+                        var collisionDetected = false;
+                        hero.nextY = hero.y;
+                        hero.nextX = hero.x + hero.speed;
+                        for (i = 0; i < blocks.length; i++) {
+                            if (predictHit(hero, blocks[i])) {
+                                collisionDetected = true;
+                                break;
+                            }
+                        }
+                        if (!collisionDetected) {
+                            hero.x += hero.speed;
                         }
                     }
-                    if (!collisionDetected) {
-                        hero.x -= hero.speed;
-                    }
-                }
-                if (keys.ukd && hero.y >= 0) {
-                    var collisionDetected = false;
-                    hero.nextY = hero.y - hero.speed;
-                    hero.nextX = hero.x;
-                    for (i = 0; i < blocks.length; i++) {
-                        if (predictHit(hero, blocks[i])) {
-                            collisionDetected = true;
-                            break;
+                    if (keys.lkd && hero.x > 0) {
+                        var collisionDetected = false;
+                        hero.nextY = hero.y;
+                        hero.nextX = hero.x - hero.speed;
+                        for (i = 0; i < blocks.length; i++) {
+                            if (predictHit(hero, blocks[i])) {
+                                collisionDetected = true;
+                                break;
+                            }
+                        }
+                        if (!collisionDetected) {
+                            hero.x -= hero.speed;
                         }
                     }
-                    if (!collisionDetected) {
-                        hero.y -= hero.speed;
-                    }
-                }
-                if (keys.dkd && hero.y < 750 - hero.height) {
-                    var collisionDetected = false;
-                    hero.nextY = hero.y + hero.speed;
-                    hero.nextX = hero.x;
-                    for (i = 0; i < blocks.length; i++) {
-                        if (predictHit(hero, blocks[i])) {
-                            collisionDetected = true;
-                            break;
+                    if (keys.ukd && hero.y >= 0) {
+                        var collisionDetected = false;
+                        hero.nextY = hero.y - hero.speed;
+                        hero.nextX = hero.x;
+                        for (i = 0; i < blocks.length; i++) {
+                            if (predictHit(hero, blocks[i])) {
+                                collisionDetected = true;
+                                break;
+                            }
+                        }
+                        if (!collisionDetected) {
+                            hero.y -= hero.speed;
                         }
                     }
-                    if (!collisionDetected) {
-                        hero.y += hero.speed;
+                    if (keys.dkd && hero.y < 750 - hero.height) {
+                        var collisionDetected = false;
+                        hero.nextY = hero.y + hero.speed;
+                        hero.nextX = hero.x;
+                        for (i = 0; i < blocks.length; i++) {
+                            if (predictHit(hero, blocks[i])) {
+                                collisionDetected = true;
+                                break;
+                            }
+                        }
+                        if (!collisionDetected) {
+                            hero.y += hero.speed;
+                        }
                     }
                 }
             }
-         }
 
 //Character hitDetection with blocks
         function predictHit(character, rect1) {
@@ -773,7 +773,7 @@ function fingerUp(e){
                 timeIsRunning = true;
                 sandDropRun.gotoAndPlay('run');
                 TimerCountDown()
-            }, 20000);
+            }, 3000);
 
         }
 
