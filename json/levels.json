@@ -1,5 +1,5 @@
 {
-  "comments": "H = Hero, E = Endgame.",
+  "comments": "H = Hero, 3 = wp, 4 = sg, 5 = eg",
   "levels":[
     {
       "tiles":[
@@ -23,8 +23,8 @@
         {"x":1000, "y":600, "waypointX":1000, "waypointY":100}
       ],
       "powerUps":[
-        {"x":425, "y":400, "type":"freezeTime", "sprite":"pu1"},
-        {"x":425, "y":500, "type":"turnBackTime", "sprite":"pu2"},
+        {"x":425, "y":500, "type":"turnBackTime", "sprite":"pu1"},
+        {"x":425, "y":400, "type":"freezeTime", "sprite":"pu2"},
         {"x":425, "y":600, "type":"life", "sprite":"pu3"}
       ],
       "enemies":[
@@ -54,8 +54,8 @@
 
       ],
       "powerUps":[
-        {"x":0, "y":0, "type":"freezeTime", "sprite":"pu1"},
-        {"x":1100, "y":0, "type":"turnBackTime", "sprite":"pu2"}
+        {"x":1100, "y":0, "type":"turnBackTime", "sprite":"pu1"},
+        {"x":0, "y":0, "type":"freezeTime", "sprite":"pu2"}
       ]
     },
     {
