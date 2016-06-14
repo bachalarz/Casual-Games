@@ -1,17 +1,15 @@
 var gameIsRunning = false, timeIsRunning = false;
-var heroStartLife = 3, heroLife = heroStartLife, heroStartScore = 1000, heroScore = heroStartScore; // Hero status
+var heroNoHit = false, heroStartLife = 3, heroLife = heroStartLife, heroStartScore = 1000, heroScore = heroStartScore; // Hero status
+var alienTweenPause = false; //Enemies
 var levelText, lifeText, scoreText, timeText; // Show in stageInfo
 var stageMain, stageInfo; // Stages
 var preloadText, titelText, deadText; // Text
-var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, restartButton, buttonBack, stickMan, stickManRun, sandDropRun, lifeIcon, scoreIcon, timerBar1, timerBar2; //Bitmaps
+var ufo, ufoSmall, soundButton, buttonStartGame, buttonHowToPlay, restartButton, buttonBack, stickMan, stickManRun, sandDropRun, lifeIcon, scoreIcon, timerBar1, timerBar2, lightningImg, freezeTimeImg; //Bitmaps
 var hero, heroSpriteSheet; //Hero player
 var queue; // Start
 var soundMute = false; // Sounds
 var moveSmallUfo = false;
 var autoStart = true;
-var teleporters=[];
-var enemies=[];
-var powerUps=[];
 var scoreTotal = 0;
 var levelData, tiles, alienSprite, currentLevel=-1, t, blockSize = 50; //level
 var hitTest;
@@ -22,8 +20,9 @@ var keys = {
     dkd:false
 };
 
-var conuntDownTime = false, startTime =360, timeLeft = startTime;
+var conuntDownTime = false, startTime = 360, timeLeft = startTime;
 var timerImg1, timerImg2;
+
 
 function init() {
     stageMain = new createjs.Stage("canvasMain");
@@ -88,6 +87,8 @@ function preload(){
         "img/rules.png",
         "img/rules.png",
         "img/alienSkull.png",
+        "img/lightning.png",
+        "img/freezeTime.png",
         {id:"levelJson",src:"json/levels.json"},
         {id:"tiles",src:"json/tiles.json"},
 
@@ -107,7 +108,6 @@ function queueComplete(){
     createjs.Ticker.on("tick", tock);
     createjs.Ticker.setFPS(30);
     stageMain.removeChild(stickMan, preloadText, ufo);
-    //console.log('Loading complete');
     levelData = queue.getResult("levelJson")
     tiles = new createjs.SpriteSheet(queue.getResult("tiles"));
     alienSprite = new createjs.SpriteSheet(queue.getResult("alienSprite"));
@@ -234,6 +234,16 @@ function startPage(){
     timerBar2.graphics.drawRect(0, 0, 150, 80);
     timerBar2.x = 50;
     timerBar2.y = 605;
+
+    lightningImg = new createjs.Bitmap(queue.getResult("img/lightning.png"));
+    lightningImg.alpha= .7;
+    lightningImg.x = 1060;
+    lightningImg.y = 20;
+
+    freezeTimeImg = new createjs.Bitmap(queue.getResult("img/freezeTime.png"));
+    freezeTimeImg.alpha= .7;
+    freezeTimeImg.x = 1060;
+    freezeTimeImg.y = 20;
     
     stageInfo.addChild(soundButton);
 }
@@ -275,7 +285,6 @@ function updateStatusBar() {
     levelText.text = "Level  " + currentLevelStatusBar;
     lifeText.text = heroLife;
     scoreText.text = heroScore;
-
 }
 
 function addBgUfo() {
@@ -349,6 +358,7 @@ function aboutGame() {
 function startGame() {
     gameIsRunning = true;
     timeIsRunning = true;
+
     addHero();
     setupLevel();
         window.addEventListener('keydown', fingerDown);
@@ -370,6 +380,7 @@ function runTimerCountDown () {
 function TimerCountDown(){
     if (timeIsRunning === true) {
         timeLeft -= .5;
+        heroScore -= 1;
         setTimeout(function () {
             runTimerCountDown();
         }, 500);
@@ -378,13 +389,14 @@ function TimerCountDown(){
 
 function setupLevel() {
     stageMain.removeAllChildren();
+    timeLeft = startTime;
     var row, col;
     currentLevel++;
     var level = levelData.levels[currentLevel].tiles;
     blocks = [];
+    enemies = [];
     teleporters = [];
     powerUps = [];
-    enemies = [];
     var hCol, hRow;
     for (row = 0; row < level.length; row++) {
         for (col = 0; col < level[row].length; col++) {
@@ -412,10 +424,9 @@ function setupLevel() {
                     img = "floor";
                     hCol = col;
                     hRow = row;
-                    console.log("hero found at ",hCol, hRow)
                     break;
             }
-            t = new createjs.Sprite(tiles, img);
+            var t = new createjs.Sprite(tiles, img);
             t.x = col * blockSize;
             t.y = row * blockSize;
             t.width = blockSize;
@@ -428,69 +439,68 @@ function setupLevel() {
             }
             stageMain.addChild(t);
 
-
         }
     }
+
         var tps = levelData.levels[currentLevel].teleporters;
         for (var i = 0; i < tps.length; i++) {
-            t = new createjs.Sprite(tiles, 'tp');
+            var t = new createjs.Sprite(tiles, 'tp');
             t.x = tps[i].x;
             t.y = tps[i].y;
             t.width = blockSize;
             t.height = blockSize;
             t.waypointX = tps[i].waypointX;
             t.waypointY = tps[i].waypointY;
-
-            teleporters.push(t)
-            stageMain.addChild(t);
-        }
-
-        var enm = levelData.levels[currentLevel].enemies;
-        for (var i = 0; i < enm.length; i++) {
-            t = new createjs.Sprite(alienSprite, 'all');
-
-
-            //t = new createjs.SpriteSheet(queue.getResult('alienSprite'));
-            //t = new createjs.Sprite(alienSprite, 'jump');
-
-            t.x = enm[i].startX;
-            t.y = enm[i].startY;
-            t.width = blockSize;
-            t.height = blockSize;
-
-
-            enemies.push(t)
+            teleporters.push(t);
             stageMain.addChild(t);
         }
 
 
         var pus = levelData.levels[currentLevel].powerUps;
         for (var i = 0; i < pus.length; i++) {
-            t = new createjs.Sprite(tiles, pus[i].sprite);
+            var t = new createjs.Sprite(tiles, pus[i].sprite);
             t.x = pus[i].x;
             t.y = pus[i].y;
             t.width = blockSize;
             t.height = blockSize;
             t.type=pus[i].type;
-            powerUps.push(t)
+            powerUps.push(t);
             stageMain.addChild(t);
         }
         hero.x = hCol * blockSize;
         hero.y = hRow * blockSize;
-        stageMain.addChild(hero, ufoSmall);
+
+
+    var enm = levelData.levels[currentLevel].enemies;
+    for (var i = 0; i < enm.length; i++) {
+        var t = new createjs.Sprite(alienSprite, 'up');
+        t.width = blockSize;
+        t.height = blockSize;
+        t.speed = 6;
+        t.startX = enm[i].startX;
+        t.startY = enm[i].startY;
+        t.endX = enm[i].endX;
+        t.endY = enm[i].endY;
+        t.x = t.startX;
+        t.y = t.startY;
+        enemies.push(t);
+        stageMain.addChild(t);
+            createjs.Tween.get(t, {paused:alienTweenPause, loop:true})
+                .to({x: t.endX, y: t.endY}, enm[i].speed, createjs.Ease.sineInOut)
+                .to({x: t.startX, y: t.startY}, enm[i].speed, createjs.Ease.sineInOut)
+    }
+    stageMain.addChild(hero, ufoSmall);
     
 }
 
-    function gameComplete() {
+function test (){
+    alienTweenPause = true;
+    alien1();
+}
 
-    }
+function gameComplete() {
 
-//tilføjes til enemy hit detection
-    function lifestatus() {
-        if (heroLife <= 0) {
-            gameOver();
-        }
-    }
+}
 
 function resetGameWarning(){
     timeIsRunning = false;
@@ -535,8 +545,9 @@ function resetGame(){
     heroLife = heroStartLife;
     heroScore = 0;
     currentLevel=-1;
-    stageInfo.addChild(soundButton);
     getReady();
+    sandDropRun.gotoAndPlay('run');
+    stageInfo.addChild(soundButton);
 }
 
     function gameOver() {
@@ -582,8 +593,6 @@ function resetGame(){
                 location.reload();
             }
         );
-
-
 
         stageMain.addChild(gameOverBg, splash, deadText, buttonPlayAgain, buttonBackToMain);
         stageInfo.removeChild(sandDropRun);
@@ -672,9 +681,7 @@ function fingerUp(e){
         return true;
     }
 
-    function checkCollisions() {
 
-    }
 
 //finger up/down
 
@@ -708,10 +715,26 @@ function fingerUp(e){
                         case "turnBackTime":
                             turnBackTime();
                             break;
+                        case "walkAlien":
+                            heroWalkThroughEnemies();
+                            break;
+                        case "point":
+                            addHeroPoint();
+                            break;
                     }
                     powerUps.splice(i, 1);
                     break;
 
+                }
+            }
+
+            if (heroNoHit === false) {
+                var i = 0, enmLength = enemies.length;
+                for (; i < enmLength; i++) {
+                    if (hitTest(hero, enemies[i])) {
+                        heroLoseLife();
+                        break;
+                    }
                 }
             }
                     var i = 0, tpLength = teleporters.length;
@@ -782,6 +805,43 @@ function fingerUp(e){
                 }
             }
 
+function heroLoseLife() {
+    createjs.Sound.play('deadSound');
+    heroNoHit = true;
+    heroLife--;
+    if (heroLife <1){
+        gameOver();
+    }
+    if (gameIsRunning === true) {
+        var message = "Lose 1 life";
+        var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
+        messageOnScreen.textBaseline="middle";
+        messageOnScreen.textAlign="center";
+        messageOnScreen.x=stageMain.canvas.width/2;
+        messageOnScreen.y=stageMain.canvas.height/2;
+        stageMain.addChild(messageOnScreen);
+        animate();
+        function animate() {
+            messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
+            createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+                    stageMain.removeChild(messageOnScreen);
+            })
+        }
+    }
+    setTimeout(function () {
+        heroUnsafe();
+    }, 2000)
+
+}
+
+function heroSafe() {
+    heroNoHit = true;
+}
+
+function heroUnsafe() {
+    heroNoHit = false;
+}
+
 //Character hitDetection with blocks
         function predictHit(character, rect1) {
             if (character.nextX >= rect1.x + rect1.width
@@ -802,21 +862,108 @@ function fingerUp(e){
                 timeIsRunning = true;
                 sandDropRun.gotoAndPlay('run');
                 TimerCountDown()
-            }, 20000);
-
+                stageMain.removeChild(freezeTimeImg);
+            }, 10000);
+            var message = "Freeze time";
+            var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
+            messageOnScreen.textBaseline="middle";
+            messageOnScreen.textAlign="center";
+            messageOnScreen.x=stageMain.canvas.width/2;
+            messageOnScreen.y=stageMain.canvas.height/2;
+            stageMain.addChild(messageOnScreen, freezeTimeImg);
+            animate();
+            function animate() {
+                messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
+                createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+                    stageMain.removeChild(messageOnScreen);
+                })
+            }
         }
 
         function turnBackTime() {
+            heroScore +=50;
             if (timeLeft < startTime - 10) {
                 timeLeft += 10;
             } else {
                 timeLeft = startTime;
             }
+            var message = "Turn back time";
+            var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
+            messageOnScreen.textBaseline="middle";
+            messageOnScreen.textAlign="center";
+            messageOnScreen.x=stageMain.canvas.width/2;
+            messageOnScreen.y=stageMain.canvas.height/2;
+            stageMain.addChild(messageOnScreen);
+            animate();
+            function animate() {
+                messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
+                createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+                    stageMain.removeChild(messageOnScreen);
+                })
+            }
         }
 
         function addLife() {
             heroLife++;
+            var message = "Get 1 life";
+            var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
+            messageOnScreen.textBaseline="middle";
+            messageOnScreen.textAlign="center";
+            messageOnScreen.x=stageMain.canvas.width/2;
+            messageOnScreen.y=stageMain.canvas.height/2;
+            stageMain.addChild(messageOnScreen);
+            animate();
+            function animate() {
+                messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
+                createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+                    stageMain.removeChild(messageOnScreen);
+                })
+            }
         }
+
+function addHeroPoint() {
+    heroScore +=100;
+    var message = "+100 Points";
+    var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
+    messageOnScreen.textBaseline="middle";
+    messageOnScreen.textAlign="center";
+    messageOnScreen.x=stageMain.canvas.width/2;
+    messageOnScreen.y=stageMain.canvas.height/2;
+    stageMain.addChild(messageOnScreen);
+    animate();
+    function animate() {
+        messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
+        createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+            stageMain.removeChild(messageOnScreen);
+        })
+    }
+}
+
+function heroWalkThroughEnemies () {
+    console.log("walk");
+    heroSafe();
+    heroScore +=50;
+    setTimeout(function () {
+        heroUnsafe();
+        stageMain.removeChild(lightningImg)
+    },5000)
+    var message = "Walk Through Enemies";
+    var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
+    messageOnScreen.textBaseline="middle";
+    messageOnScreen.textAlign="center";
+    messageOnScreen.x=stageMain.canvas.width/2;
+    messageOnScreen.y=stageMain.canvas.height/2;
+    stageMain.addChild(messageOnScreen, lightningImg);
+    animate();
+    function animate() {
+        messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
+        createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+            stageMain.removeChild(messageOnScreen);
+        })
+    }
+}
+
+
 
 
 // POWERUPS END
@@ -840,10 +987,5 @@ function fingerUp(e){
             stageInfo.update(e);
             //console.log("Tock() is running")
         }
-// Tilføjelser:
-// Lifestatus
-// Reset game
-// Add enemi
-// SetChildIndex
-// setInterval (kører function hvert x tid)
+
 
