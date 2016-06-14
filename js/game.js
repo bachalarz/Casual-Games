@@ -21,7 +21,7 @@ var keys = {
     dkd:false
 };
 
-var conuntDownTime = false, startTime = 60, timeLeft = startTime;
+var conuntDownTime = false, startTime =360, timeLeft = startTime;
 var timerImg1, timerImg2;
 
 function init() {
@@ -150,7 +150,7 @@ function startPage(){
         }
     );
 
-    createjs.Sound.play('bgSound', {loop:-1});
+    //createjs.Sound.play('bgSound', {loop:-1});
     addBgUfo();
     stageMain.addChild(buttonStartGame, buttonHowToPlay, titelText, stickManRun);
     moveSmallUfo = true;
@@ -655,9 +655,11 @@ function fingerUp(e){
 
         heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
         hero = new createjs.Sprite(heroSpriteSheet, 'still');
-        hero.width = 50;
-        hero.height = 50;
-        hero.speed = 10;
+        hero.width = 44;
+        hero.height = 44;
+        hero.regX = 3;
+        hero.regY = 3;
+        hero.speed = 7;
         hero.nextX;
         hero.nextY;
     }
