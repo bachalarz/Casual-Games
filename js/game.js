@@ -78,6 +78,7 @@ function preload(){
         "img/buttonHowToPlay.png",
         "img/buttonBack.png",
         "img/buttonPlayAgain.png",
+        "img/buttonBackToMain.png",
         "img/buttonRestart.png",
         "img/buttonYes.png",
         "img/buttonNo.png",
@@ -549,16 +550,26 @@ function resetGame(){
         var buttonPlayAgain = new createjs.Bitmap(queue.getResult("img/buttonPlayAgain.png"));
         buttonPlayAgain.width = 250;
         buttonPlayAgain.x = (stageMain.canvas.width / 2) - (buttonPlayAgain.width / 2);
-        buttonPlayAgain.y = 530;
+        buttonPlayAgain.y = 500;
         buttonPlayAgain.addEventListener('click',
             function(e){
                 resetGame();
             }
         );
 
+        var buttonBackToMain = new createjs.Bitmap(queue.getResult("img/buttonBackToMain.png"));
+        buttonBackToMain.width = 250;
+        buttonBackToMain.x = (stageMain.canvas.width / 2) - (buttonBackToMain.width / 2);
+        buttonBackToMain.y = 575;
+        buttonBackToMain.addEventListener('click',
+            function(e){
+                location.reload();
+            }
+        );
 
 
-        stageMain.addChild(gameOverBg, splash, deadText, buttonPlayAgain);
+
+        stageMain.addChild(gameOverBg, splash, deadText, buttonPlayAgain, buttonBackToMain);
         stageInfo.removeChild(sandDropRun);
 
     }
