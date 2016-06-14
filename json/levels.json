@@ -26,6 +26,10 @@
         {"x":425, "y":400, "type":"freezeTime", "sprite":"pu1"},
         {"x":425, "y":500, "type":"turnBackTime", "sprite":"pu2"},
         {"x":425, "y":600, "type":"life", "sprite":"pu3"}
+      ],
+      "enemies":[
+        {"startX": 250, "startY": 200, "endX": 300, "endY": 300},
+        {"startX": 350, "startY": 200, "endX": 300, "endY": 300}
       ]
     },
     {

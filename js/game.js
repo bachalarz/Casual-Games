@@ -10,9 +10,10 @@ var soundMute = false; // Sounds
 var moveSmallUfo = false;
 var autoStart = true;
 var teleporters=[];
+var enemies=[];
 var powerUps=[];
 var scoreTotal = 0;
-var levelData, tiles, currentLevel=-1, t, blockSize = 50; //level
+var levelData, tiles, alienSprite, currentLevel=-1, t, blockSize = 50; //level
 var hitTest;
 var keys = {
     rkd:false,
@@ -108,6 +109,7 @@ function queueComplete(){
     //console.log('Loading complete');
     levelData = queue.getResult("levelJson")
     tiles = new createjs.SpriteSheet(queue.getResult("tiles"));
+    alienSprite = new createjs.SpriteSheet(queue.getResult("alienSprite"));
     startPage();
 }
 
@@ -231,15 +233,8 @@ function startPage(){
     timerBar2.graphics.drawRect(0, 0, 150, 80);
     timerBar2.x = 50;
     timerBar2.y = 605;
-
-    // Midlertidige alien sprite - kan bruger som fjernder i banerne!
-
-    var alienSprite = new createjs.SpriteSheet(queue.getResult('alienSprite'));
-    alienSprite = new createjs.Sprite(alienSprite, 'all');
-    alienSprite.x = 200;
-    alienSprite.y = 700;
-
-    stageInfo.addChild(soundButton, alienSprite);
+    
+    stageInfo.addChild(soundButton);
 }
 
 function getReady() {
@@ -388,6 +383,7 @@ function setupLevel() {
     blocks = [];
     teleporters = [];
     powerUps = [];
+    enemies = [];
     var hCol, hRow;
     for (row = 0; row < level.length; row++) {
         for (col = 0; col < level[row].length; col++) {
@@ -447,6 +443,26 @@ function setupLevel() {
             teleporters.push(t)
             stageMain.addChild(t);
         }
+
+        var enm = levelData.levels[currentLevel].enemies;
+        for (var i = 0; i < enm.length; i++) {
+            t = new createjs.Sprite(alienSprite, 'all');
+
+
+            //t = new createjs.SpriteSheet(queue.getResult('alienSprite'));
+            //t = new createjs.Sprite(alienSprite, 'jump');
+
+            t.x = enm[i].startX;
+            t.y = enm[i].startY;
+            t.width = blockSize;
+            t.height = blockSize;
+
+
+            enemies.push(t)
+            stageMain.addChild(t);
+        }
+
+
         var pus = levelData.levels[currentLevel].powerUps;
         for (var i = 0; i < pus.length; i++) {
             t = new createjs.Sprite(tiles, pus[i].sprite);
@@ -775,7 +791,7 @@ function fingerUp(e){
                 timeIsRunning = true;
                 sandDropRun.gotoAndPlay('run');
                 TimerCountDown()
-            }, 3000);
+            }, 20000);
 
         }
 
