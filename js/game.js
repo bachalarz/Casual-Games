@@ -68,6 +68,11 @@ function preload(){
         {id:"bgSound", src:"audio/music/bgMusic.mp3"},
         {id:"clickSpaceGun", src:"audio/sounds/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
+        {id:"freezeTimeSound", src:"audio/sounds/dead.mp3"},
+        {id:"turnBackTimeSound", src:"audio/sounds/dead.mp3"},
+        {id:"lifeSound", src:"audio/sounds/dead.mp3"},
+        {id:"pointSound", src:"audio/sounds/dead.mp3"},
+        {id:"phaseSound", src:"audio/sounds/dead.mp3"},
         {id: "muteSprite", src:"json/muteSprite.json"},
         {id: "runSprite", src:"json/stickManRun.json"},
         {id: "sandDropSprite", src:"json/sandDropSprite.json"},
@@ -753,18 +758,23 @@ function moveHero() {
                     stageMain.removeChild(powerUps[i]);
                     switch(powerUps[i].type){
                         case "life":
+                            createjs.Sound.play('lifeSound');
                             addLife();
                             break;
                         case "freezeTime":
+                            createjs.Sound.play('freezeTimeSound');
                             freezeTime();
                             break;
                         case "turnBackTime":
+                            createjs.Sound.play('TurnBackTimeSound');
                             turnBackTime();
                             break;
-                        case "walkAlien":
+                        case "phase":
+                            createjs.Sound.play('phaseSound');
                             phase();
                             break;
                         case "point":
+                            createjs.Sound.play('pointSound');
                             addHeroPoint();
                             break;
                     }
