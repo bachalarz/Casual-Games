@@ -68,11 +68,11 @@ function preload(){
         {id:"bgSound", src:"audio/music/bgMusic.mp3"},
         {id:"clickSpaceGun", src:"audio/sounds/spaceGun.mp3"},
         {id:"deadSound", src:"audio/sounds/dead.mp3"},
-        {id:"freezeTimeSound", src:"audio/sounds/dead.mp3"},
-        {id:"turnBackTimeSound", src:"audio/sounds/dead.mp3"},
-        {id:"lifeSound", src:"audio/sounds/dead.mp3"},
-        {id:"pointSound", src:"audio/sounds/dead.mp3"},
-        {id:"phaseSound", src:"audio/sounds/dead.mp3"},
+        {id:"freezeTimeSound", src:"audio/sounds/freeze.mp3"},
+        {id:"turnBackTimeSound", src:"audio/sounds/turn.mp3"},
+        {id:"lifeSound", src:"audio/sounds/life.mp3"},
+        {id:"phaseSound", src:"audio/sounds/phase.mp3"},
+        {id:"pointSound", src:"audio/sounds/point.mp3"},
         {id: "muteSprite", src:"json/muteSprite.json"},
         {id: "runSprite", src:"json/stickManRun.json"},
         {id: "sandDropSprite", src:"json/sandDropSprite.json"},
@@ -161,7 +161,7 @@ function startPage(){
         }
     );
 
-    //createjs.Sound.play('bgSound', {loop:-1});
+    //createjs.Sound.play('bgSound', {loop:-1}); LYD
     addBgUfo();
     stageMain.addChild(buttonStartGame, buttonHowToPlay, titelText, stickManRun);
     moveSmallUfo = true;
@@ -766,7 +766,7 @@ function moveHero() {
                             freezeTime();
                             break;
                         case "turnBackTime":
-                            createjs.Sound.play('TurnBackTimeSound');
+                            createjs.Sound.play('turnBackTimeSound');
                             turnBackTime();
                             break;
                         case "phase":
