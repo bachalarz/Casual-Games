@@ -390,6 +390,7 @@ function timerCountDown(){
 }
 
 function callSetupLevel() {
+    timeIsRunning = false;
     if (gameIsRunning === true) {
         setTimeout(function () {
             heroMove = false;
