@@ -1,3 +1,4 @@
+
 var gameIsRunning = false, timeIsRunning = false;
 var heroNoHit = false, heroStartLife = 3, heroLife = heroStartLife, heroStartScore = 1000, heroScore = heroStartScore; // Hero status
 var alienTweenPause = false; //Enemies
@@ -13,6 +14,7 @@ var autoStart = true;
 var scoreTotal = 0;
 var levelData, tiles, alienSprite, currentLevel=-1, t, blockSize = 50; //level
 var hitTest;
+var enemies=[];
 var keys = {
     rkd:false,
     lkd:false,
@@ -493,10 +495,6 @@ function setupLevel() {
     
 }
 
-function test (){
-    alienTweenPause = true;
-    alien1();
-}
 
 function gameComplete() {
 
@@ -859,10 +857,14 @@ function heroUnsafe() {
             timeIsRunning = false;
             sandDropRun.gotoAndStop('stop');
             setTimeout(function () {
+                createjs.Ticker.setPaused(true)
+            }, 2000);
+            setTimeout(function () {
                 timeIsRunning = true;
                 sandDropRun.gotoAndPlay('run');
                 TimerCountDown()
                 stageMain.removeChild(freezeTimeImg);
+                createjs.Ticker.setPaused(false);
             }, 10000);
             var message = "Freeze time";
             var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
