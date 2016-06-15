@@ -1,5 +1,5 @@
 var gameIsRunning = false, timeIsRunning = false;
-var heroNoHit = false, heroStartLife = 3, heroLife = heroStartLife, heroStartScore = 1000, heroScore = heroStartScore; // Hero status
+var heroNoHit = false, heroMove = true, heroStartLife = 3, heroLife = heroStartLife, heroStartScore = 1000, heroScore = heroStartScore; // Hero status
 var alienTweenPause = false; //Enemies
 var levelText, lifeText, scoreText, timeText; // Show in stageInfo
 var stageMain, stageInfo; // Stages
@@ -16,7 +16,7 @@ var powerUps=[];
 nextLevel=[];
 var scoreTotal = 0;
 var levelData, tiles, alienSprite, currentLevel=-1, t, blockSize = 50; //level
-var hitTest;
+var hitTestNextLevel = true;
 var enemies=[];
 var keys = {
     rkd:false,
@@ -98,7 +98,6 @@ function preload(){
 
         "img/ufoSmall.png"
     ]);
-    //console.log("Preload is running");
 }
 
 function queueProgress(e){
@@ -376,11 +375,11 @@ function startGame() {
 
 function runTimerCountDown () {
     if (countDownTime === true && timeLeft > -1) {
-        TimerCountDown();
+        timerCountDown();
     }
 }
 
-function TimerCountDown(){
+function timerCountDown(){
     if (timeIsRunning === true) {
         timeLeft -= .5;
         heroScore -= 1;
@@ -390,28 +389,37 @@ function TimerCountDown(){
     }
 }
 
-function callSetUpLevel () {
-    var message = "Level up";
-    var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
-    messageOnScreen.textBaseline="middle";
-    messageOnScreen.textAlign="center";
-    messageOnScreen.x=stageMain.canvas.width/2;
-    messageOnScreen.y=stageMain.canvas.height/2;
-    stageMain.addChild(messageOnScreen);
-    animate();
-    function animate() {
-        messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
-        createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
-            stageMain.removeChild(messageOnScreen);
-        })
+function callSetupLevel() {
+    if (gameIsRunning === true) {
+        setTimeout(function () {
+            heroMove = false;
+        }, 200);
+        var message = "Level up";
+        var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
+        messageOnScreen.textBaseline = "middle";
+        messageOnScreen.textAlign = "center";
+        messageOnScreen.x = stageMain.canvas.width / 2;
+        messageOnScreen.y = stageMain.canvas.height / 2;
+        stageMain.addChild(messageOnScreen);
+        animate();
+        function animate() {
+            messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
+            createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+                stageMain.removeChild(messageOnScreen);
+            })
+        }
+        setTimeout(function () {
+            hero.gotoAndPlay('jump');
+            setupLevel();
+        }, 2000);
     }
-    setTimeout(function () {
-        hero.gotoAndPlay('jump');
-        setupLevel();
-    }, 2000);
 }
 
 function setupLevel() {
+    hitTestNextLevel = true;
+    timeIsRunning = true;
+    heroMove = true;
+    runTimerCountDown();
     currentLevel++;
     stageMain.removeAllChildren();
     hero.gotoAndPlay('jump');
@@ -541,6 +549,7 @@ function gameComplete() {
 
 function resetGameWarning(){
     timeIsRunning = false;
+    heroMove = false;
     sandDropRun.gotoAndStop('stop');
 
     var restartWarningCon = new createjs.Bitmap(queue.getResult("img/resetWarning.png"));
@@ -567,6 +576,7 @@ function resetGameWarning(){
         function(e){
             stageMain.removeChild(restartWarningCon, buttonYes, buttonNo);
             timeIsRunning = true;
+            heroMove = true;
             sandDropRun.gotoAndPlay('run');
             runTimerCountDown();
         }
@@ -580,14 +590,14 @@ function resetGame(){
     stageMain.removeAllChildren();
     timeLeft = startTime;
     heroLife = heroStartLife;
-    heroScore = 0;
+    heroScore = heroStartScore;
     currentLevel=-1;
     getReady();
     sandDropRun.gotoAndPlay('run');
     stageInfo.addChild(soundButton);
 }
 
-    function gameOver() {
+function gameOver() {
         gameIsRunning = false;
 
         createjs.Sound.play('deadSound');
@@ -636,7 +646,7 @@ function resetGame(){
 
     }
 
-    function soundOnOff() {
+function soundOnOff() {
         if (soundMute === false) {
             soundMute = true;
             createjs.Sound.stop();
@@ -673,7 +683,7 @@ function fingerUp(e){
     }
 }
 
-    function fingerDown(e) {
+function fingerDown(e) {
         if (gameIsRunning === true) {
             if (e.keyCode === 37) {
                 keys.lkd = true;
@@ -708,7 +718,7 @@ function fingerUp(e){
         }
     }
 
-    function hitTest(rect1, rect2) {
+function hitTest(rect1, rect2) {
         if (rect1.x >= rect2.x + rect2.width
             || rect1.x + rect1.width <= rect2.x
             || rect1.y >= rect2.y + rect2.height
@@ -720,7 +730,7 @@ function fingerUp(e){
 
 //finger up/down
 
-    function addHero() {
+function addHero() {
 
         heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
         hero = new createjs.Sprite(heroSpriteSheet, 'still');
@@ -733,8 +743,8 @@ function fingerUp(e){
         hero.nextY;
     }
 
-    function moveHero() {
-        if (gameIsRunning === true) {
+function moveHero() {
+        if (gameIsRunning === true && heroMove === true) {
 
             var i = 0, powerUpLength = powerUps.length;
             for (; i < powerUpLength; i++) {
@@ -783,7 +793,11 @@ function fingerUp(e){
             var i = 0, nxlLength = nextLevel.length;
             for (; i < nxlLength; i++) {
                 if (hitTest(hero, nextLevel[i])) {
-                    setupLevel();
+                    if (hitTestNextLevel === true) {
+                        hitTestNextLevel = false;
+                        timeIsRunning = false;
+                        callSetupLevel();
+                    }
                     break;
                 }
             }
@@ -885,7 +899,7 @@ function heroUnsafe() {
 }
 
 //Character hitDetection with blocks
-        function predictHit(character, rect1) {
+function predictHit(character, rect1) {
             if (character.nextX >= rect1.x + rect1.width
                 || character.nextX + character.width <= rect1.x
                 || character.nextY >= rect1.y + rect1.height
@@ -896,17 +910,16 @@ function heroUnsafe() {
         }
 
 // POWERUPS START
-
-        function freezeTime() {
+function freezeTime() {
             timeIsRunning = false;
             sandDropRun.gotoAndStop('stop');
             setTimeout(function () {
                 createjs.Ticker.setPaused(true)
-            }, 2000);
+            }, 1600);
             setTimeout(function () {
                 timeIsRunning = true;
                 sandDropRun.gotoAndPlay('run');
-                TimerCountDown()
+                timerCountDown()
                 stageMain.removeChild(freezeTimeImg);
                 createjs.Ticker.setPaused(false);
             }, 10000);
@@ -926,7 +939,7 @@ function heroUnsafe() {
             }
         }
 
-        function turnBackTime() {
+function turnBackTime() {
             heroScore +=50;
             if (timeLeft < startTime - 10) {
                 timeLeft += 10;
@@ -949,7 +962,7 @@ function heroUnsafe() {
             }
         }
 
-        function addLife() {
+function addLife() {
             heroLife++;
             var message = "Get 1 life";
             var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
@@ -986,7 +999,6 @@ function addHeroPoint() {
 }
 
 function phase () {
-    console.log("walk");
     heroSafe();
     hero.alpha = .4;
     heroScore +=50;
@@ -1011,13 +1023,9 @@ function phase () {
     }
 }
 
-
-
-
 // POWERUPS END
 
-
-        function tock(e) {
+function tock(e) {
             if (gameIsRunning === true) {
                 moveHero();
                 updateStatusBar();
@@ -1033,7 +1041,6 @@ function phase () {
 
             stageMain.update(e);
             stageInfo.update(e);
-            //console.log("Tock() is running")
         }
 
 
