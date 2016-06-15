@@ -21,7 +21,7 @@ var keys = {
     dkd:false
 };
 
-var conuntDownTime = false, startTime = 360, timeLeft = startTime;
+var countDownTime = false, startTime = 360, timeLeft = startTime;
 var timerImg1, timerImg2;
 
 
@@ -365,7 +365,7 @@ function startGame() {
         window.addEventListener('keydown', fingerDown);
         window.addEventListener('keyup', fingerUp);
 
-    conuntDownTime = true;
+    countDownTime = true;
     runTimerCountDown();
 
     stageInfo.addChild(restartButton, levelText, lifeText, scoreText, timeText, lifeIcon, scoreIcon, timerImg1, timerBar1, timerBar2, timerImg2, sandDropRun);
@@ -373,7 +373,7 @@ function startGame() {
 }
 
 function runTimerCountDown () {
-    if (conuntDownTime === true && timeLeft > -1) {
+    if (countDownTime === true && timeLeft > -1) {
         TimerCountDown();
     }
 }
