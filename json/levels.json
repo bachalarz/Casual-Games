@@ -3,8 +3,8 @@
   "levels":[
     {
       "tiles":[
-        ["H", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
+        [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ["H", 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
         [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
         [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -24,26 +24,25 @@
       ],
       "levelSpeed": 30,
       "powerUps":[
-        {"x":0, "y":100, "type":"point", "sprite":"pu4"},
-        {"x":100, "y":0, "type":"walkAlien", "sprite":"pu5"}
+
       ],
       "enemies":[
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 350, "startY": 200, "endX": 300, "endY": 300, "speed": 3000}
+        {"startX": 200, "startY": 0, "endX": 200, "endY": 350, "speed": 5000},
+        {"startX": 200, "startY": 700, "endX": 200, "endY": 350, "speed": 5000},
+        {"startX": 400, "startY": 0, "endX": 400, "endY": 350, "speed": 5000},
+        {"startX": 400, "startY": 700, "endX": 400, "endY": 350, "speed": 5000},
+        {"startX": 700, "startY": 0, "endX": 700, "endY": 350, "speed": 5000},
+        {"startX": 700, "startY": 700, "endX": 700, "endY": 350, "speed": 5000},
+        {"startX": 900, "startY": 0, "endX": 900, "endY": 350, "speed": 5000},
+        {"startX": 900, "startY": 700, "endX": 900, "endY": 350, "speed": 5000},
+        {"startX": 0, "startY": 200, "endX": 550, "endY": 200, "speed": 7000},
+        {"startX": 550, "startY": 250, "endX": 0, "endY": 250, "speed": 7000},
+        {"startX": 550, "startY": 200, "endX": 1100, "endY": 200, "speed": 7000},
+        {"startX": 1100, "startY": 250, "endX": 550, "endY": 250, "speed": 7000},
+        {"startX": 0, "startY": 450, "endX": 550, "endY": 450, "speed": 7000},
+        {"startX": 550, "startY": 500, "endX": 0, "endY": 500, "speed": 7000},
+        {"startX": 550, "startY": 450, "endX": 1100, "endY": 450, "speed": 7000},
+        {"startX": 1100, "startY": 500, "endX": 550, "endY": 500, "speed": 7000}
       ],
       "nextLevel":[
         {"x":1100, "y":700}
@@ -53,7 +52,7 @@
       "tiles":[
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0],
-        [0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+        [0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0],
         [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
         [0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0],
         [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0],
@@ -61,7 +60,7 @@
         [0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, "H", 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0],
         [0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 4, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0],
         [0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0],
-        [0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 5, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0],
         [0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0],
         [0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
         [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
@@ -72,24 +71,24 @@
       "levelSpeed": 60,
       "powerUps":[
         {"x":1100, "y":0, "type":"turnBackTime", "sprite":"pu1"},
-        {"x":0, "y":0, "type":"freezeTime", "sprite":"pu2"},
+        {"x":0, "y":0, "type":"walkAlien", "sprite":"pu5"},
         {"x":450, "y":100, "type":"life", "sprite":"pu3"},
-        {"x":650, "y":100, "type":"life", "sprite":"pu3"}
+        {"x":650, "y":100, "type":"life", "sprite":"pu3"},
+        {"x":100, "y":100, "type":"point", "sprite":"pu4"},
+        {"x":1000, "y":100, "type":"point", "sprite":"pu4"}
       ],
       "enemies":[
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 350, "startY": 200, "endX": 300, "endY": 300, "speed": 3000}
+        {"startX": 400, "startY": 250, "endX": 700, "endY": 250, "speed": 5000},
+        {"startX": 0, "startY": 0, "endX": 550, "endY": 0, "speed": 7000},
+        {"startX": 550, "startY": 0, "endX": 1100, "endY": 0, "speed": 7000},
+        {"startX": 200, "startY": 250, "endX": 0, "endY": 250, "speed": 5000},
+        {"startX": 0, "startY": 500, "endX": 200, "endY": 500, "speed": 5000},
+        {"startX": 900, "startY": 250, "endX": 1100, "endY": 250, "speed": 5000},
+        {"startX": 1100, "startY": 500, "endX": 900, "endY": 500, "speed": 5000},
+        {"startX": 200, "startY": 600, "endX": 200, "endY": 700, "speed": 5000},
+        {"startX": 900, "startY": 600, "endX": 900, "endY": 700, "speed": 5000},
+        {"startX": 450, "startY": 150, "endX": 100, "endY": 150, "speed": 7000},
+        {"startX": 650, "startY": 150, "endX": 1000, "endY": 150, "speed": 7000}
       ],
       "nextLevel":[
         {"x":550, "y":500}
