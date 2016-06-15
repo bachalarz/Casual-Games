@@ -22,9 +22,7 @@
       "teleporters":[
 
       ],
-      "levelSpeed":[
-        [500]
-      ],
+      "levelSpeed": 30,
       "powerUps":[
         {"x":0, "y":100, "type":"point", "sprite":"pu4"},
         {"x":100, "y":0, "type":"walkAlien", "sprite":"pu5"}
@@ -71,9 +69,7 @@
       ],
       "teleporters":[
       ],
-      "levelSpeed":[
-        [500]
-      ],
+      "levelSpeed": 60,
       "powerUps":[
         {"x":1100, "y":0, "type":"turnBackTime", "sprite":"pu1"},
         {"x":0, "y":0, "type":"freezeTime", "sprite":"pu2"},
@@ -120,9 +116,7 @@
       "teleporters":[
 
       ],
-      "levelSpeed":[
-        [500]
-      ],
+      "levelSpeed": 160,
       "powerUps":[
         {"x":0, "y":0, "type":"life", "sprite":"pu3"},
         {"x":800, "y":100, "type":"turnBackTime", "sprite":"pu1"}
@@ -165,9 +159,7 @@
       "teleporters":[
         {"x":1000, "y":600, "waypointX":1000, "waypointY":100}
       ],
-      "levelSpeed":[
-        [500]
-      ],
+      "levelSpeed": 20,
       "powerUps":[
         {"x":100, "y":600, "type":"turnBackTime", "sprite":"pu1"},
         {"x":700, "y":200, "type":"life", "sprite":"pu3"}
@@ -231,9 +223,7 @@
         {"x":1000, "y":600, "waypointX":1000, "waypointY":100},
         {"x":1000, "y":600, "waypointX":1000, "waypointY":100}
       ],
-      "levelSpeed":[
-        [500]
-      ],
+      "levelSpeed": 60,
       "powerUps":[
         {"x":50, "y":50, "type":"life", "sprite":"pu3"},
         {"x":50, "y":50, "type":"life", "sprite":"pu3"},
@@ -273,9 +263,7 @@
       "teleporters":[
 
       ],
-      "levelSpeed":[
-        10
-      ],
+      "levelSpeed": 60,
       "powerUps":[
 
       ],
@@ -307,9 +295,7 @@
       "teleporters":[
 
       ],
-      "levelSpeed":[
-
-      ],
+      "levelSpeed": 60,
       "powerUps":[
 
       ],
