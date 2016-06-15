@@ -10,6 +10,10 @@ var queue; // Start
 var soundMute = false; // Sounds
 var moveSmallUfo = false;
 var autoStart = true;
+var teleporters=[];
+var enemies=[];
+var powerUps=[];
+nextLevel=[];
 var scoreTotal = 0;
 var levelData, tiles, alienSprite, currentLevel=-1, t, blockSize = 50; //level
 var hitTest;
@@ -23,7 +27,6 @@ var keys = {
 
 var countDownTime = false, startTime = 360, timeLeft = startTime;
 var timerImg1, timerImg2;
-
 
 function init() {
     stageMain = new createjs.Stage("canvasMain");
@@ -359,7 +362,6 @@ function aboutGame() {
 function startGame() {
     gameIsRunning = true;
     timeIsRunning = true;
-
     addHero();
     setupLevel();
         window.addEventListener('keydown', fingerDown);
@@ -390,14 +392,19 @@ function TimerCountDown(){
 
 function setupLevel() {
     stageMain.removeAllChildren();
+    hero.gotoAndPlay('jump');
+    setTimeout(function () {
+        hero.gotoAndPlay('still');
+    }, 2000);
     timeLeft = startTime;
     var row, col;
     currentLevel++;
     var level = levelData.levels[currentLevel].tiles;
     blocks = [];
-    enemies = [];
     teleporters = [];
     powerUps = [];
+    enemies = [];
+    nextLevel = [];
     var hCol, hRow;
     for (row = 0; row < level.length; row++) {
         for (col = 0; col < level[row].length; col++) {
@@ -427,7 +434,7 @@ function setupLevel() {
                     hRow = row;
                     break;
             }
-            var t = new createjs.Sprite(tiles, img);
+            t = new createjs.Sprite(tiles, img);
             t.x = col * blockSize;
             t.y = row * blockSize;
             t.width = blockSize;
@@ -442,29 +449,40 @@ function setupLevel() {
 
         }
     }
-
+    
         var tps = levelData.levels[currentLevel].teleporters;
         for (var i = 0; i < tps.length; i++) {
-            var t = new createjs.Sprite(tiles, 'tp');
+            t = new createjs.Sprite(tiles, 'tp');
             t.x = tps[i].x;
             t.y = tps[i].y;
             t.width = blockSize;
             t.height = blockSize;
             t.waypointX = tps[i].waypointX;
             t.waypointY = tps[i].waypointY;
+            
             teleporters.push(t);
             stageMain.addChild(t);
         }
+    var nxl = levelData.levels[currentLevel].nextLevel;
+    for (var i = 0; i < nxl.length; i++) {
+        t = new createjs.Sprite(tiles, 'eg');
+        t.x = nxl[i].x;
+        t.y = nxl[i].y;
+        t.width = blockSize;
+        t.height = blockSize;
 
-
+        nextLevel.push(t);
+        stageMain.addChild(t);
+    }
         var pus = levelData.levels[currentLevel].powerUps;
         for (var i = 0; i < pus.length; i++) {
-            var t = new createjs.Sprite(tiles, pus[i].sprite);
+            t = new createjs.Sprite(tiles, pus[i].sprite);
             t.x = pus[i].x;
             t.y = pus[i].y;
             t.width = blockSize;
             t.height = blockSize;
             t.type=pus[i].type;
+            
             powerUps.push(t);
             stageMain.addChild(t);
         }
@@ -493,7 +511,6 @@ function setupLevel() {
     stageMain.addChild(hero, ufoSmall);
     
 }
-
 
 function gameComplete() {
 
@@ -678,8 +695,6 @@ function fingerUp(e){
         return true;
     }
 
-
-
 //finger up/down
 
     function addHero() {
@@ -742,6 +757,13 @@ function fingerUp(e){
                             break;
                         }
                     }
+            var i = 0, nxlLength = nextLevel.length;
+            for (; i < nxlLength; i++) {
+                if (hitTest(hero, nextLevel[i])) {
+                    setupLevel();
+                    break;
+                }
+            }
 
                     if (keys.rkd && hero.x < 1150 - hero.width) {
                         var collisionDetected = false;
