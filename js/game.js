@@ -12,7 +12,6 @@ var moveSmallUfo = false;
 var autoStart = true;
 var teleporters=[];
 var powerUps=[];
-nextLevel=[];
 var levelData, tiles, alienSprite, currentLevel=-1, blockSize = 50; //Levels
 var hitTestNextLevel = true;
 var enemies=[];
@@ -835,6 +834,7 @@ function moveHero() {
                     var i = 0, tpLength = teleporters.length;
                     for (; i < tpLength; i++) {
                         if (hitTest(hero, teleporters[i])) {
+                            createjs.Sound.play('levelUpSound');
                             hero.x = teleporters[i].waypointX;
                             hero.y = teleporters[i].waypointY;
                             break;
