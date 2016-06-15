@@ -163,7 +163,7 @@ function startPage(){
         }
     );
 
-    //createjs.Sound.play('bgSound', {loop:-1}); LYD
+    createjs.Sound.play('bgSound', {loop:-1}); LYD
     addBgUfo();
     stageMain.addChild(buttonStartGame, buttonHowToPlay, titelText, stickManRun);
     moveSmallUfo = true;
