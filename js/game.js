@@ -728,7 +728,7 @@ function fingerUp(e){
                             turnBackTime();
                             break;
                         case "walkAlien":
-                            heroWalkThroughEnemies();
+                            phase();
                             break;
                         case "point":
                             addHeroPoint();
@@ -962,12 +962,14 @@ function addHeroPoint() {
     }
 }
 
-function heroWalkThroughEnemies () {
+function phase () {
     console.log("walk");
     heroSafe();
+    hero.alpha = .4;
     heroScore +=50;
     setTimeout(function () {
         heroUnsafe();
+        hero.alpha = 1;
         stageMain.removeChild(lightningImg)
     },5000)
     var message = "Walk Through Enemies";
