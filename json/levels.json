@@ -24,7 +24,11 @@
       ],
       "levelSpeed": 30,
       "powerUps":[
-
+        {"x":100, "y":0, "type":"turnBackTime", "sprite":"pu1"},
+        {"x":200, "y":0, "type":"phase", "sprite":"pu5"},
+        {"x":300, "y":0, "type":"life", "sprite":"pu3"},
+        {"x":400, "y":0, "type":"freezTime", "sprite":"pu2"},
+        {"x":500, "y":0, "type":"point", "sprite":"pu4"}
       ],
       "enemies":[
         {"startX": 200, "startY": 0, "endX": 200, "endY": 350, "speed": 5000},
@@ -71,7 +75,7 @@
       "levelSpeed": 60,
       "powerUps":[
         {"x":1100, "y":0, "type":"turnBackTime", "sprite":"pu1"},
-        {"x":0, "y":0, "type":"walkAlien", "sprite":"pu5"},
+        {"x":0, "y":0, "type":"phase", "sprite":"pu5"},
         {"x":450, "y":100, "type":"life", "sprite":"pu3"},
         {"x":650, "y":100, "type":"life", "sprite":"pu3"},
         {"x":100, "y":100, "type":"point", "sprite":"pu4"},
@@ -121,8 +125,8 @@
         {"x":800, "y":100, "type":"turnBackTime", "sprite":"pu1"}
       ],
       "enemies":[
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
-        {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
+        {"startX": 950, "startY": 0, "endX": 950, "endY": 350, "speed": 3000},
+        {"startX": 950, "startY": 700, "endX": 950, "endY": 350, "speed": 3000},
         {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
         {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
         {"startX": 250, "startY": 200, "endX": 300, "endY": 300, "speed": 3000},
