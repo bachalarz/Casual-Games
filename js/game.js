@@ -25,7 +25,7 @@ var keys = {
     dkd:false
 };
 
-var countDownTime = false, startTime = 360, timeLeft = startTime;
+var countDownTime = false, startTime = null, timeLeft = startTime;
 var timerImg1, timerImg2;
 
 function init() {
@@ -390,15 +390,38 @@ function TimerCountDown(){
     }
 }
 
+function callSetUpLevel () {
+    var message = "Level up";
+    var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
+    messageOnScreen.textBaseline="middle";
+    messageOnScreen.textAlign="center";
+    messageOnScreen.x=stageMain.canvas.width/2;
+    messageOnScreen.y=stageMain.canvas.height/2;
+    stageMain.addChild(messageOnScreen);
+    animate();
+    function animate() {
+        messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
+        createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+            stageMain.removeChild(messageOnScreen);
+        })
+    }
+    setTimeout(function () {
+        hero.gotoAndPlay('jump');
+        setupLevel();
+    }, 2000);
+}
+
 function setupLevel() {
+    currentLevel++;
     stageMain.removeAllChildren();
     hero.gotoAndPlay('jump');
     setTimeout(function () {
         hero.gotoAndPlay('still');
     }, 2000);
+    startTime = levelData.levels[currentLevel].levelSpeed;
     timeLeft = startTime;
     var row, col;
-    currentLevel++;
+
     var level = levelData.levels[currentLevel].tiles;
     blocks = [];
     teleporters = [];
