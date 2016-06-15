@@ -1,4 +1,3 @@
-
 var gameIsRunning = false, timeIsRunning = false;
 var heroNoHit = false, heroStartLife = 3, heroLife = heroStartLife, heroStartScore = 1000, heroScore = heroStartScore; // Hero status
 var alienTweenPause = false; //Enemies
