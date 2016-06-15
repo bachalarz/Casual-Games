@@ -73,12 +73,14 @@ function preload(){
         {id:"lifeSound", src:"audio/sounds/life.mp3"},
         {id:"phaseSound", src:"audio/sounds/phase.mp3"},
         {id:"pointSound", src:"audio/sounds/point.mp3"},
+        {id:"winSound", src:"audio/sounds/win.mp3"},
         {id: "muteSprite", src:"json/muteSprite.json"},
         {id: "runSprite", src:"json/stickManRun.json"},
         {id: "sandDropSprite", src:"json/sandDropSprite.json"},
         "img/resetWarning.png",
         "img/sandDropSprite.png",
         "img/gameOverBg.png",
+        "img/WinBg.png",
         "img/heart.png",
         "img/star.png",
         "img/timer1.png",
@@ -283,7 +285,6 @@ function getReady() {
     }
 }
 
-//Denne funktion bliver kaldt 30 gange i sekundet fra tock()
 function updateStatusBar() {
 
     var scale=timeLeft/startTime;
@@ -550,7 +551,28 @@ function setupLevel() {
 }
 
 function gameComplete() {
+    gameIsRunning = false;
+    timeIsRunning = false;
+    heroMove = false;
+    sandDropRun.gotoAndStop('stop');
 
+    var gameCompleteCon = new createjs.Bitmap(queue.getResult("img/WinBg.png"));
+    gameCompleteCon.width = 850;
+    gameCompleteCon.height = 550;
+    gameCompleteCon.x = (stageMain.canvas.width / 2) - (gameCompleteCon.width / 2);
+    gameCompleteCon.y = (stageMain.canvas.height / 2) - (gameCompleteCon.height / 2);
+
+    var buttonRestart = new createjs.Bitmap(queue.getResult("img/buttonBackToMain.png"));
+    buttonRestart.width = 250;
+    buttonRestart.x = 650;
+    buttonRestart.y = 500;
+    buttonRestart.addEventListener('click',
+        function(e){
+            location.reload();
+        }
+    );
+
+    stageMain.addChild(gameCompleteCon, buttonRestart);
 }
 
 function resetGameWarning(){
@@ -734,8 +756,6 @@ function hitTest(rect1, rect2) {
         return true;
     }
 
-//finger up/down
-
 function addHero() {
 
         heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
@@ -776,6 +796,10 @@ function moveHero() {
                         case "point":
                             createjs.Sound.play('pointSound');
                             addHeroPoint();
+                            break;
+                        case "winGame":
+                            createjs.Sound.play('winSound');
+                            gameComplete();
                             break;
                     }
                     powerUps.splice(i, 1);
@@ -909,7 +933,6 @@ function heroUnsafe() {
     heroNoHit = false;
 }
 
-//Character hitDetection with blocks
 function predictHit(character, rect1) {
             if (character.nextX >= rect1.x + rect1.width
                 || character.nextX + character.width <= rect1.x

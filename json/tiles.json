@@ -1,5 +1,4 @@
 {
-
   "images": ["img/tiles.png"],
   "frames": {"width":50, "height":50, "regX": 0, "regY":0},
   "animations": {

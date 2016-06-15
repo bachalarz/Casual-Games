@@ -28,7 +28,8 @@
         {"x":200, "y":0, "type":"phase", "sprite":"pu5"},
         {"x":300, "y":0, "type":"life", "sprite":"pu3"},
         {"x":400, "y":0, "type":"freezeTime", "sprite":"pu2"},
-        {"x":500, "y":0, "type":"point", "sprite":"pu4"}
+        {"x":500, "y":0, "type":"point", "sprite":"pu4"},
+        {"x":50, "y":0, "type":"winGame", "sprite":"win"}
       ],
       "enemies":[
         {"startX": 200, "startY": 0, "endX": 200, "endY": 350, "speed": 5000},
