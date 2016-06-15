@@ -12,6 +12,7 @@ var autoStart = true;
 var teleporters=[];
 var enemies=[];
 var powerUps=[];
+nextLevel=[];
 var scoreTotal = 0;
 var levelData, tiles, alienSprite, currentLevel=-1, t, blockSize = 50; //level
 var hitTest;
@@ -378,6 +379,10 @@ function TimerCountDown(){
 
 function setupLevel() {
     stageMain.removeAllChildren();
+    hero.gotoAndPlay('jump');
+    setTimeout(function () {
+        hero.gotoAndPlay('still');
+    }, 2000);
     var row, col;
     currentLevel++;
     var level = levelData.levels[currentLevel].tiles;
@@ -385,6 +390,7 @@ function setupLevel() {
     teleporters = [];
     powerUps = [];
     enemies = [];
+    nextLevel = [];
     var hCol, hRow;
     for (row = 0; row < level.length; row++) {
         for (col = 0; col < level[row].length; col++) {
@@ -444,6 +450,17 @@ function setupLevel() {
             teleporters.push(t)
             stageMain.addChild(t);
         }
+    var nxl = levelData.levels[currentLevel].nextLevel;
+    for (var i = 0; i < nxl.length; i++) {
+        t = new createjs.Sprite(tiles, 'eg');
+        t.x = nxl[i].x;
+        t.y = nxl[i].y;
+        t.width = blockSize;
+        t.height = blockSize;
+
+        nextLevel.push(t)
+        stageMain.addChild(t);
+    }
 
         var enm = levelData.levels[currentLevel].enemies;
         for (var i = 0; i < enm.length; i++) {
@@ -658,7 +675,7 @@ function fingerUp(e){
                 setTimeout(function () {
                     hero.gotoAndPlay('still');
                 }, 2000);
-            }
+}
         }
     }
 
@@ -722,6 +739,13 @@ function fingerUp(e){
                             break;
                         }
                     }
+            var i = 0, nxlLength = nextLevel.length;
+            for (; i < nxlLength; i++) {
+                if (hitTest(hero, nextLevel[i])) {
+                    setupLevel();
+                    break;
+                }
+            }
 
                     if (keys.rkd && hero.x < 1150 - hero.width) {
                         var collisionDetected = false;
