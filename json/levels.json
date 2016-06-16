@@ -211,7 +211,7 @@
         {"x":650, "y":50, "waypointX":650, "waypointY":250},
         {"x":1050, "y":200, "waypointX":1100, "waypointY":600}
       ],
-      "levelSpeed": 100,
+      "levelSpeed": 200,
       "powerUps":[
         {"x":900, "y":100, "type":"phase", "sprite":"pu5"},
         {"x":150, "y":300, "type":"phase", "sprite":"pu5"},

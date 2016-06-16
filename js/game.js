@@ -1,4 +1,4 @@
-var gameIsRunning = false, timeIsRunning = false;
+var gameIsRunning = false, timeIsRunning = false, autoStart = true; // Game setup
 var heroNoHit = false, heroMove = true, heroStartLife = 3, heroLife = heroStartLife, heroStartScore = 1000, heroScore = heroStartScore; // Hero status
 var alienTweenPause = false; //Enemies
 var levelText, lifeText, scoreText, timeText; // Show in stageInfo
@@ -6,17 +6,17 @@ var stageMain, stageInfo; // Stages
 var preloadText, titelText, deadText; // Text
 var ufo, ufoSmall, stickMan, stickManRun, sandDropRun, lifeIcon, scoreIcon, timerBar1, timerBar2, lightningImg, freezeTimeImg; //Bitmaps
 var hero, heroSpriteSheet; //Hero player
-var queue; // Start
+var queue; // Preload
 var soundMute = false; // Sounds
-var moveSmallUfo = false;
-var autoStart = true;
-var teleporters=[];
-var powerUps=[];
+var moveSmallUfo = false; // Ufo animation
+var teleporters=[]; // Teleporter
+var powerUps=[]; // Powerups
 var levelData, tiles, alienSprite, currentLevel=-1, blockSize = 50; //Levels
-var hitTestNextLevel = true;
-var enemies=[];
+var hitTestNextLevel = true; // Pause hero movement on change level
+var enemies=[]; // Aliens
 var countDownTime = false, startTime = null, timeLeft = startTime;
-var timerImg1, timerImg2;
+var timerImg1, timerImg2; // Timer animation
+// Buttons
 var button  = {
     startGame: undefined,
     howToPlay: undefined,
@@ -24,6 +24,7 @@ var button  = {
     sound: undefined,
     back: undefined
 }
+// Keypress
 var keys = {
     rkd:false,
     lkd:false,
@@ -31,7 +32,8 @@ var keys = {
     dkd:false
 };
 
-function init() {
+// START CALL START
+function init(){
     stageMain = new createjs.Stage("canvasMain");
     stageInfo = new createjs.Stage("canvasInfo");
 
@@ -59,7 +61,9 @@ function init() {
 
     preload()
 }
+// START CALL END
 
+// PRELOAD START
 function preload(){
     queue = new createjs.LoadQueue(autoStart);
     queue.installPlugin(createjs.Sound);
@@ -81,6 +85,8 @@ function preload(){
         {id: "muteSprite", src:"json/muteSprite.json"},
         {id: "runSprite", src:"json/stickManRun.json"},
         {id: "sandDropSprite", src:"json/sandDropSprite.json"},
+        {id:"levelJson",src:"json/levels.json"},
+        {id:"tiles",src:"json/tiles.json"},
         "img/resetWarning.png",
         "img/sandDropSprite.png",
         "img/gameOverBg.png",
@@ -104,9 +110,6 @@ function preload(){
         "img/alienSkull.png",
         "img/lightning.png",
         "img/freezeTime.png",
-        {id:"levelJson",src:"json/levels.json"},
-        {id:"tiles",src:"json/tiles.json"},
-
         "img/ufoSmall.png"
     ]);
 }
@@ -127,10 +130,12 @@ function queueComplete(){
     alienSprite = new createjs.SpriteSheet(queue.getResult("alienSprite"));
     startPage();
 }
+//PRELOAD END
 
+// MAINPAGE START
 function startPage(){
-
     stageMain.removeChild();
+
     titelText = new createjs.Text("Space Escape", "50px Raleway", "#000");
     titelText.textBaseline="middle";
     titelText.textAlign="center";
@@ -262,90 +267,7 @@ function startPage(){
     stageInfo.addChild(button.sound);
 }
 
-function getReady() {
-    var counter = 4;
-    var cT = new createjs.Text(counter, "1500px Raleway", "#000");
-    cT.textBaseline="middle";
-    cT.textAlign="center";
-    cT.x=stageMain.canvas.width/2;
-    cT.y=stageMain.canvas.height/2;
-
-    stageMain.addChild(cT);
-
-    animate();
-    function animate() {
-        cT.scaleX = cT.scaleY = 0;
-        counter--;
-        cT.text = counter;
-        createjs.Tween.get(cT).to({scaleX: 2, scaleY: 2}, 1000).call(function () {
-            if (counter === 1) {
-
-                startGame();
-                stageMain.removeChild(cT);
-            } else {
-                animate();
-            }
-        })
-    }
-}
-
-function updateStatusBar() {
-
-    var scale=timeLeft/startTime;
-    timerBar2.scaleY=scale;
-    timerBar1.scaleY=1-scale;
-    var currentLevelStatusBar = currentLevel +1;
-    levelText.text = "Level  " + currentLevelStatusBar;
-    lifeText.text = heroLife;
-    scoreText.text = heroScore;
-}
-
-function addBgUfo() {
-    ufoSmall = new createjs.Bitmap("img/ufoSmall.png");
-    ufoSmall.width = 100;
-    ufoSmall.height = 100;
-    ufoSmall.x = -200;
-    ufoSmall.y = Math.floor(Math.random() * 600);
-    stageMain.addChild(ufoSmall);
-    moveUfo();
-}
-
-function removeBgUfo() {
-    setTimeout(function () {
-        createjs.Tween.get(ufoSmall).to(
-            {
-                y:Math.floor(Math.random() * -600), x:-200
-            },
-            4000,
-            createjs.Ease.cubicInOut
-        ).call(
-            function(){
-                stageMain.removeChild(ufoSmall);
-            }
-        )
-    }, 6000);
-}
-
-function moveUfo(){
-    createjs.Tween.get(ufoSmall).to(
-        {
-            x:Math.floor(Math.random() * 1000), y:Math.floor(Math.random() * 650)
-
-        },
-        6000,
-        createjs.Ease.cubicInOut
-    ).call(
-        function(){
-            if(moveSmallUfo===true) {
-                setTimeout(function () {
-                    moveUfo();
-                }, 2000);
-            }
-        }
-    )
-}
-
-function aboutGame() {
+function aboutGame(){
     stageMain.removeChild(button.startGame, button.howToPlay, titelText);
 
     button.back = new createjs.Bitmap(queue.getResult('img/buttonBack.png'));
@@ -368,22 +290,107 @@ function aboutGame() {
     stageMain.addChild(button.back, rulesGraphics);
 }
 
-function startGame() {
+function getReady(){
+    var counter = 4;
+    var cT = new createjs.Text(counter, "1500px Raleway", "#000");
+    cT.textBaseline="middle";
+    cT.textAlign="center";
+    cT.x=stageMain.canvas.width/2;
+    cT.y=stageMain.canvas.height/2;
+
+    stageMain.addChild(cT);
+
+    animate();
+    function animate(){
+        cT.scaleX = cT.scaleY = 0;
+        counter--;
+        cT.text = counter;
+        createjs.Tween.get(cT).to({scaleX: 2, scaleY: 2}, 1000).call(function(){
+            if (counter === 1) {
+
+                startGame();
+                stageMain.removeChild(cT);
+            } else {
+                animate();
+            }
+        })
+    }
+}
+
+function startGame(){
     gameIsRunning = true;
     timeIsRunning = true;
     addHero();
     setupLevel();
-        window.addEventListener('keydown', fingerDown);
-        window.addEventListener('keyup', fingerUp);
+    window.addEventListener('keydown', fingerDown);
+    window.addEventListener('keyup', fingerUp);
 
     countDownTime = true;
     runTimerCountDown();
 
     stageInfo.addChild(button.restart, levelText, lifeText, scoreText, timeText, lifeIcon, scoreIcon, timerImg1, timerBar1, timerBar2, timerImg2, sandDropRun);
+}
+// MAINPAGE END
 
+// UFO ANIMATION START
+function addBgUfo(){
+    ufoSmall = new createjs.Bitmap("img/ufoSmall.png");
+    ufoSmall.width = 100;
+    ufoSmall.height = 100;
+    ufoSmall.x = -200;
+    ufoSmall.y = Math.floor(Math.random() * 600);
+    stageMain.addChild(ufoSmall);
+    moveUfo();
 }
 
-function runTimerCountDown () {
+function moveUfo(){
+    createjs.Tween.get(ufoSmall).to(
+        {
+            x:Math.floor(Math.random() * 1000), y:Math.floor(Math.random() * 650)
+
+        },
+        6000,
+        createjs.Ease.cubicInOut
+    ).call(
+        function(){
+            if(moveSmallUfo===true) {
+                setTimeout(function(){
+                    moveUfo();
+                }, 2000);
+            }
+        }
+    )
+}
+
+function removeBgUfo(){
+    setTimeout(function(){
+        createjs.Tween.get(ufoSmall).to(
+            {
+                y:Math.floor(Math.random() * -600), x:-200
+            },
+            4000,
+            createjs.Ease.cubicInOut
+        ).call(
+            function(){
+                stageMain.removeChild(ufoSmall);
+            }
+        )
+    }, 6000);
+}
+// UFO ANIMATON END
+
+// STATUSBAR START
+function updateStatusBar(){
+    var scale=timeLeft/startTime;
+    timerBar2.scaleY=scale;
+    timerBar1.scaleY=1-scale;
+    var currentLevelStatusBar = currentLevel +1;
+    levelText.text = "Level  " + currentLevelStatusBar;
+    lifeText.text = heroLife;
+    scoreText.text = heroScore;
+}
+
+function runTimerCountDown(){
     if (countDownTime === true && timeLeft > -1) {
         timerCountDown();
     }
@@ -393,17 +400,19 @@ function timerCountDown(){
     if (timeIsRunning === true) {
         timeLeft -= .5;
         heroScore -= 1;
-        setTimeout(function () {
+        setTimeout(function(){
             runTimerCountDown();
         }, 500);
     }
 }
+// STATUSBAR END
 
-function callSetupLevel() {
+// SET UP LEVEL START
+function callSetupLevel(){
     createjs.Sound.play('levelUpSound');
     timeIsRunning = false;
     if (gameIsRunning === true) {
-        setTimeout(function () {
+        setTimeout(function(){
             heroMove = false;
         }, 200);
         var message = "Level up";
@@ -414,20 +423,20 @@ function callSetupLevel() {
         messageOnScreen.y = stageMain.canvas.height / 2;
         stageMain.addChild(messageOnScreen);
         animate();
-        function animate() {
+        function animate(){
             messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
-            createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+            createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function(){
                 stageMain.removeChild(messageOnScreen);
             })
         }
-        setTimeout(function () {
+        setTimeout(function(){
             hero.gotoAndPlay('jump');
             setupLevel();
         }, 2000);
     }
 }
 
-function setupLevel() {
+function setupLevel(){
     hitTestNextLevel = true;
     timeIsRunning = true;
     heroMove = true;
@@ -435,7 +444,7 @@ function setupLevel() {
     currentLevel++;
     stageMain.removeAllChildren();
     hero.gotoAndPlay('jump');
-    setTimeout(function () {
+    setTimeout(function(){
         hero.gotoAndPlay('still');
     }, 2000);
     startTime = levelData.levels[currentLevel].levelSpeed;
@@ -489,23 +498,23 @@ function setupLevel() {
 
             }
             stageMain.addChild(t);
-
         }
     }
     
-        var tps = levelData.levels[currentLevel].teleporters;
-        for (var i = 0; i < tps.length; i++) {
-            t = new createjs.Sprite(tiles, 'tp');
-            t.x = tps[i].x;
-            t.y = tps[i].y;
-            t.width = blockSize;
-            t.height = blockSize;
-            t.waypointX = tps[i].waypointX;
-            t.waypointY = tps[i].waypointY;
-            
-            teleporters.push(t);
-            stageMain.addChild(t);
-        }
+    var tps = levelData.levels[currentLevel].teleporters;
+    for (var i = 0; i < tps.length; i++) {
+        t = new createjs.Sprite(tiles, 'tp');
+        t.x = tps[i].x;
+        t.y = tps[i].y;
+        t.width = blockSize;
+        t.height = blockSize;
+        t.waypointX = tps[i].waypointX;
+        t.waypointY = tps[i].waypointY;
+
+        teleporters.push(t);
+        stageMain.addChild(t);
+    }
+
     var nxl = levelData.levels[currentLevel].nextLevel;
     for (var i = 0; i < nxl.length; i++) {
         t = new createjs.Sprite(tiles, 'eg');
@@ -517,6 +526,7 @@ function setupLevel() {
         nextLevel.push(t);
         stageMain.addChild(t);
     }
+
         var pus = levelData.levels[currentLevel].powerUps;
         for (var i = 0; i < pus.length; i++) {
             t = new createjs.Sprite(tiles, pus[i].sprite);
@@ -529,15 +539,15 @@ function setupLevel() {
             powerUps.push(t);
             stageMain.addChild(t);
         }
+
         hero.x = hCol * blockSize;
         hero.y = hRow * blockSize;
-
 
     var enm = levelData.levels[currentLevel].enemies;
     for (var i = 0; i < enm.length; i++) {
         var t = new createjs.Sprite(alienSprite, 'up');
         t.width = blockSize;
-        t.height = blockSize;
+        t.height = 30;
         t.speed = 6;
         t.startX = enm[i].startX;
         t.startY = enm[i].startY;
@@ -551,43 +561,12 @@ function setupLevel() {
                 .to({x: t.endX, y: t.endY}, enm[i].speed, createjs.Ease.sineInOut)
                 .to({x: t.startX, y: t.startY}, enm[i].speed, createjs.Ease.sineInOut)
     }
+
     stageMain.addChild(hero, ufoSmall);
-    
 }
+// SET UP LEVEL END
 
-function gameComplete() {
-    gameIsRunning = false;
-    timeIsRunning = false;
-    heroMove = false;
-    sandDropRun.gotoAndStop('stop');
-
-    var scoreText = new createjs.Text("", "50px Raleway", "#000");
-    scoreText.text = "You scored " + heroScore + " point!";
-    scoreText.textBaseline = "middle";
-    scoreText.textAlign = "center";
-    scoreText.x = stageMain.canvas.width / 2;
-    scoreText.y = 150;
-
-    var gameCompleteCon = new createjs.Bitmap(queue.getResult("img/WinBg.png"));
-    gameCompleteCon.width = 850;
-    gameCompleteCon.height = 600;
-    gameCompleteCon.x = (stageMain.canvas.width / 2) - (gameCompleteCon.width / 2);
-    gameCompleteCon.y = (stageMain.canvas.height / 2) - (gameCompleteCon.height / 2);
-
-    var buttonRestart = new createjs.Bitmap(queue.getResult("img/buttonBackToMain.png"));
-    buttonRestart.width = 250;
-    buttonRestart.x = 650;
-    buttonRestart.y = 500;
-    buttonRestart.addEventListener('click',
-        function(e){
-            location.reload();
-        }
-    );
-
-    stageMain.addChild(gameCompleteCon, scoreText, buttonRestart);
-    stageInfo.removeAllChildren();
-}
-
+// RESET GAME START
 function resetGameWarning(){
     timeIsRunning = false;
     heroMove = false;
@@ -637,68 +616,109 @@ function resetGame(){
     sandDropRun.gotoAndPlay('run');
     stageInfo.addChild(button.sound);
 }
+// RESET GAME END
 
-function gameOver() {
-        gameIsRunning = false;
+// LOSE GAME START
+function gameOver(){
+    gameIsRunning = false;
 
-        createjs.Sound.play('deadSound');
+    createjs.Sound.play('deadSound');
 
-        var gameOverBg = new createjs.Bitmap(queue.getResult("img/gameOverBg.png"));
-        gameOverBg.width = 850;
-        gameOverBg.height = 550;
-        gameOverBg.x = (stageMain.canvas.width / 2) - (gameOverBg.width / 2);
-        gameOverBg.y = (stageMain.canvas.height / 2) - (gameOverBg.height / 2);
+    var gameOverBg = new createjs.Bitmap(queue.getResult("img/gameOverBg.png"));
+    gameOverBg.width = 850;
+    gameOverBg.height = 550;
+    gameOverBg.x = (stageMain.canvas.width / 2) - (gameOverBg.width / 2);
+    gameOverBg.y = (stageMain.canvas.height / 2) - (gameOverBg.height / 2);
 
 
-        var splash = new createjs.Bitmap(queue.getResult('img/alienSkull.png'));
-        splash.x = stageMain.canvas.width / 2;
-        splash.y = 140;
-        splash.x = 450;
+    var splash = new createjs.Bitmap(queue.getResult('img/alienSkull.png'));
+    splash.x = stageMain.canvas.width / 2;
+    splash.y = 140;
+    splash.x = 450;
 
-        deadText = new createjs.Text("", "50px Raleway", "#000");
-        deadText.text = "You have died!";
-        deadText.textBaseline = "middle";
-        deadText.textAlign = "center";
-        deadText.x = stageMain.canvas.width / 2;
-        deadText.y = 450;
+    deadText = new createjs.Text("", "50px Raleway", "#000");
+    deadText.text = "You have died!";
+    deadText.textBaseline = "middle";
+    deadText.textAlign = "center";
+    deadText.x = stageMain.canvas.width / 2;
+    deadText.y = 450;
 
-        var buttonPlayAgain = new createjs.Bitmap(queue.getResult("img/buttonPlayAgain.png"));
-        buttonPlayAgain.width = 250;
-        buttonPlayAgain.x = (stageMain.canvas.width / 2) - (buttonPlayAgain.width / 2);
-        buttonPlayAgain.y = 500;
-        buttonPlayAgain.addEventListener('click',
-            function(e){
-                resetGame();
-            }
-        );
-
-        var buttonBackToMain = new createjs.Bitmap(queue.getResult("img/buttonBackToMain.png"));
-        buttonBackToMain.width = 250;
-        buttonBackToMain.x = (stageMain.canvas.width / 2) - (buttonBackToMain.width / 2);
-        buttonBackToMain.y = 575;
-        buttonBackToMain.addEventListener('click',
-            function(e){
-                location.reload();
-            }
-        );
-
-        stageMain.addChild(gameOverBg, splash, deadText, buttonPlayAgain, buttonBackToMain);
-        stageInfo.removeChild(sandDropRun);
-
-    }
-
-function soundOnOff() {
-        if (soundMute === false) {
-            soundMute = true;
-            createjs.Sound.stop();
-            button.sound.gotoAndStop('muteOn');
-        } else {
-            soundMute = false;
-            createjs.Sound.play('bgSound', {loop: -1});
-            button.sound.gotoAndStop('muteOff');
+    var buttonPlayAgain = new createjs.Bitmap(queue.getResult("img/buttonPlayAgain.png"));
+    buttonPlayAgain.width = 250;
+    buttonPlayAgain.x = (stageMain.canvas.width / 2) - (buttonPlayAgain.width / 2);
+    buttonPlayAgain.y = 500;
+    buttonPlayAgain.addEventListener('click',
+        function(e){
+            resetGame();
         }
-    }
+    );
 
+    var buttonBackToMain = new createjs.Bitmap(queue.getResult("img/buttonBackToMain.png"));
+    buttonBackToMain.width = 250;
+    buttonBackToMain.x = (stageMain.canvas.width / 2) - (buttonBackToMain.width / 2);
+    buttonBackToMain.y = 575;
+    buttonBackToMain.addEventListener('click',
+        function(e){
+            location.reload();
+        }
+    );
+
+    stageMain.addChild(gameOverBg, splash, deadText, buttonPlayAgain, buttonBackToMain);
+    stageInfo.removeChild(sandDropRun);
+
+}
+// LOSE GAME END
+
+// WIN GAME START
+function gameComplete(){
+    gameIsRunning = false;
+    timeIsRunning = false;
+    heroMove = false;
+    sandDropRun.gotoAndStop('stop');
+
+    var scoreText = new createjs.Text("", "50px Raleway", "#000");
+    scoreText.text = "You scored " + heroScore + " point!";
+    scoreText.textBaseline = "middle";
+    scoreText.textAlign = "center";
+    scoreText.x = stageMain.canvas.width / 2;
+    scoreText.y = 150;
+
+    var gameCompleteCon = new createjs.Bitmap(queue.getResult("img/WinBg.png"));
+    gameCompleteCon.width = 850;
+    gameCompleteCon.height = 600;
+    gameCompleteCon.x = (stageMain.canvas.width / 2) - (gameCompleteCon.width / 2);
+    gameCompleteCon.y = (stageMain.canvas.height / 2) - (gameCompleteCon.height / 2);
+
+    var buttonRestart = new createjs.Bitmap(queue.getResult("img/buttonBackToMain.png"));
+    buttonRestart.width = 250;
+    buttonRestart.x = 630;
+    buttonRestart.y = 500;
+    buttonRestart.addEventListener('click',
+        function(e){
+            location.reload();
+        }
+    );
+
+    stageMain.addChild(gameCompleteCon, scoreText, buttonRestart);
+    stageInfo.removeAllChildren();
+}
+// WIN GAME END
+
+// SOUND START
+function soundOnOff(){
+    if (soundMute === false) {
+        soundMute = true;
+        createjs.Sound.stop();
+        button.sound.gotoAndStop('muteOn');
+    } else {
+        soundMute = false;
+        createjs.Sound.play('bgSound', {loop: -1});
+        button.sound.gotoAndStop('muteOff');
+    }
+}
+// SOUND END
+
+// KEYPRESS START
 function fingerUp(e){
     if(e.keyCode===37){
         keys.lkd=false;
@@ -725,193 +745,210 @@ function fingerUp(e){
 }
 
 function fingerDown(e) {
-        if (gameIsRunning === true) {
-            if (e.keyCode === 37) {
-                keys.lkd = true;
-                if (hero.currentAnimation != 'left') {
-                    hero.gotoAndPlay('left');
-                }
-            }
-            if (e.keyCode === 38) {
-                keys.ukd = true;
-                if (hero.currentAnimation != 'up') {
-                    hero.gotoAndPlay('up');
-                }
-            }
-            if (e.keyCode === 39) {
-                keys.rkd = true;
-                if (hero.currentAnimation != 'right') {
-                    hero.gotoAndPlay('right');
-                }
-            }
-            if (e.keyCode === 40) {
-                keys.dkd = true;
-                if (hero.currentAnimation != 'down') {
-                    hero.gotoAndPlay('down');
-                }
-            }
-            if(e.keyCode===32){
-                hero.gotoAndPlay('jump');
-                setTimeout(function () {
-                    hero.gotoAndPlay('still');
-                }, 2000);
+    if (gameIsRunning === true) {
+        if (e.keyCode === 37) {
+            keys.lkd = true;
+            if (hero.currentAnimation != 'left') {
+                hero.gotoAndPlay('left');
             }
         }
+        if (e.keyCode === 38) {
+            keys.ukd = true;
+            if (hero.currentAnimation != 'up') {
+                hero.gotoAndPlay('up');
+            }
+        }
+        if (e.keyCode === 39) {
+            keys.rkd = true;
+            if (hero.currentAnimation != 'right') {
+                hero.gotoAndPlay('right');
+            }
+        }
+        if (e.keyCode === 40) {
+            keys.dkd = true;
+            if (hero.currentAnimation != 'down') {
+                hero.gotoAndPlay('down');
+            }
+        }
+        if(e.keyCode===32){
+            hero.gotoAndPlay('jump');
+            setTimeout(function(){
+                hero.gotoAndPlay('still');
+            }, 2000);
+        }
     }
+}
+// KEYPRESS END
 
+// HITTEST START
 function hitTest(rect1, rect2) {
-        if (rect1.x >= rect2.x + rect2.width
-            || rect1.x + rect1.width <= rect2.x
-            || rect1.y >= rect2.y + rect2.height
-            || rect1.y + rect1.height <= rect2.y) {
-            return false;
-        }
-        return true;
+    if (rect1.x >= rect2.x + rect2.width
+        || rect1.x + rect1.width <= rect2.x
+        || rect1.y >= rect2.y + rect2.height
+        || rect1.y + rect1.height <= rect2.y) {
+        return false;
     }
+    return true;
+}
 
-function addHero() {
-
-        heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
-        hero = new createjs.Sprite(heroSpriteSheet, 'still');
-        hero.width = 44;
-        hero.height = 44;
-        hero.regX = 3;
-        hero.regY = 3;
-        hero.speed = 7;
-        hero.nextX;
-        hero.nextY;
+function predictHit(character, rect1) {
+    if (character.nextX >= rect1.x + rect1.width
+        || character.nextX + character.width <= rect1.x
+        || character.nextY >= rect1.y + rect1.height
+        || character.nextY + character.height <= rect1.y) {
+        return false;
     }
+    return true;
+}
+// HITTEST END
 
-function moveHero() {
-        if (gameIsRunning === true && heroMove === true) {
+// HERO START
+function addHero(){
+    heroSpriteSheet = new createjs.SpriteSheet(queue.getResult('heroSprite'));
+    hero = new createjs.Sprite(heroSpriteSheet, 'still');
+    hero.width = 44;
+    hero.height = 44;
+    hero.regX = 3;
+    hero.regY = 3;
+    hero.speed = 7;
+    hero.nextX;
+    hero.nextY;
+}
 
-            var i = 0, powerUpLength = powerUps.length;
-            for (; i < powerUpLength; i++) {
-                if (hitTest(hero, powerUps[i])) {
-                    stageMain.removeChild(powerUps[i]);
-                    switch(powerUps[i].type){
-                        case "life":
-                            createjs.Sound.play('lifeSound');
-                            addLife();
-                            break;
-                        case "freezeTime":
-                            createjs.Sound.play('freezeTimeSound');
-                            freezeTime();
-                            break;
-                        case "turnBackTime":
-                            createjs.Sound.play('turnBackTimeSound');
-                            turnBackTime();
-                            break;
-                        case "phase":
-                            createjs.Sound.play('phaseSound');
-                            phase();
-                            break;
-                        case "point":
-                            createjs.Sound.play('pointSound');
-                            addHeroPoint();
-                            break;
-                        case "winGame":
-                            createjs.Sound.stop('bgSound')
-                            createjs.Sound.play('winSound');
-                            gameComplete();
-                            break;
-                    }
-                    powerUps.splice(i, 1);
-                    break;
+function moveHero(){
+    if (gameIsRunning === true && heroMove === true) {
 
-                }
-            }
-
-            if (heroNoHit === false) {
-                var i = 0, enmLength = enemies.length;
-                for (; i < enmLength; i++) {
-                    if (hitTest(hero, enemies[i])) {
-                        heroLoseLife();
+        var i = 0, powerUpLength = powerUps.length;
+        for (; i < powerUpLength; i++) {
+            if (hitTest(hero, powerUps[i])) {
+                stageMain.removeChild(powerUps[i]);
+                switch(powerUps[i].type){
+                    case "life":
+                        createjs.Sound.play('lifeSound');
+                        addLife();
                         break;
-                    }
+                    case "freezeTime":
+                        createjs.Sound.play('freezeTimeSound');
+                        freezeTime();
+                        break;
+                    case "turnBackTime":
+                        createjs.Sound.play('turnBackTimeSound');
+                        turnBackTime();
+                        break;
+                    case "phase":
+                        createjs.Sound.play('phaseSound');
+                        phase();
+                        break;
+                    case "point":
+                        createjs.Sound.play('pointSound');
+                        addHeroPoint();
+                        break;
+                    case "winGame":
+                        createjs.Sound.stop('bgSound')
+                        createjs.Sound.play('winSound');
+                        gameComplete();
+                        break;
                 }
+                powerUps.splice(i, 1);
+                break;
             }
-                    var i = 0, tpLength = teleporters.length;
-                    for (; i < tpLength; i++) {
-                        if (hitTest(hero, teleporters[i])) {
-                            createjs.Sound.play('levelUpSound');
-                            hero.x = teleporters[i].waypointX;
-                            hero.y = teleporters[i].waypointY;
-                            break;
-                        }
-                    }
-            var i = 0, nxlLength = nextLevel.length;
-            for (; i < nxlLength; i++) {
-                if (hitTest(hero, nextLevel[i])) {
-                    if (hitTestNextLevel === true) {
-                        hitTestNextLevel = false;
-                        timeIsRunning = false;
-                        callSetupLevel();
-                    }
+        }
+
+        if (heroNoHit === false) {
+            var i = 0, enmLength = enemies.length;
+            for (; i < enmLength; i++) {
+                if (hitTest(hero, enemies[i])) {
+                    heroLoseLife();
                     break;
                 }
             }
+        }
 
-                    if (keys.rkd && hero.x < 1150 - hero.width) {
-                        var collisionDetected = false;
-                        hero.nextY = hero.y;
-                        hero.nextX = hero.x + hero.speed;
-                        for (i = 0; i < blocks.length; i++) {
-                            if (predictHit(hero, blocks[i])) {
-                                collisionDetected = true;
-                                break;
-                            }
-                        }
-                        if (!collisionDetected) {
-                            hero.x += hero.speed;
-                        }
-                    }
-                    if (keys.lkd && hero.x > 0) {
-                        var collisionDetected = false;
-                        hero.nextY = hero.y;
-                        hero.nextX = hero.x - hero.speed;
-                        for (i = 0; i < blocks.length; i++) {
-                            if (predictHit(hero, blocks[i])) {
-                                collisionDetected = true;
-                                break;
-                            }
-                        }
-                        if (!collisionDetected) {
-                            hero.x -= hero.speed;
-                        }
-                    }
-                    if (keys.ukd && hero.y >= 0) {
-                        var collisionDetected = false;
-                        hero.nextY = hero.y - hero.speed;
-                        hero.nextX = hero.x;
-                        for (i = 0; i < blocks.length; i++) {
-                            if (predictHit(hero, blocks[i])) {
-                                collisionDetected = true;
-                                break;
-                            }
-                        }
-                        if (!collisionDetected) {
-                            hero.y -= hero.speed;
-                        }
-                    }
-                    if (keys.dkd && hero.y < 750 - hero.height) {
-                        var collisionDetected = false;
-                        hero.nextY = hero.y + hero.speed;
-                        hero.nextX = hero.x;
-                        for (i = 0; i < blocks.length; i++) {
-                            if (predictHit(hero, blocks[i])) {
-                                collisionDetected = true;
-                                break;
-                            }
-                        }
-                        if (!collisionDetected) {
-                            hero.y += hero.speed;
-                        }
-                    }
+        var i = 0, tpLength = teleporters.length;
+        for (; i < tpLength; i++) {
+            if (hitTest(hero, teleporters[i])) {
+                createjs.Sound.play('levelUpSound');
+                hero.x = teleporters[i].waypointX;
+                hero.y = teleporters[i].waypointY;
+                break;
+            }
+        }
+
+        var i = 0, nxlLength = nextLevel.length;
+        for (; i < nxlLength; i++) {
+            if (hitTest(hero, nextLevel[i])) {
+                if (hitTestNextLevel === true) {
+                    hitTestNextLevel = false;
+                    timeIsRunning = false;
+                    callSetupLevel();
+                }
+                break;
+            }
+        }
+
+        if (keys.rkd && hero.x < 1150 - hero.width) {
+            var collisionDetected = false;
+            hero.nextY = hero.y;
+            hero.nextX = hero.x + hero.speed;
+            for (i = 0; i < blocks.length; i++) {
+                if (predictHit(hero, blocks[i])) {
+                    collisionDetected = true;
+                    break;
                 }
             }
+            if (!collisionDetected) {
+                hero.x += hero.speed;
+            }
+        }
 
-function heroLoseLife() {
+        if (keys.lkd && hero.x > 0) {
+            var collisionDetected = false;
+            hero.nextY = hero.y;
+            hero.nextX = hero.x - hero.speed;
+            for (i = 0; i < blocks.length; i++) {
+                if (predictHit(hero, blocks[i])) {
+                    collisionDetected = true;
+                    break;
+                }
+            }
+            if (!collisionDetected) {
+                hero.x -= hero.speed;
+            }
+        }
+
+        if (keys.ukd && hero.y >= 0) {
+            var collisionDetected = false;
+            hero.nextY = hero.y - hero.speed;
+            hero.nextX = hero.x;
+            for (i = 0; i < blocks.length; i++) {
+                if (predictHit(hero, blocks[i])) {
+                    collisionDetected = true;
+                    break;
+                }
+            }
+            if (!collisionDetected) {
+                hero.y -= hero.speed;
+            }
+        }
+
+        if (keys.dkd && hero.y < 750 - hero.height) {
+            var collisionDetected = false;
+            hero.nextY = hero.y + hero.speed;
+            hero.nextX = hero.x;
+            for (i = 0; i < blocks.length; i++) {
+                if (predictHit(hero, blocks[i])) {
+                    collisionDetected = true;
+                    break;
+                }
+            }
+            if (!collisionDetected) {
+                hero.y += hero.speed;
+            }
+        }
+    }
+}
+
+function heroLoseLife(){
     createjs.Sound.play('deadSound');
     heroNoHit = true;
     heroLife--;
@@ -927,48 +964,38 @@ function heroLoseLife() {
         messageOnScreen.y=stageMain.canvas.height/2;
         stageMain.addChild(messageOnScreen);
         animate();
-        function animate() {
+        function animate(){
             messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
-            createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
-                    stageMain.removeChild(messageOnScreen);
+            createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function(){
+                stageMain.removeChild(messageOnScreen);
             })
         }
     }
-    setTimeout(function () {
+    setTimeout(function(){
         heroUnsafe();
     }, 2000)
-
 }
 
-function heroSafe() {
+function heroSafe(){
     heroNoHit = true;
 }
 
-function heroUnsafe() {
+function heroUnsafe(){
     heroNoHit = false;
 }
-
-function predictHit(character, rect1) {
-            if (character.nextX >= rect1.x + rect1.width
-                || character.nextX + character.width <= rect1.x
-                || character.nextY >= rect1.y + rect1.height
-                || character.nextY + character.height <= rect1.y) {
-                return false;
-            }
-            return true;
-        }
+// HERO END
 
 // POWERUPS START
-function freezeTime() {
+function freezeTime(){
             timeIsRunning = false;
             sandDropRun.gotoAndStop('stop');
-            setTimeout(function () {
+            setTimeout(function(){
                 createjs.Ticker.setPaused(true)
             }, 1600);
-            setTimeout(function () {
+            setTimeout(function(){
                 timeIsRunning = true;
                 sandDropRun.gotoAndPlay('run');
-                timerCountDown()
+                timerCountDown();
                 stageMain.removeChild(freezeTimeImg);
                 createjs.Ticker.setPaused(false);
             }, 10000);
@@ -980,15 +1007,15 @@ function freezeTime() {
             messageOnScreen.y=stageMain.canvas.height/2;
             stageMain.addChild(messageOnScreen, freezeTimeImg);
             animate();
-            function animate() {
+            function animate(){
                 messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
-                createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+                createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function(){
                     stageMain.removeChild(messageOnScreen);
                 })
             }
         }
 
-function turnBackTime() {
+function turnBackTime(){
             heroScore +=50;
             if (timeLeft < startTime - 10) {
                 timeLeft += 10;
@@ -1003,15 +1030,15 @@ function turnBackTime() {
             messageOnScreen.y=stageMain.canvas.height/2;
             stageMain.addChild(messageOnScreen);
             animate();
-            function animate() {
+            function animate(){
                 messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
-                createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+                createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function(){
                     stageMain.removeChild(messageOnScreen);
                 })
             }
         }
 
-function addLife() {
+function addLife(){
             heroLife++;
             var message = "Get 1 life";
             var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
@@ -1021,15 +1048,15 @@ function addLife() {
             messageOnScreen.y=stageMain.canvas.height/2;
             stageMain.addChild(messageOnScreen);
             animate();
-            function animate() {
+            function animate(){
                 messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
-                createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+                createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function(){
                     stageMain.removeChild(messageOnScreen);
                 })
             }
         }
 
-function addHeroPoint() {
+function addHeroPoint(){
     heroScore +=100;
     var message = "+100 Points";
     var messageOnScreen = new createjs.Text(message, "70px Raleway", "#000");
@@ -1039,19 +1066,19 @@ function addHeroPoint() {
     messageOnScreen.y=stageMain.canvas.height/2;
     stageMain.addChild(messageOnScreen);
     animate();
-    function animate() {
+    function animate(){
         messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
-        createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+        createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function(){
             stageMain.removeChild(messageOnScreen);
         })
     }
 }
 
-function phase () {
+function phase(){
     heroSafe();
     hero.alpha = .4;
     heroScore +=50;
-    setTimeout(function () {
+    setTimeout(function(){
         heroUnsafe();
         hero.alpha = 1;
         stageMain.removeChild(lightningImg)
@@ -1064,32 +1091,32 @@ function phase () {
     messageOnScreen.y=stageMain.canvas.height/2;
     stageMain.addChild(messageOnScreen, lightningImg);
     animate();
-    function animate() {
+    function animate(){
         messageOnScreen.scaleX = messageOnScreen.scaleY = 0;
-        createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function () {
+        createjs.Tween.get(messageOnScreen).to({scaleX: 2, scaleY: 2}, 1500).call(function(){
             stageMain.removeChild(messageOnScreen);
         })
     }
 }
-
 // POWERUPS END
 
+// TOCK START
 function tock(e) {
-            if (gameIsRunning === true) {
-                moveHero();
-                updateStatusBar();
-            }
-            if (stickManRun.x < 1200) {
-                stickManRun.x += 5;
-            }
-
-            if (timeLeft < 0 && gameIsRunning === true) {
-                gameOver();
-            }
-
-
-            stageMain.update(e);
-            stageInfo.update(e);
+    if (gameIsRunning === true) {
+        moveHero();
+        updateStatusBar();
+    }
+    if (stickManRun.x < 1200) {
+        stickManRun.x += 5;
+    }
+    if (timeLeft < 0 && gameIsRunning === true) {
+        gameOver();
+    }
+    stageMain.update(e);
+    stageInfo.update(e);
         }
+// TOCK END
+
+// Developed by Mattias Sachs Tastum and Magnus Bachalarz
 
 
