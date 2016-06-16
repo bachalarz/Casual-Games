@@ -22,7 +22,7 @@
       "teleporters":[
 
       ],
-      "levelSpeed": 200,
+      "levelSpeed": 60,
       "powerUps":[
 
       ],
@@ -158,7 +158,7 @@
       "teleporters":[
         {"x":1000, "y":600, "waypointX":1000, "waypointY":100}
       ],
-      "levelSpeed": 200,
+      "levelSpeed": 300,
       "powerUps":[
         {"x":100, "y":600, "type":"turnBackTime", "sprite":"pu1"},
         {"x":0, "y":250, "type":"point", "sprite":"pu4"},
@@ -317,7 +317,7 @@
         {"x":300, "y":700, "waypointX":0, "waypointY":150},
         {"x":400, "y":600, "waypointX":0, "waypointY":150}
       ],
-      "levelSpeed": 200,
+      "levelSpeed": 300,
       "powerUps":[
         {"x":700, "y":0, "type":"point", "sprite":"pu4"},
         {"x":400, "y":700, "type":"point", "sprite":"pu4"},
