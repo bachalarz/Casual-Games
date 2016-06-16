@@ -990,7 +990,7 @@ function freezeTime(){
             timeIsRunning = false;
             sandDropRun.gotoAndStop('stop');
             setTimeout(function(){
-                createjs.Ticker.setPaused(true)
+                createjs.Ticker.setPaused(true);
             }, 1600);
             setTimeout(function(){
                 timeIsRunning = true;
@@ -1116,6 +1116,7 @@ function tock(e) {
     stageInfo.update(e);
         }
 // TOCK END
+
 
 // Developed by Mattias Sachs Tastum and Magnus Bachalarz
 
