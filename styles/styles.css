@@ -25,12 +25,12 @@ body {
 
 .buttonWrapper {
     margin: 20px auto 0 auto;
-    width: 300px;
+    width: 610px;
 }
 
 .buttons {
     cursor: pointer;
-    width: 140px;
+    width: 200px;
     background-color: #000;
     color: #fff;
     font-family: 'Raleway', sans-serif;
